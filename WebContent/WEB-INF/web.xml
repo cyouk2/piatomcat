@@ -18,6 +18,15 @@
 		<servlet-name>GetTaiNoList</servlet-name>
 		<url-pattern>/GetTaiNoList</url-pattern>
 	</servlet-mapping>
+		<!-- 図を表示用データ情報取得 -->
+	<servlet>
+		<servlet-name>GetPiaDataForChart</servlet-name>
+		<servlet-class>com.zgd.controller.GetPiaDataForChart</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetPiaDataForChart</servlet-name>
+		<url-pattern>/GetPiaDataForChart</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>1.html</welcome-file>
 	</welcome-file-list>

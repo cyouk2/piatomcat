@@ -14,7 +14,64 @@ public class PiaDataInfo implements Serializable {
 	private int rate;
 	private int bonusCount;
 	private int ballOutput;
-	
+	private int playDateN;
+	private int rateN;
+	private int bonusCountN;
+	private int ballOutputN;
+	private int totalOut;
+	private int outMax;
+	public int getPlayDateN() {
+		return playDateN;
+	}
+
+	public void setPlayDateN(int playDateN) {
+		this.playDateN = playDateN;
+	}
+
+	public int getRateN() {
+		return rateN;
+	}
+
+	public void setRateN(int rateN) {
+		this.rateN = rateN;
+	}
+
+	public int getBonusCountN() {
+		return bonusCountN;
+	}
+
+	public void setBonusCountN(int bonusCountN) {
+		this.bonusCountN = bonusCountN;
+	}
+
+	public int getBallOutputN() {
+		return ballOutputN;
+	}
+
+	public void setBallOutputN(int ballOutputN) {
+		this.ballOutputN = ballOutputN;
+	}
+
+	public int getTotalOut() {
+		return totalOut;
+	}
+
+	public void setTotalOut(int totalOut) {
+		this.totalOut = totalOut;
+	}
+
+	public int getOutMax() {
+		return outMax;
+	}
+
+	public void setOutMax(int outMax) {
+		this.outMax = outMax;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public int getPlayDate() {
 		return playDate;
 	}
