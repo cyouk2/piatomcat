@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">  
+  
+<select id="getPiaDataInfoList" parameterType="PiaDataInfo" resultType="PiaDataInfo">  
+	 SELECT playDate,
+	    taiNo,
+	    rate,
+	    bonusCount,
+	    ballOutput
+	FROM piainfo
+	where taiNo = #{taiNo}
+	order by playDate desc;
+
+</select>  
+  
+<select id="getPiaDataInfo" parameterType="PiaDataInfo" resultType="PiaDataInfo">  
+  SELECT playDate,
+	    taiNo,
+	    rate,
+	    bonusCount,
+	    ballOutput
+	FROM piainfo
+	where taiNo = #{taiNo}
+	and playDate =#{playDate}
+	order by playDate desc;
+</select>
+</mapper>

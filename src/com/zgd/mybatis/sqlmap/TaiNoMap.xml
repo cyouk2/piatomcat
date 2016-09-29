@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zgd.mybatis.dao.TaiNoMapper">  
+  
+<select id="getTaiNoList" resultType="TaiNo">  
+	 SELECT 
+	    taiNo
+	FROM taino
+	order by taiNo;
+
+</select>    
+</mapper>
