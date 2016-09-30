@@ -8,11 +8,9 @@ public interface PiaDataInfoMapper {
 	
 	public List<PiaDataInfo> getPiaDataInfoList(PiaDataInfo piadatainfo);
 
-//	public PiaDataInfo getPiaDataInfo(PiaDataInfo piadatainfo);
-	  
-//	public void insertPiaDataInfo(PiaDataInfo piadatainfo);
-//	
-//	public void updatePiaDataInfo(PiaDataInfo piadatainfo);
-//	
-//	public void deletePiaDataInfo(PiaDataInfo piadatainfo);
+	public void insertPiaDataInfo(PiaDataInfo piadatainfo);
+	
+	public void updatePiaDataInfo(PiaDataInfo piadatainfo);
+	
+	public void deletePiaDataInfo(PiaDataInfo piadatainfo);
 }

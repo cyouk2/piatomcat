@@ -195,7 +195,7 @@ Ext.application({
 							xtype : 'loadmask',
 							message : '検索中...'
 						});
-						var strUrl = 'GetPiaData?taiNo=' + strtaiNo + '&playDate=' + strplayDate;
+						var strUrl = 'GetPiaDataForChart?taiNo=' + strtaiNo + '&playDate=' + strplayDate;
 						Ext.Ajax.request({
 							url : strUrl,
 							success : function(response) {
@@ -233,24 +233,15 @@ Ext.application({
 									Ext.emptyFn);
 							return;
 						}
-						if (id) {
-							formPanel.submit({
-								url : 'UpdatePiaData',
-								waitMsg : 'データ更新中...',
-								success : function(result, data) {
-									Ext.Msg.alert('更新', data.msg, Ext.emptyFn);
-								}
-							});
-						} else {
-							formPanel.submit({
-										url : 'SavePiaData',
-										waitMsg : 'データ保存中...',
-										success : function(result, data) {
-											Ext.Msg.alert('保存 ', data.msg,
-													Ext.emptyFn);
-										}
-									});
-						}
+
+						formPanel.submit({
+							url : 'SavePiaData',
+							waitMsg : 'データを保存 / 更新中...',
+							success : function(result, data) {
+								Ext.Msg.alert('保存 / 更新 ', data.msg, Ext.emptyFn);
+							}
+						});
+
 					}
 				});
 				// 削除ボタン
@@ -258,24 +249,18 @@ Ext.application({
 					text : '削除',
 					ui : 'confirm',
 					handler : function() {
-						var id = formPanel.getValues().id;
-						if (id) {
-							Ext.Msg.confirm("確認", "データを削除しますか？", function(
-									buttonId, value, opt) {
-								if (buttonId == 'yes') {
-									formPanel.submit({
-										url : 'DeletePiaData',
-										waitMsg : 'データ削除中...',
-										success : function(result, data) {
-											Ext.Msg.alert('削除', data.msg,
-													Ext.emptyFn);
-										}
-									});
-								}
-							});
-						} else {
-							Ext.Msg.alert('削除', 'データを入力してください。', Ext.emptyFn);
-						}
+						Ext.Msg.confirm("確認", "データを削除しますか？", function(buttonId,
+								value, opt) {
+							if (buttonId == 'yes') {
+								formPanel.submit({
+									url : 'DeletePiaData',
+									waitMsg : 'データ削除中...',
+									success : function(result, data) {
+										Ext.Msg.alert('削除', data.msg, Ext.emptyFn);
+									}
+								});
+							}
+						});
 					}
 				});
 				// 削除ボタン

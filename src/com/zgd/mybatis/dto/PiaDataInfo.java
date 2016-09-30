@@ -14,17 +14,18 @@ public class PiaDataInfo implements Serializable {
 	private int rate;
 	private int bonusCount;
 	private int ballOutput;
-	private int playDateN;
+	private String playDateN;
 	private int rateN;
 	private int bonusCountN;
 	private int ballOutputN;
 	private int totalOut;
 	private int outMax;
-	public int getPlayDateN() {
+
+	public String getPlayDateN() {
 		return playDateN;
 	}
 
-	public void setPlayDateN(int playDateN) {
+	public void setPlayDateN(String playDateN) {
 		this.playDateN = playDateN;
 	}
 

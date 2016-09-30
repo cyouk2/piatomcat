@@ -18,7 +18,7 @@
 		<servlet-name>GetTaiNoList</servlet-name>
 		<url-pattern>/GetTaiNoList</url-pattern>
 	</servlet-mapping>
-		<!-- 図を表示用データ情報取得 -->
+	<!-- 図を表示用データ情報取得 -->
 	<servlet>
 		<servlet-name>GetPiaDataForChart</servlet-name>
 		<servlet-class>com.zgd.controller.GetPiaDataForChart</servlet-class>
@@ -27,6 +27,25 @@
 		<servlet-name>GetPiaDataForChart</servlet-name>
 		<url-pattern>/GetPiaDataForChart</url-pattern>
 	</servlet-mapping>
+	<!-- データ保存 -->
+	<servlet>
+		<servlet-name>SavePiaData</servlet-name>
+		<servlet-class>com.zgd.crud.SavePiaData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SavePiaData</servlet-name>
+		<url-pattern>/SavePiaData</url-pattern>
+	</servlet-mapping>
+	<!-- データ削除 -->
+	<servlet>
+		<servlet-name>DeletePiaData</servlet-name>
+		<servlet-class>com.zgd.crud.DeletePiaData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeletePiaData</servlet-name>
+		<url-pattern>/DeletePiaData</url-pattern>
+	</servlet-mapping>
+	<!-- データ取得 -->
 	<welcome-file-list>
 		<welcome-file>1.html</welcome-file>
 	</welcome-file-list>
