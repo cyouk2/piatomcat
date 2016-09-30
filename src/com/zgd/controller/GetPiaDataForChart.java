@@ -28,7 +28,7 @@ public class GetPiaDataForChart extends HttpServlet {
 		ComRootResult re = new ComRootResult();
 		PiaDataInfo param = new PiaDataInfo();
 		param.setTaiNo(CommonUtil.ObejctToInt(taiNo));
-		if(!CommonUtil.IsNullOrEmpty(playDate)){
+		if (!CommonUtil.IsNullOrEmpty(playDate)) {
 			param.setPlayDate(CommonUtil.ObejctToInt(playDate));
 		}
 		List<PiaDataInfo> list2 = new ArrayList<PiaDataInfo>();

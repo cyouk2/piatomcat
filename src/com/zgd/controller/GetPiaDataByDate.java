@@ -29,12 +29,12 @@ public class GetPiaDataByDate extends HttpServlet {
 		try {
 			PiaDataInfoMapper piaDataInfoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
 			List<PiaDataInfo> list = piaDataInfoMapper.getPiaDataByDate(param);
-			if (list != null && list.size() > 0){
+			if (list != null && list.size() > 0) {
 				re.setRoot(list);
-			}else{
+			} else {
 				re.setRoot(new ArrayList<PiaDataInfo>());
 			}
-			
+
 		} finally {
 			sqlSession.close();
 		}
@@ -45,7 +45,7 @@ public class GetPiaDataByDate extends HttpServlet {
 		resp.setContentType("text/plain");
 		resp.getWriter().println(gson.toJson(re));
 	}
-	
+
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		doGet(req, resp);
 	}
