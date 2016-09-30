@@ -15,7 +15,7 @@ Ext.onReady(function() {
 		model : 'ImageModel',
 		proxy : {
 			type : 'ajax',
-			url : 'GetPiaData',
+			url : 'GetPiaDataForChart',
 			reader : {
 				type : 'json',
 				root : 'root'
@@ -50,7 +50,7 @@ Ext.onReady(function() {
 	var btnSreachByTaiNo = Ext.create('Ext.Button', {
 		text : '検索',
 		handler : function() {
-			piaDataStore.load({ url : 'GetPiaData?taiNo=' + combTaiNo.getValue() });
+			piaDataStore.load({ url : 'GetPiaDataForChart?taiNo=' + combTaiNo.getValue() });
 		}
 	});
 
@@ -277,7 +277,7 @@ Ext.onReady(function() {
 	                    success: function(form, action) {
 	                    	var strTaiNo = form.getValues().taiNo
 	                    	combTaiNo.setValue(strTaiNo);
-	                    	piaDataStore.load({ url : 'GetPiaData?taiNo=' + strTaiNo });
+	                    	piaDataStore.load({ url : 'GetPiaDataForChart?taiNo=' + strTaiNo });
 	                    },
 	                    failure: function(form, action) {
 	                        Ext.Msg.alert('Failed', action.result.msg);
@@ -286,44 +286,12 @@ Ext.onReady(function() {
 	            }
 	        }
 	    }, {
-	        text: 'UPDATE',
-	        formBind: true, //only enabled once the form is valid
-	        disabled: true,
-	        handler: function() {
-	            var inputform = this.up('form').getForm();
-	            inputform.url = 'UpdatePiaData';
-	            var id = inputform.getValues().id;
-	            if (id == null || id ==''){
-	            	Ext.Msg.alert('Check', '既存データが選択してください。');
-	            	return;
-	            }
-	            if (inputform.isValid()) {
-	            	inputform.submit({
-	                    success: function(form, action) {
-	                    	var strTaiNo = form.getValues().taiNo
-	                    	combTaiNo.setValue(strTaiNo);
-	                    	piaDataStore.reload();
-	            			inputform.reset();
-	                        Ext.Msg.alert('Success', action.result.msg);
-	                    },
-	                    failure: function(form, action) {
-	                        Ext.Msg.alert('Failed', action.result.msg);
-	                    }
-	                });
-	            }
-	        }
-	    },  {
 	        text: 'DELETE',
 	        formBind: true, //only enabled once the form is valid
 	        disabled: true,
 	        handler: function() {
 	            var inputform = this.up('form').getForm();
 	            inputform.url = 'DeletePiaData';
-	            var id = inputform.getValues().id;
-	            if (id == null || id ==''){
-	            	Ext.Msg.alert('Check', '既存データが選択してください。');
-	            	return;
-	            }
 	            if (inputform.isValid()) {
 	            	inputform.submit({
 	                    success: function(form, action) {
@@ -331,24 +299,6 @@ Ext.onReady(function() {
 	                    	combTaiNo.setValue(strTaiNo);
 	                    	piaDataStore.reload();
 	            			inputform.reset();
-	            			Ext.Ajax.request({
-	            			    url : 'GetTaiNoList',
-	            			    params : {},
-	            			    success : function(r){
-	            			        var res = Ext.decode(r.responseText, true);
-	            		    		var records = [];
-	            		            Ext.each(res.root, function(obj){
-	            		                records.push({
-	            		                	taiNo: obj.taiNo,
-	            		                	taiNoName: obj.taiNo
-	            		                })
-	            		            });
-	            		            dsTaiNo.loadData(records);
-	            			    },
-	            			    failure : function(r){
-
-	            			    }
-	            			});
 	                        Ext.Msg.alert('Success', action.result.msg);
 	                    },
 	                    failure: function(form, action) {
