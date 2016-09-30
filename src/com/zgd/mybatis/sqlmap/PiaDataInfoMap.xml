@@ -3,33 +3,26 @@
   
 <mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">  
   
-<select id="getPiaDataInfoList" parameterType="PiaDataInfo" resultType="PiaDataInfo">  
-	SELECT 
-	    v.playDate,
-	    v.taiNo,
-	    v.rate,
-	    v.bonusCount,
-	    v.ballOutput,
-	    FORMAT(IF(v.rate = 0, 0, 10000 / v.rate),
-	        0) AS rateN,
-	    v.bonusCount * 10 AS bonusCountN,
-	    FORMAT(v.ballOutput / 100, 0) AS ballOutputN,
-	    SUBSTRING(v.playDate, 5) AS playDateN,
-	    FORMAT((SELECT 
-	                SUM(p.ballOutput)
-	            FROM
-	                piainfo p
-	            WHERE
-	                v.playDate >= p.playDate
-	                    AND p.taiNo = v.taiNo) / 100,
-	        0) AS totalOut
+<select id="getPiaDataInfoList" parameterType="PiaDataInfo" resultType="PiaDataInfo">
+	SELECT
+		playDate,
+		taiNo,
+		rate,
+		bonusCount,
+		ballOutput,
+		totalOut,
+		rateN,
+		bonusCountN,
+		ballOutputN,
+		playDateN,
+		totalOutN
 	FROM
-	    piainfo v
+		v_satama_by_d_t
 	WHERE
-	    taiNo  = #{taiNo}
+		taiNo = #{taiNo}
 	<if test="playDate != null and playDate > 0">
-    	AND playDate = #{playDate}
-  	</if>
+		AND playDate = #{playDate}
+	</if>
 	ORDER BY playDate ASC;
 
 </select>  

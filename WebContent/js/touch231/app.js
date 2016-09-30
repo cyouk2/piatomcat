@@ -98,6 +98,9 @@ Ext.define('piaDataModel', {
 			name : 'totalOut',
 			type : 'integer'
 		}, {
+			name : 'totalOutN',
+			type : 'integer'
+		}, {
 			name : 'outMax',
 			type : 'integer'
 		} ]
@@ -426,7 +429,7 @@ Ext.application({
 						}, {
 							type : 'line',
 							xField : 'playDateN',
-							yField : 'totalOut',
+							yField : 'totalOutN',
 							title : '差玉',
 							style : {
 								stroke : '#660033',

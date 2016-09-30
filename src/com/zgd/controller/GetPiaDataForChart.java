@@ -37,7 +37,7 @@ public class GetPiaDataForChart extends HttpServlet {
 			List<PiaDataInfo> list = piaDataInfoMapper.getPiaDataInfoList(param);
 			int outMax = 0;
 			for (PiaDataInfo en : list) {
-				int s = en.getTotalOut();
+				int s = en.getTotalOutN();
 				if (s < outMax) {
 					outMax = s;
 				}
