@@ -8,6 +8,10 @@ public interface PiaDataInfoMapper {
 	
 	public List<PiaDataInfo> getPiaDataInfoList(PiaDataInfo piadatainfo);
 
+	public List<PiaDataInfo> getPiaBallsOfDay(PiaDataInfo piadatainfo);
+	
+	public List<PiaDataInfo> getPiaDataByDate(PiaDataInfo piadatainfo);
+	
 	public void insertPiaDataInfo(PiaDataInfo piadatainfo);
 	
 	public void updatePiaDataInfo(PiaDataInfo piadatainfo);
