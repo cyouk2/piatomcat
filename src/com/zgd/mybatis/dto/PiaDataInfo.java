@@ -27,6 +27,16 @@ public class PiaDataInfo implements Serializable {
 	private int ballOutput2;
 	private int rate3;
 	private int ballOutput3;
+	private int totalOutBefore;
+	
+	public int getTotalOutBefore() {
+		return totalOutBefore;
+	}
+
+	public void setTotalOutBefore(int totalOutBefore) {
+		this.totalOutBefore = totalOutBefore;
+	}
+
 	public int getRate1() {
 		return rate1;
 	}

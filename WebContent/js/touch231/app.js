@@ -17,6 +17,9 @@ Ext.define('outTotalModel', {
 			name : 'totalOut',
 			type : 'integer'
 		}, {
+			name : 'totalOutBefore',
+			type : 'integer'
+		}, {
 			name : 'rank',
 			type : 'string'
 		}, {
@@ -158,7 +161,7 @@ Ext.application({
 				return [
 						'<div>',
 						'<span style="color:#000099;font-size:15px;width: 50px;display: inline-block;">{taiNo}</span>',
-						'<span style="color:#000099;font-size:15px; width: 180px;display: inline-block;">前日差玉 ：{totalOut}</span><br/>',
+						'<span style="color:#000099;font-size:15px; width: 180px;display: inline-block;">前日差玉 ：{totalOutBefore}</span><br/>',
 						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">本日</span>',
 						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate}</span>',
 						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput}</span><br/>',

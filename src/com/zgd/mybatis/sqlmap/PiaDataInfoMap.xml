@@ -68,6 +68,7 @@
 		v.bonusCount,
 		v.ballOutput,
 		v.totalOut,
+		v.totalOutBefore,
 		v.rateN,
 		v.bonusCountN,
 		v.ballOutputN,
