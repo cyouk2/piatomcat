@@ -136,14 +136,14 @@ Ext.application({
 						'<span style="color:#000099;font-size:15px;width: 120px;display: inline-block;">{taiNo}</span><br/>',
 						'<span style="color:#006600;font-size:x-small;width: 120px;display: inline-block;">本日差玉 ：{totalOut}</span><br/>',
 						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">明後日</span>',
-						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate3}</span>',
-						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput3}</span><br/>',
-						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">明日</span>',
 						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate2}</span>',
 						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput2}</span><br/>',
-						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">本日</span>',
+						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">明日</span>',
 						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate1}</span>',
 						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput1}</span><br/>',
+						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">本日</span>',
+						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate}</span>',
+						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput}</span><br/>',
 						'</div>' ].join("");
 			},
 			getItemTpl : function() {
