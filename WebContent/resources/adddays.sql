@@ -1,6 +1,6 @@
-CREATE DEFINER=`root`@`localhost` FUNCTION `adddays`(intDay INT,adds INT) RETURNS int(11)
+CREATE DEFINER=`root`@`localhost` FUNCTION `adddays`(intday INT,adds INT) RETURNS int(11)
 BEGIN
-	declare result INTEGER;
+declare result INTEGER;
 SELECT 
     DATE_FORMAT(ADDDATE(STR_TO_DATE(intDay, '%Y%m%d'),
                 INTERVAL adds DAY),
