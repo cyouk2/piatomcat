@@ -16,16 +16,19 @@ import com.zgd.common.CommonUtil;
 import com.zgd.mybatis.config.MyBatisConfig;
 import com.zgd.mybatis.dao.PiaDataInfoMapper;
 import com.zgd.mybatis.dto.PiaDataInfo;
+import com.zgd.mybatis.dto.PraInfo;
 
 @SuppressWarnings("serial")
 public class GetPiaDataByDate extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String playDate = CommonUtil.ObejctToString(req.getParameter("playDate"));
+		String sortKind = CommonUtil.ObejctToString(req.getParameter("sortKind"));
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
-		PiaDataInfo param = new PiaDataInfo();
+		PraInfo param = new PraInfo();
 		param.setPlayDate(CommonUtil.ObejctToInt(playDate));
+		param.setSortKind(sortKind);
 		try {
 			PiaDataInfoMapper piaDataInfoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
 			List<PiaDataInfo> list = piaDataInfoMapper.getPiaDataByDate(param);

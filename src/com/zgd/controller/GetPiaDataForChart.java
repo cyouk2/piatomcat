@@ -16,6 +16,7 @@ import com.zgd.common.CommonUtil;
 import com.zgd.mybatis.config.MyBatisConfig;
 import com.zgd.mybatis.dao.PiaDataInfoMapper;
 import com.zgd.mybatis.dto.PiaDataInfo;
+import com.zgd.mybatis.dto.PraInfo;
 
 @SuppressWarnings("serial")
 public class GetPiaDataForChart extends HttpServlet {
@@ -26,7 +27,7 @@ public class GetPiaDataForChart extends HttpServlet {
 		String playDate = req.getParameter("playDate");
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
-		PiaDataInfo param = new PiaDataInfo();
+		PraInfo param = new PraInfo();
 		param.setTaiNo(CommonUtil.ObejctToInt(taiNo));
 		if (!CommonUtil.IsNullOrEmpty(playDate)) {
 			param.setPlayDate(CommonUtil.ObejctToInt(playDate));

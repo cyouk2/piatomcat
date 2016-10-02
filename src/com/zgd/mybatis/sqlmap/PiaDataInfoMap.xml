@@ -3,7 +3,7 @@
   
 <mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">  
   
-<select id="getPiaDataInfoList" parameterType="PiaDataInfo" resultType="PiaDataInfo">
+<select id="getPiaDataInfoList" parameterType="PiaDataInfo" resultType="PraInfo">
 	SELECT
 		playDate,
 		taiNo,
@@ -27,7 +27,7 @@
 
 </select>  
 
-<select id="getPiaBallsOfDay" parameterType="PiaDataInfo" resultType="PiaDataInfo">
+<select id="getPiaBallsOfDay" parameterType="PiaDataInfo" resultType="PraInfo">
 	SELECT
 		v.playDate,
 		v.taiNo,
@@ -60,7 +60,7 @@
 
 </select> 
 
-<select id="getPiaDataByDate" parameterType="PiaDataInfo" resultType="PiaDataInfo">
+<select id="getPiaDataByDate" parameterType="PiaDataInfo" resultType="PraInfo">
 	SELECT
 		v.playDate,
 		v.taiNo,
@@ -90,8 +90,18 @@
 		on (d.taino = v.taino and d.playDate = adddays(v.playDate,-3))
 	WHERE
 		v.playDate = #{playDate}
-	ORDER BY v.ballOutput DESC;
-
+	<if test="sortKind == 'ballOutput'">
+		ORDER BY ballOutput DESC;
+	</if>
+	<if test="sortKind == 'totalOutBefore'">
+		ORDER BY totalOutBefore DESC;
+	</if>
+	<if test="sortKind == 'totalOut'">
+		ORDER BY totalOut DESC;
+	</if>
+	<if test="sortKind == 'rate'">
+		ORDER BY rate DESC;
+	</if>
 </select> 
 
 <insert id="insertPiaDataInfo" parameterType="PiaDataInfo">

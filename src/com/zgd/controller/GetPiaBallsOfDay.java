@@ -16,6 +16,7 @@ import com.zgd.common.CommonUtil;
 import com.zgd.mybatis.config.MyBatisConfig;
 import com.zgd.mybatis.dao.PiaDataInfoMapper;
 import com.zgd.mybatis.dto.PiaDataInfo;
+import com.zgd.mybatis.dto.PraInfo;
 
 @SuppressWarnings("serial")
 public class GetPiaBallsOfDay extends HttpServlet {
@@ -24,7 +25,7 @@ public class GetPiaBallsOfDay extends HttpServlet {
 		String playDate = CommonUtil.ObejctToString(req.getParameter("playDate"));
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
-		PiaDataInfo param = new PiaDataInfo();
+		PraInfo param = new PraInfo();
 		param.setPlayDate(CommonUtil.ObejctToInt(playDate));
 		try {
 			PiaDataInfoMapper piaDataInfoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);

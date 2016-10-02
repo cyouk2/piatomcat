@@ -123,8 +123,8 @@ Ext.application({
 				var dataOfPlayDate = [];
 				for (var i = 0; i >= -100; i--) {
 					var dateTmp = Ext.Date.add(new Date(), Ext.Date.DAY, i);
-					var strPattern = i == 0 ? 'm/d （本日）' : 'm/d （' + (0 - i)
-							+ '日前）';
+					var strPattern = i == 0 ? 'm/d：本日' : 'm/d：' + (0 - i)
+							+ '日前';
 					var el = {};
 					el.text = Ext.Date.format(dateTmp, strPattern);
 					el.value = Ext.Date.format(dateTmp, 'Ymd');
@@ -132,7 +132,27 @@ Ext.application({
 				}
 				return dataOfPlayDate;
 			},
-
+			getDataOfSortKind: function() {
+				var dataOfSortKind = [];
+				
+				var el = {};
+				el.value = 'ballOutput';
+				el.text = '出玉';
+				dataOfSortKind.push(el);
+				el = {};
+				el.value = 'totalOutBefore';
+				el.text = '前日差玉';
+				dataOfSortKind.push(el);
+				el = {};
+				el.value = 'totalOut';
+				el.text = '本日差玉';
+				dataOfSortKind.push(el);
+				el = {};
+				el.value = 'rate';
+				el.text = '確率';
+				dataOfSortKind.push(el);
+				return dataOfPlayDate;
+			},
 			getItemTplForBall : function() {
 				return [
 						'<div>',
@@ -590,19 +610,30 @@ Ext.application({
 					displayField : 'text',
 					store : {
 						data : this.getPlayDate()
-					},
-					listeners : {
-						change : function(selectf, newValue, oldValue, eOpts) {
-							storeForSaTaMa.load({
-								params : {
-									playDate : newValue
-								}
-							});
-						}
 					}
 				});
-
-
+				var sortSelectField = Ext.create('Ext.field.Select', {
+					label : 'SORT',
+					valueField : 'value',
+					displayField : 'text',
+					store : {
+						data : this.getDataOfSortKind()
+					}
+				});
+				// 検索ボタン
+				var searchButtonForm = Ext.create('Ext.Button', {
+					text : '検索',
+					ui : 'confirm',
+					handler : function() {
+						storeForSaTaMa.load({
+							params : {
+								playDate : playdateSelectField.getValue(),
+								sortKind:sortSelectField.getValue()
+							}
+						});
+					}
+				});
+				
 				var listForSaTaMa = Ext.create('Ext.List', {
 					itemTpl : this.getItemTplForBall(),
 					store : storeForSaTaMa,
@@ -631,7 +662,7 @@ Ext.application({
 							direction : 'horizontal',
 							directionLock : true
 						},
-						items : [ playdateSelectField ]
+						items : [ playdateSelectField ,sortSelectField]
 					}, listForSaTaMa ]
 				});
 				// ################################ 一覧日別 ListPanel Start

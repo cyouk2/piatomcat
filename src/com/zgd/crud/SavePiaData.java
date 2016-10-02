@@ -15,6 +15,7 @@ import com.zgd.common.CommonUtil;
 import com.zgd.mybatis.config.MyBatisConfig;
 import com.zgd.mybatis.dao.PiaDataInfoMapper;
 import com.zgd.mybatis.dto.PiaDataInfo;
+import com.zgd.mybatis.dto.PraInfo;
 
 @SuppressWarnings("serial")
 public class SavePiaData extends HttpServlet {
@@ -35,9 +36,13 @@ public class SavePiaData extends HttpServlet {
 		param.setRate(CommonUtil.ObejctToInt(rate));
 		param.setBonusCount(CommonUtil.ObejctToInt(bonusCount));
 		param.setBallOutput(CommonUtil.ObejctToInt(ballOutput));
+		PraInfo param1 = new PraInfo();
+		param1.setPlayDate(CommonUtil.ObejctToInt(playDate));
+		param1.setTaiNo(CommonUtil.ObejctToInt(taiNo));
+		
 		try {
 			PiaDataInfoMapper piaDataInfoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
-			List<PiaDataInfo> result = piaDataInfoMapper.getPiaDataInfoList(param);
+			List<PiaDataInfo> result = piaDataInfoMapper.getPiaDataInfoList(param1);
 			if(result != null && result.size() > 0){
 				piaDataInfoMapper.updatePiaDataInfo(param);
 				re.setMsg("台番：" + taiNo + ";日付：" + playDate + "の情報を更新しました。");
