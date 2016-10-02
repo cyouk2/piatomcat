@@ -27,7 +27,7 @@
 
 </select>  
 
-<select id="getPiaBallsOfDay" parameterType="PiaDataInfo" resultType="PraInfo">
+<select id="getPiaBallsOfDay" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
 		v.playDate,
 		v.taiNo,
@@ -60,7 +60,7 @@
 
 </select> 
 
-<select id="getPiaDataByDate" parameterType="PiaDataInfo" resultType="PraInfo">
+<select id="getPiaDataByDate" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
 		v.playDate,
 		v.taiNo,
