@@ -3,7 +3,7 @@
   
 <mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">  
   
-<select id="getPiaDataInfoList" parameterType="PiaDataInfo" resultType="PraInfo">
+<select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
 		playDate,
 		taiNo,
