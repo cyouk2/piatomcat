@@ -151,7 +151,7 @@ Ext.application({
 				el.value = 'rate';
 				el.text = '確率';
 				dataOfSortKind.push(el);
-				return dataOfPlayDate;
+				return dataOfSortKind;
 			},
 			getItemTplForBall : function() {
 				return [
