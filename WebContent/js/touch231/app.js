@@ -137,7 +137,7 @@ Ext.application({
 				
 				var el = {};
 				el.value = 'ballOutput';
-				el.text = '出玉';
+				el.text = '本日出玉';
 				dataOfSortKind.push(el);
 				el = {};
 				el.value = 'totalOutBefore';
@@ -149,7 +149,7 @@ Ext.application({
 				dataOfSortKind.push(el);
 				el = {};
 				el.value = 'rate';
-				el.text = '確率';
+				el.text = '前日確率';
 				dataOfSortKind.push(el);
 				return dataOfSortKind;
 			},
@@ -547,15 +547,27 @@ Ext.application({
 					displayField : 'text',
 					store : {
 						data : this.getPlayDate()
-					},
-					listeners : {
-						change : function(selectf, newValue, oldValue, eOpts) {
-							storeChartForDate.load({
-								params : {
-									playDate : newValue
-								}
-							});
-						}
+					}
+				});
+				var sortSelectField = Ext.create('Ext.field.Select', {
+					label : 'SORT',
+					valueField : 'value',
+					displayField : 'text',
+					store : {
+						data : this.getDataOfSortKind()
+					}
+				});
+				// 検索ボタン
+				var searchButtonForm1 = Ext.create('Ext.Button', {
+					text : '検索',
+					ui : 'confirm',
+					handler : function() {
+						storeChartForDate.load({
+							params : {
+								playDate : playDateSelectField1.getValue(),
+								sortKind:sortSelectField.getValue()
+							}
+						});
 					}
 				});
 				var listForBalloutOfOneDay = Ext.create('Ext.List', {
@@ -586,7 +598,7 @@ Ext.application({
 							direction : 'horizontal',
 							directionLock : true
 						},
-						items : [ playDateSelectField1 ]
+						items : [ playDateSelectField1,sortSelectField,searchButtonForm1 ]
 					}, listForBalloutOfOneDay ]
 				});
 				// ################################ 差玉台別 ListPanel Start
@@ -610,29 +622,18 @@ Ext.application({
 					displayField : 'text',
 					store : {
 						data : this.getPlayDate()
+					},
+					listeners : {
+						change : function(selectf, newValue, oldValue, eOpts) {
+							storeForSaTaMa.load({
+								params : {
+									playDate : newValue
+								}
+							});
+						}
 					}
 				});
-				var sortSelectField = Ext.create('Ext.field.Select', {
-					label : 'SORT',
-					valueField : 'value',
-					displayField : 'text',
-					store : {
-						data : this.getDataOfSortKind()
-					}
-				});
-				// 検索ボタン
-				var searchButtonForm = Ext.create('Ext.Button', {
-					text : '検索',
-					ui : 'confirm',
-					handler : function() {
-						storeForSaTaMa.load({
-							params : {
-								playDate : playdateSelectField.getValue(),
-								sortKind:sortSelectField.getValue()
-							}
-						});
-					}
-				});
+				
 				
 				var listForSaTaMa = Ext.create('Ext.List', {
 					itemTpl : this.getItemTplForBall(),
@@ -662,7 +663,7 @@ Ext.application({
 							direction : 'horizontal',
 							directionLock : true
 						},
-						items : [ playdateSelectField ,sortSelectField]
+						items : [ playdateSelectField ]
 					}, listForSaTaMa ]
 				});
 				// ################################ 一覧日別 ListPanel Start

@@ -100,7 +100,7 @@
 		ORDER BY totalOut DESC;
 	</if>
 	<if test="sortKind == 'rate'">
-		ORDER BY rate DESC;
+		ORDER BY rate1 DESC;
 	</if>
 </select> 
 
