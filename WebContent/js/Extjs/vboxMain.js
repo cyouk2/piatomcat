@@ -395,8 +395,8 @@ Ext.onReady(function() {
 		tbar : [ combTaiNo, btnSreachByTaiNo ],
 		bodyPadding : 5, // Don't want content to crunch against the borders
 		region : 'center',
-		//collapsible : true,
-		//height : 500,
+		// collapsible : true,
+		// height : 500,
 		layout : 'fit',
 		title : '図',
 		items : [ chartBonusCount ]
