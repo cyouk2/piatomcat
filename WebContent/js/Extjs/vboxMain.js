@@ -5,12 +5,62 @@ Ext.onReady(function() {
 
 	var bd = Ext.getBody();
 
+	// 台別情報のModel
 	Ext.define('ImageModel', {
 		extend : 'Ext.data.Model',
-		fields : [ 'id', 'kind', 'playDate', 'taiNo', 'bonusCount',
-				'ballInput', 'ballOutput', 'rate' ]
+		fields : [ {
+			name : 'id',
+			type : 'string'
+		}, {
+			name : 'playDate',
+			type : 'string'
+		}, {
+			name : 'taiNo',
+			type : 'integer'
+		}, {
+			name : 'bonusCount',
+			type : 'integer'
+		}, {
+			name : 'ballInput',
+			type : 'integer'
+		}, {
+			name : 'ballOutput',
+			type : 'integer'
+		}, {
+			name : 'rate',
+			type : 'integer'
+		}, {
+			name : 'playDateN',
+			type : 'string'
+		}, {
+			name : 'bonusCountN',
+			type : 'integer'
+		}, {
+			name : 'ballInputN',
+			type : 'integer'
+		}, {
+			name : 'ballOutputN',
+			type : 'integer'
+		}, {
+			name : 'rateN',
+			type : 'integer'
+		}, {
+			name : 'totalOut',
+			type : 'integer'
+		}, {
+			name : 'totalOutN',
+			type : 'integer'
+		}, {
+			name : 'outMax',
+			type : 'integer'
+		} ]
 	});
-
+	// 台番のModel
+	Ext.define('taiNoModel', {
+		extend : 'Ext.data.Model',
+		fields : [ 'taiNo' ]
+	});
+	// 台別情報のStore
 	var piaDataStore = Ext.create('Ext.data.JsonStore', {
 		model : 'ImageModel',
 		proxy : {
@@ -22,31 +72,20 @@ Ext.onReady(function() {
 			}
 		}
 	});
-
-	var dsTaiNo = Ext.create('Ext.data.Store', {
-		fields : [ 'taiNo', 'taiNoName' ],
-		data : []
-	});
-
-	Ext.Ajax.request({
-		url : 'GetTaiNoList',
-		params : {},
-		success : function(r) {
-			var res = Ext.decode(r.responseText, true);
-			var records = [];
-			Ext.each(res.root, function(obj) {
-				records.push({
-					taiNo : obj.taiNo,
-					taiNoName : obj.taiNo
-				})
-			});
-			dsTaiNo.loadData(records);
+	// 台番のStore
+	var dsTaiNoStore = Ext.create('Ext.data.Store', {
+		model : 'taiNoModel',
+		proxy : {
+			type : 'ajax',
+			url : 'GetTaiNoList',
+			reader : {
+				type : 'json',
+				root : 'root'
+			}
 		},
-		failure : function(r) {
-
-		}
+		autoLoad : true
 	});
-
+	// 検索ボタン
 	var btnSreachByTaiNo = Ext.create('Ext.Button', {
 		text : '検索',
 		handler : function() {
@@ -55,19 +94,21 @@ Ext.onReady(function() {
 			});
 		}
 	});
-
+	// 台番
 	var combTaiNo = Ext.create('Ext.form.field.ComboBox', {
 		fieldLabel : 'TAI_NO',
-		store : dsTaiNo,
+		store : dsTaiNoStore,
 		queryMode : 'local',
 		displayField : 'taiNo',
-		valueField : 'taiNoName'
+		valueField : 'taiNo'
 	});
-
+	// 台別情報のGridPanel
 	var piaDataGrid = Ext.create('Ext.grid.Panel', {
-		region: 'center', 
+		region : 'south',
+		collapsible : true,
+		height : 700,
 		store : piaDataStore,
-		flex : 0.7,
+		flex : 0.8,
 		title : 'データ',
 		columns : [ {
 			text : 'id',
@@ -105,12 +146,74 @@ Ext.onReady(function() {
 			}
 		}
 	});
+	// ################################## 台別編集用FormPanel
+	// 保存ボタン
+	var btnSave = Ext.create('Ext.Button', {
+		text : 'Save',
+		listeners : {
+			click : function() {
+				var inputform = piaDataFormPanel.getForm();
+				inputform.url = 'SavePiaData';
+				if (inputform.isValid()) {
+					inputform.submit({
+						success : function(form, action) {
+							var strTaiNo = form.getValues().taiNo
+							combTaiNo.setValue(strTaiNo);
+							piaDataStore.load({
+								url : 'GetPiaDataForChart?taiNo=' + strTaiNo
+							});
+							Ext.Msg.alert('Success', action.result.msg);
+						},
+						failure : function(form, action) {
+							Ext.Msg.alert('Failed', action.result.msg);
+						}
+					});
+				}
 
+			}
+		}
+	});
+	// 削除ボタン
+	var btnDelete = Ext.create('Ext.Button', {
+		text : 'Delete',
+		listeners : {
+			click : function() {
+
+				var inputform = piaDataFormPanel.getForm();
+				inputform.url = 'DeletePiaData';
+				if (inputform.isValid()) {
+					inputform.submit({
+						success : function(form, action) {
+							var strTaiNo = form.getValues().taiNo
+							combTaiNo.setValue(strTaiNo);
+							piaDataStore.reload();
+							inputform.reset();
+							Ext.Msg.alert('Success', action.result.msg);
+						},
+						failure : function(form, action) {
+							Ext.Msg.alert('Failed', action.result.msg);
+						}
+					});
+				}
+
+			}
+		}
+	});
+	// クリアボタン
+	var btnClear = Ext.create('Ext.Button', {
+		text : 'Clear',
+		listeners : {
+			click : function() {
+				piaDataFormPanel.getForm().reset();
+			}
+		}
+	});
+	// 台別編集用FormPanel
 	var piaDataFormPanel = Ext.create('Ext.form.Panel', {
-		flex : 0.3,
+		flex : 0.2,
 		layout : 'form',
-		region:'west',
-		collapsible: true,
+		region : 'east',
+		collapsible : true,
 		url : 'SavePiaData',
 		standardSubmit : false,
 		frame : true,
@@ -121,6 +224,11 @@ Ext.onReady(function() {
 			labelWidth : 60
 		},
 		defaultType : 'textfield',
+		tbar : [ btnSave, {
+			xtype : 'tbseparator'
+		}, btnDelete, {
+			xtype : 'tbseparator'
+		}, btnClear ],
 		items : [ {
 			xtype : 'hiddenfield',
 			name : 'id',
@@ -157,57 +265,158 @@ Ext.onReady(function() {
 			name : 'ballOutput',
 			xtype : 'textfield',
 			value : "0"
-		} ],
-		buttons : [ {
-			text : 'SAVE',
-			formBind : true, // only enabled once the form is valid
-			disabled : true,
-			handler : function() {
-				var inputform = this.up('form').getForm();
-				inputform.url = 'SavePiaData';
-				if (inputform.isValid()) {
-					inputform.submit({
-						success : function(form, action) {
-							var strTaiNo = form.getValues().taiNo
-							combTaiNo.setValue(strTaiNo);
-							piaDataStore.load({
-								url : 'GetPiaDataForChart?taiNo=' + strTaiNo
-							});
-						},
-						failure : function(form, action) {
-							Ext.Msg.alert('Failed', action.result.msg);
-						}
-					});
-				}
-			}
-		}, {
-			text : 'DELETE',
-			formBind : true, // only enabled once the form is valid
-			disabled : true,
-			handler : function() {
-				var inputform = this.up('form').getForm();
-				inputform.url = 'DeletePiaData';
-				if (inputform.isValid()) {
-					inputform.submit({
-						success : function(form, action) {
-							var strTaiNo = form.getValues().taiNo
-							combTaiNo.setValue(strTaiNo);
-							piaDataStore.reload();
-							inputform.reset();
-							Ext.Msg.alert('Success', action.result.msg);
-						},
-						failure : function(form, action) {
-							Ext.Msg.alert('Failed', action.result.msg);
-						}
-					});
-				}
-			}
-		}, {
-			text : 'Cancel',
-			handler : function() {
-				this.up('form').getForm().reset();
-			}
 		} ]
+	});
+
+	// ################################ chart
+	var chartBonusCount = Ext.create('Ext.chart.Chart', {
+
+		animate : false,
+		store : piaDataStore,
+		axes : [ {
+			type : 'Numeric',
+			position : 'left',
+			fields : [ 'ballOutputN', 'outMax', 'totalOutN', 'rateN' ],
+			title : false,
+			grid : true,
+			label : {
+				renderer : Ext.util.Format.numberRenderer('0,0'),
+				font : '9px Arial'
+			}
+		}, {
+			type : 'Category',
+			position : 'bottom',
+			fields : [ 'playDateN' ],
+			title : false,
+			label : {
+				font : '9px Arial'
+			}
+		} ],
+		series : [
+				{
+					type : 'line',
+					axis : 'left',
+					xField : 'playDateN',
+					yField : 'rateN',
+					tips : {
+						trackMouse : true,
+						width : 90,
+						height : 30,
+						renderer : function(storeItem, item) {
+							this.setTitle(storeItem.get('rateN') + ' 確率 ');
+						}
+					},
+					style : {
+						fill : '#993399',
+						stroke : '#993399'
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#993399',
+						stroke : '#993399'
+					}
+				},
+				{
+					type : 'line',
+					axis : 'left',
+					xField : 'playDateN',
+					yField : 'outMax',
+					tips : {
+						trackMouse : true,
+						width : 90,
+						height : 30,
+						renderer : function(storeItem, item) {
+							this.setTitle(storeItem.get('outMax') + ' 玉 ');
+						}
+					},
+					style : {
+						fill : '#006600',
+						stroke : '#006600'
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#006600',
+						stroke : '#006600'
+					}
+				},
+				{
+					type : 'line',
+					axis : 'left',
+					xField : 'playDateN',
+					yField : 'totalOutN',
+					tips : {
+						trackMouse : true,
+						width : 90,
+						height : 30,
+						renderer : function(storeItem, item) {
+							this.setTitle(storeItem.get('totalOutN') + ' 玉 ');
+						}
+					},
+					style : {
+						fill : '#660033',
+						stroke : '#660033'
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#660033',
+						stroke : '#660033'
+					}
+				},
+				{
+					type : 'column',
+					axis : 'left',
+					highlight : true,
+					tips : {
+						trackMouse : true,
+						width : 140,
+						height : 28,
+						renderer : function(storeItem, item) {
+							this.setTitle(storeItem.get('playDateN') + '日  : '
+									+ storeItem.get('ballOutputN') + ' 玉');
+						}
+					},
+					xField : 'playDateN',
+					yField : 'ballOutputN',
+					style : {
+						fill : '#00001a',
+						stroke : '#00001a'
+					}
+				} ]
+	});
+
+	var filterPanel = Ext.create('Ext.panel.Panel', {
+
+		tbar : [ combTaiNo, btnSreachByTaiNo ],
+		bodyPadding : 5, // Don't want content to crunch against the borders
+		region : 'center',
+		//collapsible : true,
+		//height : 500,
+		layout : 'fit',
+		title : '図',
+		items : [ chartBonusCount ]
+	});
+
+	var borderPanel = Ext.create('Ext.Panel', {
+		title : '台別情報',
+		layout : {
+			type : 'border',
+			padding : 5
+		},
+		defaults : {
+			split : true
+		},
+		items : [ piaDataFormPanel, piaDataGrid, filterPanel ]
+	});
+
+	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
+		activeTab : 0,
+		items : [ borderPanel ]
 	});
 	var viewport = Ext.create('Ext.Viewport', {
 		layout : {
@@ -217,12 +426,7 @@ Ext.onReady(function() {
 		defaults : {
 			split : true
 		},
-		items : [ {
-			tbar : [ combTaiNo, btnSreachByTaiNo ],
-			layout :'border',
-//			border : false,
-//			bodyStyle : 'background-color: transparent',
-			items : [piaDataFormPanel, piaDataGrid ]
-		} ]
+		items : [ piaDataTabPanel ]
 	});
+
 });

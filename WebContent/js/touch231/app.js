@@ -641,7 +641,7 @@ Ext.application({
 							},
 							style : {
 								axisLine : true,
-								estStepSize : 25,
+								estStepSize : 50,
 								stroke : '#ddd'
 							}
 						}, {
