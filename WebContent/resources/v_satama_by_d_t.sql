@@ -9,6 +9,10 @@ VIEW `v_satama_by_d_t` AS
         `v`.`rate` AS `rate`,
         `v`.`bonusCount` AS `bonusCount`,
         `v`.`ballOutput` AS `ballOutput`,
+        CAST(IF((`v`.`rate` <> 0),
+                (`v`.`bonusCount` * `v`.`rate`),
+                ABS((((`v`.`ballOutput` * 4) / 1000) * 14)))
+            AS UNSIGNED) AS `ballInput`,
         (SELECT 
                 SUM(`p`.`ballOutput`)
             FROM
@@ -29,15 +33,16 @@ VIEW `v_satama_by_d_t` AS
                 (10000 / `v`.`rate`)),
             0) AS `rateN`,
         (`v`.`bonusCount` * 10) AS `bonusCountN`,
-        FORMAT((`v`.`ballOutput` / 100), 0) AS `ballOutputN`,
+        CAST((`v`.`ballOutput` / 100) AS SIGNED) AS `ballOutputN`,
         SUBSTR(`v`.`playDate`, 5) AS `playDateN`,
-        ((SELECT 
-                SUM(`p`.`ballOutput`)
-            FROM
-                `piainfo` `p`
-            WHERE
-                ((`v`.`playDate` >= `p`.`playDate`)
-                    AND (`p`.`taiNo` = `v`.`taiNo`))) / 100) AS `totalOutN`
+        CAST(((SELECT 
+                    SUM(`p`.`ballOutput`)
+                FROM
+                    `piainfo` `p`
+                WHERE
+                    ((`v`.`playDate` >= `p`.`playDate`)
+                        AND (`p`.`taiNo` = `v`.`taiNo`))) / 100)
+            AS SIGNED) AS `totalOutN`
     FROM
         `piainfo` `v`
     GROUP BY `v`.`taiNo` , `v`.`playDate`
