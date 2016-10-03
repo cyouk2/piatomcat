@@ -214,8 +214,8 @@ Ext.application({
 				return [
 						'<div>',
 						'<span style="color:#000099;font-size:15px;width: 40px;display: inline-block;">{taiNo}</span>',
-						'<span style="color:#000099;font-size:15px; width: 120px;display: inline-block;">本差 ：{totalOut}</span>',
-						'<span style="color:#000099;font-size:15px; width: 100px;display: inline-block;">前差 ：{totalOutBefore}</span><br/>',
+						'<span style="color:#000099;font-size:10px; width: 120px;display: inline-block;">本差 ：{totalOut}</span>',
+						'<span style="color:#000099;font-size:10px; width: 100px;display: inline-block;">前差 ：{totalOutBefore}</span><br/>',
 						
 						'<span style="color:#000099;font-size:8px;width: 40px;display: inline-block;">本日</span>',
 						'<span style="color:#ff0066;font-size:8px;width: 60px;display: inline-block;">確率 ：{rate}</span>',
