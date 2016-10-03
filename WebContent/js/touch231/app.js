@@ -1,3 +1,21 @@
+Ext.define('taiInfoModel', {
+	extend : 'Ext.data.Model',
+	config : {
+		fields : [ {
+			name : 'playDate',
+			type : 'string'
+		},{
+			name : 'playDateN',
+			type : 'string'
+		}, {
+			name : 'totalOut',
+			type : 'integer'
+		}, {
+			name : 'totalOutBefore',
+			type : 'integer'
+		} ]
+	}
+});
 Ext.define('taiNoModel', {
 	extend : 'Ext.data.Model',
 	config : {
@@ -553,7 +571,92 @@ Ext.application({
 
 					]
 				});
+				// ################################  全差玉集計 chart
+				var taiInfoAllDaysStore = Ext.create("Ext.data.Store", {
+					model : "taiInfoModel",
+					proxy : {
+						type : "ajax",
+						url : "GetTaiInfoOfAllDays",
+						reader : {
+							type : "json",
+							rootProperty : "root"
+						}
+					},
+					autoLoad : true
+				});
+				var taiInfoAllDaysChartpanel = Ext.create("Ext.Panel", {
+					title : '差玉集計',
+					iconCls : 'team',
+					layout : 'fit',
+					items : [{
+						xtype : 'chart',
+						background : "none",
+						store : taiInfoAllDaysStore,
+						animate : true,
+						interactions : [ 'panzoom', 'itemhighlight' ],
+						legend : {
+							position : "bottom"
+						},
+						series : [ {
+							type : 'line',
+							xField : 'playDateN',
+							yField : 'totalOutBefore',
+							title : '本日まで',
+							style : {
+								stroke : '#993399',
+								lineWidth : 2
+							},
+							highlightCfg : {
+								scale : 2
+							},
+							marker : {
+								type : 'circle',
+								stroke : '#0d1f96',
+								fill : '#115fa6',
+								lineWidth : 1,
+								radius : 2,
+								fx : {
+									duration : 300
+								}
+							}
+						}, {
+							type : 'bar',
+							xField : 'playDateN',
+							yField : [ 'totalOut' ],
+							title : [ '本日' ],
+							style : {
+								maxBarWidth : 3,
+								lineWidth : 1,
+								fill : "#00001a",
+								stroke : '#00001a'
+							}
+						}],
+						axes : [ {
+							type : 'numeric',
+							position : 'left',
+							grid : {
+								odd : {
+									fill : '#fafafa'
+								}
+							},
+							style : {
+								axisLine : true,
+								estStepSize : 25,
+								stroke : '#ddd'
+							}
+						}, {
+							type : 'category',
+							position : 'bottom',
+							style : {
+								estStepSize : 4,
+								stroke : '#999'
+							}
+						} ]
+					}
 
+					]
+				});
+				
 				// ################################ 差玉日別 listPanel Start
 				var storeChartForDate = Ext.create("Ext.data.Store", {
 					model : "outTotalModel",
@@ -743,7 +846,7 @@ Ext.application({
 					xtype : 'tabpanel',
 					tabBarPosition : 'bottom',
 					items : [ panelForIChiRan, formPanel, chartpanel,listPanelForSaTaMa, 
-							listpanelForBalloutOfOneDay ]
+							listpanelForBalloutOfOneDay,taiInfoAllDaysChartpanel ]
 				});
 
 				Ext.Viewport.add(tabpanels);

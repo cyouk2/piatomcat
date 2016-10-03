@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
   
-<mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">  
-  
+<mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">
+
+	<select id="getTaiNoInfoOfAllDays" resultType="TaiInfo">
+		SELECT
+			playDate, SUBSTR(playDate, 5) AS playDateN,totalOutBefore, totalOut
+		FROM
+			v_satama_all_tai
+	</select>   
+
 <select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
 		playDate,

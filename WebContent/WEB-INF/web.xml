@@ -63,6 +63,15 @@
 		<servlet-name>GetPiaDataByDate</servlet-name>
 		<url-pattern>/GetPiaDataByDate</url-pattern>
 	</servlet-mapping>
+	<!-- 全差玉集計 -->
+	<servlet>
+		<servlet-name>GetTaiInfoOfAllDays</servlet-name>
+		<servlet-class>com.zgd.controller.GetTaiInfoOfAllDays</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetTaiInfoOfAllDays</servlet-name>
+		<url-pattern>/GetTaiInfoOfAllDays</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>1.html</welcome-file>

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="PiaDataInfo" type="com.zgd.mybatis.dto.PiaDataInfo" />
 		<typeAlias alias="TaiNo" type="com.zgd.mybatis.dto.TaiNo" />
 		<typeAlias alias="PraInfo" type="com.zgd.mybatis.dto.PraInfo" />
+		<typeAlias alias="TaiInfo" type="com.zgd.mybatis.dto.TaiInfo" />
 	</typeAliases>
 
 	<environments default="development">
