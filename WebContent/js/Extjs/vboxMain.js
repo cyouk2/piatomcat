@@ -809,11 +809,11 @@ Ext.onReady(function() {
 				}
 			}*/
 		}, {
-			text : 'BALL_OUT',
-			width : 80,
+			text : 'SATAMA1',
+			width : 100,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'ballOutput',
+			dataIndex : 'totalOutBefore',
 			renderer : function(value) {
 				if (value > 0) {
 					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
@@ -822,11 +822,11 @@ Ext.onReady(function() {
 				}
 			}
 		}, {
-			text : 'SATAMA1',
-			width : 100,
+			text : 'BALL_OUT',
+			width : 80,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'totalOutBefore',
+			dataIndex : 'ballOutput',
 			renderer : function(value) {
 				if (value > 0) {
 					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
