@@ -730,19 +730,6 @@ Ext.onReady(function() {
 					return value;
 				}
 			}
-		}, {
-			text : 'SATAMA1',
-			width : 100,
-			sortable : true,
-			align : 'right',
-			dataIndex : 'totalOutBefore',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
 		} , {
 			text : 'RATE',
 			width : 70,
@@ -827,6 +814,19 @@ Ext.onReady(function() {
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'SATAMA1',
+			width : 100,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'totalOutBefore',
 			renderer : function(value) {
 				if (value > 0) {
 					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
