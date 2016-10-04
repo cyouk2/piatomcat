@@ -59,6 +59,9 @@ Ext.define('outTotalModel', {
 			name : 'rate4',
 			type : 'integer'
 		}, {
+			name : 'rate5',
+			type : 'integer'
+		}, {
 			name : 'ballOutput',
 			type : 'integer'
 		}, {
@@ -72,6 +75,9 @@ Ext.define('outTotalModel', {
 			type : 'integer'
 		}, {
 			name : 'ballOutput4',
+			type : 'integer'
+		}, {
+			name : 'ballOutput5',
 			type : 'integer'
 		} , {
 			name : 'bonusCount',
@@ -87,6 +93,9 @@ Ext.define('outTotalModel', {
 			type : 'integer'
 		}, {
 			name : 'bonusCount4',
+			type : 'integer'
+		}, {
+			name : 'bonusCount5',
 			type : 'integer'
 		} ]
 	}

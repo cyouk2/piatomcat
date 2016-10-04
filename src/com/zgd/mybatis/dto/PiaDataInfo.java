@@ -31,10 +31,37 @@ public class PiaDataInfo implements Serializable {
 	private int ballOutput3;
 	private int rate4;
 	private int ballOutput4;
+	private int rate5;
+	private int ballOutput5;
 	private int bonusCount1;
 	private int bonusCount2;
 	private int bonusCount3;
 	private int bonusCount4;
+	private int bonusCount5;
+
+	public int getRate5() {
+		return rate5;
+	}
+
+	public void setRate5(int rate5) {
+		this.rate5 = rate5;
+	}
+
+	public int getBallOutput5() {
+		return ballOutput5;
+	}
+
+	public void setBallOutput5(int ballOutput5) {
+		this.ballOutput5 = ballOutput5;
+	}
+
+	public int getBonusCount5() {
+		return bonusCount5;
+	}
+
+	public void setBonusCount5(int bonusCount5) {
+		this.bonusCount5 = bonusCount5;
+	}
 
 	public int getBallInput() {
 		return ballInput;

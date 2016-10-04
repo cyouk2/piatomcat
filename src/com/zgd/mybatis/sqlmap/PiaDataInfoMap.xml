@@ -95,7 +95,10 @@
         d.ballOutput as ballOutput3,
         e.rate as rate4,
         e.bonusCount as bonusCount4,
-        e.ballOutput as ballOutput4
+        e.ballOutput as ballOutput4,
+        f.rate as rate5,
+        f.bonusCount as bonusCount5,
+        f.ballOutput as ballOutput5
 	FROM
 		v_satama_by_d_t v
 		LEFT OUTER JOIN piainfo b
@@ -106,6 +109,8 @@
 		on (d.taino = v.taino and d.playDate = adddays(v.playDate,-3))
 		 LEFT OUTER JOIN piainfo e
 		on (e.taino = v.taino and e.playDate = adddays(v.playDate,-4))
+		LEFT OUTER JOIN piainfo f
+		on (f.taino = v.taino and f.playDate = adddays(v.playDate,-5))
 	WHERE
 		v.playDate = #{playDate}
 	<if test="sortKind == 'ballOutput'">

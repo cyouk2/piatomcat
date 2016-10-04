@@ -69,6 +69,84 @@ Ext.onReady(function() {
 			type : 'integer'
 		} ]
 	});
+
+	Ext.define('outTotalModel', {
+		extend : 'Ext.data.Model',
+		fields : [ {
+			name : 'taiNo',
+			type : 'string'
+		}, {
+			name : 'ballInput',
+			type : 'integer'
+		}, {
+			name : 'totalOut',
+			type : 'integer'
+		}, {
+			name : 'totalOutBefore',
+			type : 'integer'
+		}, {
+			name : 'rank',
+			type : 'string'
+		}, {
+			name : 'playDate',
+			type : 'string'
+		}, {
+			name : 'rate',
+			type : 'integer'
+		}, {
+			name : 'rate1',
+			type : 'integer'
+		}, {
+			name : 'rate2',
+			type : 'integer'
+		}, {
+			name : 'rate3',
+			type : 'integer'
+		}, {
+			name : 'rate4',
+			type : 'integer'
+		}, {
+			name : 'rate5',
+			type : 'integer'
+		}, {
+			name : 'ballOutput',
+			type : 'integer'
+		}, {
+			name : 'ballOutput1',
+			type : 'integer'
+		}, {
+			name : 'ballOutput2',
+			type : 'integer'
+		}, {
+			name : 'ballOutput3',
+			type : 'integer'
+		}, {
+			name : 'ballOutput4',
+			type : 'integer'
+		}, {
+			name : 'ballOutput5',
+			type : 'integer'
+		}, {
+			name : 'bonusCount',
+			type : 'integer'
+		}, {
+			name : 'bonusCount1',
+			type : 'integer'
+		}, {
+			name : 'bonusCount2',
+			type : 'integer'
+		}, {
+			name : 'bonusCount3',
+			type : 'integer'
+		}, {
+			name : 'bonusCount4',
+			type : 'integer'
+		} , {
+			name : 'bonusCount5',
+			type : 'integer'
+		} ]
+
+	});
 	// 台番のModel
 	Ext.define('taiNoModel', {
 		extend : 'Ext.data.Model',
@@ -111,6 +189,8 @@ Ext.onReady(function() {
 	// 台番
 	var combTaiNo = Ext.create('Ext.form.field.ComboBox', {
 		fieldLabel : 'TaiNo',
+		labelWidth : 40,
+		width: 120,
 		store : dsTaiNoStore,
 		queryMode : 'local',
 		displayField : 'taiNo',
@@ -121,10 +201,10 @@ Ext.onReady(function() {
 
 		tbar : [ combTaiNo, btnSreachByTaiNo ],
 		region : 'center',
-//		collapsible : true,
+		// collapsible : true,
 		store : piaDataStore,
 		title : 'DATA',
-		columns : [{
+		columns : [ {
 			text : 'DATE',
 			width : 75,
 			sortable : true,
@@ -136,29 +216,53 @@ Ext.onReady(function() {
 			dataIndex : 'taiNo'
 		}, {
 			text : 'BONUS',
-			width : 100,
+			width : 50,
 			sortable : true,
 			dataIndex : 'bonusCount'
 		}, {
 			text : 'BALL_IN',
-			width : 100,
+			width : 70,
 			sortable : true,
 			dataIndex : 'ballInput'
 		}, {
 			text : 'RATE',
-			width : 100,
+			width : 70,
 			sortable : true,
-			dataIndex : 'rate'
+			align : 'right',
+			dataIndex : 'rate',
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:green;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
 		}, {
 			text : 'BALL_OUT',
-			width : 100,
+			width : 70,
 			sortable : true,
-			dataIndex : 'ballOutput'
+			align : 'right',
+			dataIndex : 'ballOutput',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
 		}, {
 			text : 'SATAMA',
-			width : 100,
+			width : 70,
 			sortable : true,
-			dataIndex : 'totalOut'
+			align : 'right',
+			dataIndex : 'totalOut',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
 		} ],
 		listeners : {
 			select : function(dv, record, item, index, e) {
@@ -256,7 +360,7 @@ Ext.onReady(function() {
 			allowBlank : false,
 			maxValue : new Date(),
 			value : Ext.Date.add(new Date(), Ext.Date.DAY, -1),
-			format : 'Ymd',
+			format : 'Ymd'
 		}, {
 			fieldLabel : 'TAI_NO',
 			name : 'taiNo',
@@ -292,7 +396,7 @@ Ext.onReady(function() {
 		axes : [ {
 			type : 'Numeric',
 			position : 'left',
-			fields : [ 'ballOutputN', 'outMax', 'totalOutN', 'rateN' ],
+			fields : [ 'ballOutputN', 'outMax', 'totalOutN', 'rate' ],
 			title : false,
 			grid : true,
 			label : {
@@ -313,13 +417,13 @@ Ext.onReady(function() {
 					type : 'line',
 					axis : 'left',
 					xField : 'playDateN',
-					yField : 'rateN',
+					yField : 'rate',
 					tips : {
 						trackMouse : true,
 						width : 90,
 						height : 30,
 						renderer : function(storeItem, item) {
-							this.setTitle(storeItem.get('rateN') + ' 確率 ');
+							this.setTitle(storeItem.get('rate') + ' 確率 ');
 						}
 					},
 					style : {
@@ -428,8 +532,7 @@ Ext.onReady(function() {
 		items : [ piaDataFormPanel, piaDataGrid, filterPanel ]
 	});
 
-	
-// #######################差玉情報#############
+	// #######################差玉情報#############
 	// 差玉情報のStore
 	var balloutInfoOfAllDaysStore = Ext.create('Ext.data.Store', {
 		model : 'taiInfoModel',
@@ -443,7 +546,7 @@ Ext.onReady(function() {
 		},
 		autoLoad : true
 	});
-	
+
 	// 台別情報
 	var balloutInfoOfAllDaysChart = Ext.create('Ext.chart.Chart', {
 		animate : false,
@@ -522,20 +625,290 @@ Ext.onReady(function() {
 		items : [ balloutInfoOfAllDaysChart ]
 	});
 
-	
-	
-	
-	
-	
-	
-	
-	// ##########################   tabPanel  ##################
+	// ##################### outputInfoPanel ##################
+
+	// 台番のStore
+	var outputInfoStore = Ext.create('Ext.data.Store', {
+		model : 'outTotalModel',
+		proxy : {
+			type : 'ajax',
+			url : 'GetPiaDataByDate',
+			reader : {
+				type : 'json',
+				root : 'root'
+			}
+		}
+	});
+	var playDatePicker = Ext.create('Ext.form.field.Date', {
+		fieldLabel : 'PLAY_DATE',
+		editable : false,
+		labelWidth : 80,
+		width: 180,
+		maxValue : new Date(),
+		value : Ext.Date.add(new Date(), Ext.Date.DAY, -1),
+		format : 'Ymd'
+	});
+	// ソート区分のStore
+	var sortKindStore = Ext.create('Ext.data.Store', {
+		fields : [ 'abbr', 'name' ],
+		data : [ {
+			'abbr' : 'ballOutput',
+			'name' : '本日出玉'
+		}, {
+			'abbr' : 'totalOutBefore',
+			'name' : '前日差玉'
+		}, {
+			'abbr' : 'totalOut',
+			'name' : '本日差玉'
+		}, {
+			'abbr' : 'rate',
+			'name' : '前日確率'
+		} ]
+	});
+	// ソート区分
+	var sortSelectField = Ext.create('Ext.form.ComboBox', {
+		fieldLabel : 'SORT',
+		labelWidth : 50,
+		width: 150,
+		queryMode : 'local',
+		editable : false,
+		store : sortKindStore,
+		value : 'ballOutput',
+		valueField : 'abbr',
+		displayField : 'name'
+	});
+	// 検索ボタン
+	var SreachOutputInfoBtn = Ext.create('Ext.Button', {
+		text : 'Search',
+		handler : function() {
+			outputInfoStore.load({
+				params : {
+					playDate : Ext.Date
+							.format(playDatePicker.getValue(), 'Ymd'),
+					sortKind : sortSelectField.getValue()
+				}
+			});
+		}
+	});
+
+	var OutputInfoGrid = Ext.create('Ext.grid.Panel', {
+		tbar : [ playDatePicker, sortSelectField, SreachOutputInfoBtn ],
+		region : 'center',
+		// collapsible : true,
+		store : outputInfoStore,
+		title : 'OUTPUTINFO',
+		columns : [ {
+			text : 'DATE',
+			width : 75,
+			sortable : true,
+			dataIndex : 'playDate'
+		}, {
+			text : 'TAI',
+			width : 50,
+			sortable : true,
+			dataIndex : 'taiNo'
+		}, {
+			text : 'BONUS',
+			width : 50,
+			sortable : true,
+			dataIndex : 'bonusCount'
+		}, {
+			text : 'BALL_IN',
+			width : 70,
+			sortable : true,
+			dataIndex : 'ballInput'
+		}, {
+			text : 'SATAMA',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'totalOut',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'SATAMA1',
+			width : 100,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'totalOutBefore',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		} , {
+			text : 'RATE',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
+			text : 'RATE1',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate1'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
+			text : 'RATE2',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate2'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
+			text : 'RATE3',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate3'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
+			text : 'RATE4',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate4'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
+			text : 'RATE5',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate5'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
+			text : 'BALL_OUT',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'BALL_OUT1',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput1',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'BALL_OUT2',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput2',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'BALL_OUT3',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput3',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'BALL_OUT4',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput4',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}, {
+			text : 'BALL_OUT5',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput5',
+			renderer : function(value) {
+				if (value > 0) {
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}
+		}]
+	});
+
+	// ########################## tabPanel ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
-		items : [ borderPanel, balloutInfoOfAllDaysPanel ]
+		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel ]
 	});
-	
-	// ##########################   viewport  ##################
+
+	// ########################## viewport ##################
 	var viewport = Ext.create('Ext.Viewport', {
 		layout : {
 			type : 'fit',
@@ -547,7 +920,6 @@ Ext.onReady(function() {
 		items : [ piaDataTabPanel ],
 		listeners : {
 			render : function(view, eOpts) {
-				// taiInfoStore.load();
 			}
 		}
 	});
