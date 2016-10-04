@@ -6,8 +6,8 @@ VIEW `v_satama_by_d_t` AS
     SELECT 
         `v`.`playDate` AS `playDate`,
         `v`.`taiNo` AS `taiNo`,
-        `v`.`rate` AS `rate`,
         `v`.`bonusCount` AS `bonusCount`,
+        `v`.`rate` AS `rate`,
         `v`.`ballOutput` AS `ballOutput`,
         CAST(IF((`v`.`rate` <> 0),
                 (`v`.`bonusCount` * `v`.`rate`),

@@ -232,7 +232,7 @@ Ext.onReady(function() {
 			dataIndex : 'rate',
 			renderer : function(value) {
 				if (value > 0 && value < 120) {
-					return '<span style="color:green;">' + value + '</span>';
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
 				} else {
 					return value;
 				}
@@ -245,7 +245,7 @@ Ext.onReady(function() {
 			dataIndex : 'ballOutput',
 			renderer : function(value) {
 				if (value > 0) {
-					return '<span style="color:red;">' + value + '</span>';
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 				} else {
 					return value;
 				}
@@ -258,7 +258,7 @@ Ext.onReady(function() {
 			dataIndex : 'totalOut',
 			renderer : function(value) {
 				if (value > 0) {
-					return '<span style="color:red;">' + value + '</span>';
+					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 				} else {
 					return value;
 				}
