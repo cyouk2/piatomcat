@@ -109,6 +109,9 @@ Ext.onReady(function() {
 			name : 'rate5',
 			type : 'integer'
 		}, {
+			name : 'rate6',
+			type : 'integer'
+		}, {
 			name : 'ballOutput',
 			type : 'integer'
 		}, {
@@ -127,6 +130,9 @@ Ext.onReady(function() {
 			name : 'ballOutput5',
 			type : 'integer'
 		}, {
+			name : 'ballOutput6',
+			type : 'integer'
+		}, {
 			name : 'bonusCount',
 			type : 'integer'
 		}, {
@@ -143,6 +149,9 @@ Ext.onReady(function() {
 			type : 'integer'
 		} , {
 			name : 'bonusCount5',
+			type : 'integer'
+		} , {
+			name : 'bonusCount6',
 			type : 'integer'
 		} ]
 
@@ -690,6 +699,18 @@ Ext.onReady(function() {
 			});
 		}
 	});
+	
+	var renderfunctionBallout = function(value) {
+		if (value >= 0) {
+			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+		}/*else if (value >= 10000 && value < 20000) {
+			return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+		} else if (value >= 0 && value < 10000) {
+			return '<span style="color:green;font-weight: bolder;">' + value + '</span>';
+		} */else {
+			return value;
+		}
+	}
 
 	var OutputInfoGrid = Ext.create('Ext.grid.Panel', {
 		tbar : [ playDatePicker, sortSelectField, SreachOutputInfoBtn ],
@@ -732,7 +753,7 @@ Ext.onReady(function() {
 			}
 		} , {
 			text : 'RATE',
-			width : 70,
+			width : 50,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate'/*,
@@ -745,7 +766,7 @@ Ext.onReady(function() {
 			}*/
 		}, {
 			text : 'RATE1',
-			width : 70,
+			width : 50,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate1'/*,
@@ -758,7 +779,7 @@ Ext.onReady(function() {
 			}*/
 		}, {
 			text : 'RATE2',
-			width : 70,
+			width : 50,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate2'/*,
@@ -771,7 +792,7 @@ Ext.onReady(function() {
 			}*/
 		}, {
 			text : 'RATE3',
-			width : 70,
+			width : 50,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate3'/*,
@@ -784,7 +805,7 @@ Ext.onReady(function() {
 			}*/
 		}, {
 			text : 'RATE4',
-			width : 70,
+			width : 50,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate4'/*,
@@ -797,7 +818,7 @@ Ext.onReady(function() {
 			}*/
 		}, {
 			text : 'RATE5',
-			width : 70,
+			width : 50,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate5'/*,
@@ -809,8 +830,21 @@ Ext.onReady(function() {
 				}
 			}*/
 		}, {
+			text : 'RATE6',
+			width : 50,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'rate6'/*,
+			renderer : function(value) {
+				if (value > 0 && value < 120) {
+					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+				} else {
+					return value;
+				}
+			}*/
+		}, {
 			text : 'SATAMA1',
-			width : 100,
+			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'totalOutBefore',
@@ -827,78 +861,49 @@ Ext.onReady(function() {
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderfunctionBallout
 		}, {
 			text : 'BALL_OUT1',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput1',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderfunctionBallout
 		}, {
 			text : 'BALL_OUT2',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput2',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderfunctionBallout
 		}, {
 			text : 'BALL_OUT3',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput3',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderfunctionBallout
 		}, {
 			text : 'BALL_OUT4',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput4',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderfunctionBallout
 		}, {
 			text : 'BALL_OUT5',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput5',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderfunctionBallout
+		}, {
+			text : 'BALL_OUT6',
+			width : 80,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'ballOutput6',
+			renderer : renderfunctionBallout
 		}]
 	});
 
