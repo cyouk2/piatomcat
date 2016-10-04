@@ -4,14 +4,28 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var bd = Ext.getBody();
+	// 全台出玉情報のModel
+	Ext.define('taiInfoModel', {
+		extend : 'Ext.data.Model',
+		fields : [ {
+			name : 'playDate',
+			type : 'string'
+		}, {
+			name : 'playDateN',
+			type : 'string'
+		}, {
+			name : 'totalOut',
+			type : 'integer'
+		}, {
+			name : 'totalOutBefore',
+			type : 'integer'
+		} ]
 
+	});
 	// 台別情報のModel
 	Ext.define('ImageModel', {
 		extend : 'Ext.data.Model',
 		fields : [ {
-			name : 'id',
-			type : 'string'
-		}, {
 			name : 'playDate',
 			type : 'string'
 		}, {
@@ -87,7 +101,7 @@ Ext.onReady(function() {
 	});
 	// 検索ボタン
 	var btnSreachByTaiNo = Ext.create('Ext.Button', {
-		text : '検索',
+		text : 'Search',
 		handler : function() {
 			piaDataStore.load({
 				url : 'GetPiaDataForChart?taiNo=' + combTaiNo.getValue()
@@ -96,7 +110,7 @@ Ext.onReady(function() {
 	});
 	// 台番
 	var combTaiNo = Ext.create('Ext.form.field.ComboBox', {
-		fieldLabel : 'TAI_NO',
+		fieldLabel : 'TaiNo',
 		store : dsTaiNoStore,
 		queryMode : 'local',
 		displayField : 'taiNo',
@@ -104,41 +118,47 @@ Ext.onReady(function() {
 	});
 	// 台別情報のGridPanel
 	var piaDataGrid = Ext.create('Ext.grid.Panel', {
-		region : 'south',
-		collapsible : true,
-		height : 700,
+
+		tbar : [ combTaiNo, btnSreachByTaiNo ],
+		region : 'center',
+//		collapsible : true,
 		store : piaDataStore,
-		flex : 0.8,
-		title : 'データ',
-		columns : [ {
-			text : 'id',
-			hidden : true,
-			dataIndex : 'id'
-		}, {
-			text : 'PLAY_DATE',
+		title : 'DATA',
+		columns : [{
+			text : 'DATE',
 			width : 75,
 			sortable : true,
 			dataIndex : 'playDate'
 		}, {
-			text : 'TAI_NO',
-			width : 75,
+			text : 'TAI',
+			width : 50,
 			sortable : true,
 			dataIndex : 'taiNo'
 		}, {
-			text : 'BONUS_COUNT',
+			text : 'BONUS',
 			width : 100,
 			sortable : true,
 			dataIndex : 'bonusCount'
 		}, {
+			text : 'BALL_IN',
+			width : 100,
+			sortable : true,
+			dataIndex : 'ballInput'
+		}, {
 			text : 'RATE',
-			width : 75,
+			width : 100,
 			sortable : true,
 			dataIndex : 'rate'
 		}, {
-			text : 'BALL_OUTPUT',
+			text : 'BALL_OUT',
 			width : 100,
 			sortable : true,
 			dataIndex : 'ballOutput'
+		}, {
+			text : 'SATAMA',
+			width : 100,
+			sortable : true,
+			dataIndex : 'totalOut'
 		} ],
 		listeners : {
 			select : function(dv, record, item, index, e) {
@@ -210,18 +230,18 @@ Ext.onReady(function() {
 	});
 	// 台別編集用FormPanel
 	var piaDataFormPanel = Ext.create('Ext.form.Panel', {
-		flex : 0.2,
+		width : 200,
 		layout : 'form',
 		region : 'east',
 		collapsible : true,
 		url : 'SavePiaData',
 		standardSubmit : false,
 		frame : true,
-		title : '入力',
+		title : 'FORM',
 		bodyPadding : '5 5 0',
 		fieldDefaults : {
 			msgTarget : 'side',
-			labelWidth : 60
+			labelWidth : 90
 		},
 		defaultType : 'textfield',
 		tbar : [ btnSave, {
@@ -230,41 +250,37 @@ Ext.onReady(function() {
 			xtype : 'tbseparator'
 		}, btnClear ],
 		items : [ {
-			xtype : 'hiddenfield',
-			name : 'id',
-			value : ''
-		}, {
-			fieldLabel : 'playDate',
+			fieldLabel : 'PLAY_DATE',
 			xtype : 'datefield',
 			name : 'playDate',
 			allowBlank : false,
 			maxValue : new Date(),
-			value : new Date(),
+			value : Ext.Date.add(new Date(), Ext.Date.DAY, -1),
 			format : 'Ymd',
 		}, {
-			fieldLabel : 'taiNo',
+			fieldLabel : 'TAI_NO',
 			name : 'taiNo',
 			allowBlank : false,
 			xtype : 'numberfield',
-			value : 570
+			value : 557
 		}, {
-			fieldLabel : 'bonusCount',
+			fieldLabel : 'BONUS_COUNT',
 			name : 'bonusCount',
 			xtype : 'numberfield',
 			minValue : 0,
 			value : 0,
 			maxValue : 100
 		}, {
-			fieldLabel : 'rate',
+			fieldLabel : 'RATE',
 			name : 'rate',
 			xtype : 'numberfield',
 			minValue : 0,
 			value : 0
 		}, {
-			fieldLabel : 'ballOutput',
+			fieldLabel : 'BALL_OUTPUT',
 			name : 'ballOutput',
 			xtype : 'textfield',
-			value : "0"
+			value : "-"
 		} ]
 	});
 
@@ -390,20 +406,18 @@ Ext.onReady(function() {
 				} ]
 	});
 
-	var filterPanel = Ext.create('Ext.panel.Panel', {
-
-		tbar : [ combTaiNo, btnSreachByTaiNo ],
-		bodyPadding : 5, // Don't want content to crunch against the borders
-		region : 'center',
-		// collapsible : true,
-		// height : 500,
+	var filterPanel = Ext.create('Ext.Panel', {
+		bodyPadding : 5,
+		region : 'south',
+		collapsible : true,
+		height : 500,
 		layout : 'fit',
-		title : '図',
+		title : 'GRAPH',
 		items : [ chartBonusCount ]
 	});
 
 	var borderPanel = Ext.create('Ext.Panel', {
-		title : '台別情報',
+		title : 'TAI_INFO',
 		layout : {
 			type : 'border',
 			padding : 5
@@ -414,10 +428,114 @@ Ext.onReady(function() {
 		items : [ piaDataFormPanel, piaDataGrid, filterPanel ]
 	});
 
+	
+// #######################差玉情報#############
+	// 差玉情報のStore
+	var balloutInfoOfAllDaysStore = Ext.create('Ext.data.Store', {
+		model : 'taiInfoModel',
+		proxy : {
+			type : 'ajax',
+			url : 'GetTaiInfoOfAllDays',
+			reader : {
+				type : 'json',
+				root : 'root'
+			}
+		},
+		autoLoad : true
+	});
+	
+	// 台別情報
+	var balloutInfoOfAllDaysChart = Ext.create('Ext.chart.Chart', {
+		animate : false,
+		store : balloutInfoOfAllDaysStore,
+		axes : [ {
+			type : 'Numeric',
+			position : 'left',
+			fields : [ 'totalOut', 'totalOutBefore' ],
+			title : false,
+			grid : true,
+			label : {
+				renderer : Ext.util.Format.numberRenderer('0,0'),
+				font : '8px Arial'
+			}
+		}, {
+			type : 'Category',
+			position : 'bottom',
+			fields : [ 'playDateN' ],
+			title : false,
+			label : {
+				font : '8px Arial'
+			}
+		} ],
+		series : [
+				{
+					type : 'line',
+					axis : 'left',
+					xField : 'playDateN',
+					yField : 'totalOutBefore',
+					tips : {
+						trackMouse : true,
+						width : 120,
+						height : 20,
+						renderer : function(storeItem, item) {
+							this.setTitle(' 総差玉 :'
+									+ storeItem.get('totalOutBefore'));
+						}
+					},
+					style : {
+						fill : '#006600',
+						stroke : '#006600'
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#006600',
+						stroke : '#006600'
+					}
+				},
+				{
+					type : 'column',
+					axis : 'left',
+					highlight : true,
+					tips : {
+						trackMouse : true,
+						width : 140,
+						height : 20,
+						renderer : function(storeItem, item) {
+							this.setTitle(storeItem.get('playDateN') + '日  : '
+									+ storeItem.get('totalOut') + ' 差玉');
+						}
+					},
+					xField : 'playDateN',
+					yField : 'totalOut',
+					style : {
+						fill : '#cc00cc',
+						stroke : '#cc00cc'
+					}
+				} ]
+	});
+	// 差玉情報のchartPanel
+	var balloutInfoOfAllDaysPanel = Ext.create('Ext.Panel', {
+		layout : 'fit',
+		title : 'SATAMA_INFO',
+		items : [ balloutInfoOfAllDaysChart ]
+	});
+
+	
+	
+	
+	
+	
+	
+	
+	// ##########################   tabPanel  ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
-		items : [ borderPanel ]
+		items : [ borderPanel, balloutInfoOfAllDaysPanel ]
 	});
+	
+	// ##########################   viewport  ##################
 	var viewport = Ext.create('Ext.Viewport', {
 		layout : {
 			type : 'fit',
@@ -426,7 +544,12 @@ Ext.onReady(function() {
 		defaults : {
 			split : true
 		},
-		items : [ piaDataTabPanel ]
+		items : [ piaDataTabPanel ],
+		listeners : {
+			render : function(view, eOpts) {
+				// taiInfoStore.load();
+			}
+		}
 	});
 
 });

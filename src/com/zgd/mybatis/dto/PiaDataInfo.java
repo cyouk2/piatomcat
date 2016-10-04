@@ -14,6 +14,7 @@ public class PiaDataInfo implements Serializable {
 	private int rate;
 	private int bonusCount;
 	private int ballOutput;
+	private int ballInput;
 	private int totalOut;
 	private int totalOutBefore;
 	private int rateN;
@@ -34,6 +35,14 @@ public class PiaDataInfo implements Serializable {
 	private int bonusCount2;
 	private int bonusCount3;
 	private int bonusCount4;
+
+	public int getBallInput() {
+		return ballInput;
+	}
+
+	public void setBallInput(int ballInput) {
+		this.ballInput = ballInput;
+	}
 
 	public int getBonusCount1() {
 		return bonusCount1;

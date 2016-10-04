@@ -74,6 +74,6 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>1.html</welcome-file>
+		<welcome-file>2.html</welcome-file>
 	</welcome-file-list>
 </web-app>
