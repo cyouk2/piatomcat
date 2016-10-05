@@ -27,7 +27,7 @@
 	FROM
 	<choose>
 		<when test="month == 'NINE'">
-			v_satama_by_d_t_9
+			v_satama_by_d_t_09
 		</when>
 		<when test="month == 'TEN'">
 			v_satama_by_d_t_10
@@ -85,7 +85,7 @@
 	FROM
 	<choose>
 		<when test="month == 'NINE'">
-			v_satama_by_d_t_9 v
+			v_satama_by_d_t_09 v
 		</when>
 		<when test="month == 'TEN'">
 			v_satama_by_d_t_10 v
@@ -101,9 +101,9 @@
 		on (b.taino = v.taino and b.playDate = adddays(v.playDate,-1))
         LEFT OUTER JOIN piainfo c
 		on (c.taino = v.taino and c.playDate = adddays(v.playDate,-2))
-         LEFT OUTER JOIN piainfo d
+        LEFT OUTER JOIN piainfo d
 		on (d.taino = v.taino and d.playDate = adddays(v.playDate,-3))
-		 LEFT OUTER JOIN piainfo e
+		LEFT OUTER JOIN piainfo e
 		on (e.taino = v.taino and e.playDate = adddays(v.playDate,-4))
 		LEFT OUTER JOIN piainfo f
 		on (f.taino = v.taino and f.playDate = adddays(v.playDate,-5))
