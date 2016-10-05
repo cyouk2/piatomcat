@@ -2,7 +2,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `v_satama_by_d_t_9` AS
+VIEW `v_satama_by_d_t_09` AS
     SELECT 
         `v`.`playDate` AS `playDate`,
         `v`.`taiNo` AS `taiNo`,
