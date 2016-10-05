@@ -3,7 +3,51 @@ Ext.onReady(function() {
 
 	Ext.QuickTips.init();
 
-	var bd = Ext.getBody();
+	var renderforBallsout = function(value) {
+//		if (value >= 0 && value < 10000) {
+//			return '<span style="color:green;font-weight: bolder;">' + value
+//					+ '</span>';
+//		} else if (value >= 10000 && value <= 15000) {
+//			return '<span style="color:blue;font-weight: bolder;">' + value
+//					+ '</span>';
+//		} else if (value > 15000) {
+//			return '<span style="color:red;font-weight: bolder;">' + value
+//					+ '</span>';
+//		} else {
+//			return value;
+//		}
+		
+		if (value >= 0) {
+			return '<span style="color:red;font-weight: bolder;">' + value
+					+ '</span>';
+		} else {
+			return value;
+		}
+	};
+
+	var renderForRate = function(value) {
+		if (value > 0 && value <= 100) {
+			return '<span style="color:red;font-weight: bolder;">' + value
+					+ '</span>';
+		} else {
+			return value;
+		}
+	};
+
+	var renderForSaTaMa = function(value) {
+		if (value >= 0) {
+			return '<span style="color:red;font-weight: bolder;">' + value
+					+ '</span>';
+		} else {
+			return value;
+		}
+	};
+
+	// 台番のModel
+	Ext.define('taiNoModel', {
+		extend : 'Ext.data.Model',
+		fields : [ 'taiNo' ]
+	});
 	// 全台出玉情報のModel
 	Ext.define('taiInfoModel', {
 		extend : 'Ext.data.Model',
@@ -66,6 +110,9 @@ Ext.onReady(function() {
 			type : 'integer'
 		}, {
 			name : 'outMax',
+			type : 'integer'
+		}, {
+			name : 'outMaxN',
 			type : 'integer'
 		} ]
 	});
@@ -147,20 +194,16 @@ Ext.onReady(function() {
 		}, {
 			name : 'bonusCount4',
 			type : 'integer'
-		} , {
+		}, {
 			name : 'bonusCount5',
 			type : 'integer'
-		} , {
+		}, {
 			name : 'bonusCount6',
 			type : 'integer'
 		} ]
 
 	});
-	// 台番のModel
-	Ext.define('taiNoModel', {
-		extend : 'Ext.data.Model',
-		fields : [ 'taiNo' ]
-	});
+
 	// 台別情報のStore
 	var piaDataStore = Ext.create('Ext.data.JsonStore', {
 		model : 'ImageModel',
@@ -199,7 +242,7 @@ Ext.onReady(function() {
 	var combTaiNo = Ext.create('Ext.form.field.ComboBox', {
 		fieldLabel : 'TaiNo',
 		labelWidth : 40,
-		width: 120,
+		width : 120,
 		store : dsTaiNoStore,
 		queryMode : 'local',
 		displayField : 'taiNo',
@@ -239,39 +282,21 @@ Ext.onReady(function() {
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate',
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderForRate
 		}, {
 			text : 'BALL_OUT',
 			width : 70,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderForSaTaMa
 		}, {
 			text : 'SATAMA',
 			width : 70,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'totalOut',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderForSaTaMa
 		} ],
 		listeners : {
 			select : function(dv, record, item, index, e) {
@@ -402,15 +427,26 @@ Ext.onReady(function() {
 
 		animate : false,
 		store : piaDataStore,
+		legend : {
+			position : 'bottom'
+		},
+		style : 'background:#fff',
 		axes : [ {
 			type : 'Numeric',
 			position : 'left',
-			fields : [ 'ballOutputN', 'outMax', 'totalOutN', 'rate' ],
+			fields : [ 'ballOutputN', 'outMaxN', 'totalOutN', 'rateN' ],
 			title : false,
-			grid : true,
 			label : {
 				renderer : Ext.util.Format.numberRenderer('0,0'),
 				font : '9px Arial'
+			},
+			grid : {
+				odd : {
+					opacity : 1,
+					fill : '#ddd',
+					stroke : '#bbb',
+					'stroke-width' : 0.5
+				}
 			}
 		}, {
 			type : 'Category',
@@ -426,43 +462,54 @@ Ext.onReady(function() {
 					type : 'line',
 					axis : 'left',
 					xField : 'playDateN',
-					yField : 'rate',
+					yField : 'rateN',
+					highlight : {
+						size : 0.5,
+						radius : 0.5
+					},
+					smooth : true,
 					tips : {
 						trackMouse : true,
 						width : 90,
 						height : 30,
 						renderer : function(storeItem, item) {
-							this.setTitle(storeItem.get('rate') + ' 確率 ');
+							this.setTitle(storeItem.get('rateN') + ' 確率 ');
 						}
 					},
 					style : {
-						fill : '#993399',
-						stroke : '#993399'
+						fill : 'rgb(111, 49, 255)',
+						stroke : 'rgb(111, 49, 255)',
+						'stroke-width' : 1
 					},
 					markerConfig : {
 						type : 'circle',
 						size : 2,
 						radius : 2,
-						fill : '#993399',
-						stroke : '#993399'
+						fill : 'red',
+						stroke : 'red'
 					}
 				},
 				{
 					type : 'line',
 					axis : 'left',
 					xField : 'playDateN',
-					yField : 'outMax',
+					yField : 'outMaxN',
+					highlight : {
+						size : 1,
+						radius : 1
+					},
 					tips : {
 						trackMouse : true,
 						width : 90,
 						height : 30,
 						renderer : function(storeItem, item) {
-							this.setTitle(storeItem.get('outMax') + ' 玉 ');
+							this.setTitle(storeItem.get('outMaxN') + ' 玉 ');
 						}
 					},
 					style : {
 						fill : '#006600',
-						stroke : '#006600'
+						stroke : '#006600',
+						'stroke-width' : 1
 					},
 					markerConfig : {
 						type : 'circle',
@@ -477,6 +524,10 @@ Ext.onReady(function() {
 					axis : 'left',
 					xField : 'playDateN',
 					yField : 'totalOutN',
+					highlight : {
+						size : 0.5,
+						radius : 0.5
+					},
 					tips : {
 						trackMouse : true,
 						width : 90,
@@ -487,7 +538,8 @@ Ext.onReady(function() {
 					},
 					style : {
 						fill : '#660033',
-						stroke : '#660033'
+						stroke : '#660033',
+						'stroke-width' : 1
 					},
 					markerConfig : {
 						type : 'circle',
@@ -565,7 +617,14 @@ Ext.onReady(function() {
 			position : 'left',
 			fields : [ 'totalOut', 'totalOutBefore' ],
 			title : false,
-			grid : true,
+			grid : {
+				odd : {
+					opacity : 1,
+					fill : '#ddd',
+					stroke : '#bbb',
+					'stroke-width' : 0.5
+				}
+			},
 			label : {
 				renderer : Ext.util.Format.numberRenderer('0,0'),
 				font : '8px Arial'
@@ -596,7 +655,12 @@ Ext.onReady(function() {
 					},
 					style : {
 						fill : '#006600',
-						stroke : '#006600'
+						stroke : '#006600',
+						'stroke-width' : 1
+					},
+					highlight : {
+						size : 1,
+						radius : 1
 					},
 					markerConfig : {
 						type : 'circle',
@@ -627,6 +691,7 @@ Ext.onReady(function() {
 					}
 				} ]
 	});
+
 	// 差玉情報のchartPanel
 	var balloutInfoOfAllDaysPanel = Ext.create('Ext.Panel', {
 		layout : 'fit',
@@ -652,7 +717,7 @@ Ext.onReady(function() {
 		fieldLabel : 'PLAY_DATE',
 		editable : false,
 		labelWidth : 80,
-		width: 180,
+		width : 180,
 		maxValue : new Date(),
 		value : Ext.Date.add(new Date(), Ext.Date.DAY, -1),
 		format : 'Ymd'
@@ -678,7 +743,7 @@ Ext.onReady(function() {
 	var sortSelectField = Ext.create('Ext.form.ComboBox', {
 		fieldLabel : 'SORT',
 		labelWidth : 50,
-		width: 150,
+		width : 150,
 		queryMode : 'local',
 		editable : false,
 		store : sortKindStore,
@@ -699,18 +764,6 @@ Ext.onReady(function() {
 			});
 		}
 	});
-	
-	var renderfunctionBallout = function(value) {
-		if (value >= 0) {
-			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-		}/*else if (value >= 10000 && value < 20000) {
-			return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-		} else if (value >= 0 && value < 10000) {
-			return '<span style="color:green;font-weight: bolder;">' + value + '</span>';
-		} */else {
-			return value;
-		}
-	}
 
 	var OutputInfoGrid = Ext.create('Ext.grid.Panel', {
 		tbar : [ playDatePicker, sortSelectField, SreachOutputInfoBtn ],
@@ -744,167 +797,113 @@ Ext.onReady(function() {
 			sortable : true,
 			align : 'right',
 			dataIndex : 'totalOut',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
-		} , {
+			renderer : renderForSaTaMa
+		}, {
 			text : 'RATE',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate',
+			renderer : renderForRate
 		}, {
 			text : 'RATE1',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate1'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate1',
+			renderer : renderForRate
 		}, {
 			text : 'RATE2',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate2'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate2',
+			renderer : renderForRate
 		}, {
 			text : 'RATE3',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate3'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate3',
+			renderer : renderForRate
 		}, {
 			text : 'RATE4',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate4'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate4',
+			renderer : renderForRate
 		}, {
 			text : 'RATE5',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate5'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate5',
+			renderer : renderForRate
 		}, {
 			text : 'RATE6',
 			width : 50,
 			sortable : true,
 			align : 'right',
-			dataIndex : 'rate6'/*,
-			renderer : function(value) {
-				if (value > 0 && value < 120) {
-					return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}*/
+			dataIndex : 'rate6',
+			renderer : renderForRate
 		}, {
 			text : 'SATAMA1',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'totalOutBefore',
-			renderer : function(value) {
-				if (value > 0) {
-					return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-				} else {
-					return value;
-				}
-			}
+			renderer : renderForSaTaMa
 		}, {
 			text : 'BALL_OUT',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput',
-			renderer : renderfunctionBallout
+			renderer : renderforBallsout
 		}, {
 			text : 'BALL_OUT1',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput1',
-			renderer : renderfunctionBallout
+			renderer : renderforBallsout
 		}, {
 			text : 'BALL_OUT2',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput2',
-			renderer : renderfunctionBallout
+			renderer : renderforBallsout
 		}, {
 			text : 'BALL_OUT3',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput3',
-			renderer : renderfunctionBallout
+			renderer : renderforBallsout
 		}, {
 			text : 'BALL_OUT4',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput4',
-			renderer : renderfunctionBallout
+			renderer : renderforBallsout
 		}, {
 			text : 'BALL_OUT5',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput5',
-			renderer : renderfunctionBallout
+			renderer : renderforBallsout
 		}, {
 			text : 'BALL_OUT6',
 			width : 80,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput6',
-			renderer : renderfunctionBallout
-		}]
+			renderer : renderforBallsout
+		} ]
 	});
 
 	// ########################## tabPanel ##################
@@ -917,7 +916,7 @@ Ext.onReady(function() {
 	var viewport = Ext.create('Ext.Viewport', {
 		layout : {
 			type : 'fit',
-			padding : 5
+			padding : 2
 		},
 		defaults : {
 			split : true

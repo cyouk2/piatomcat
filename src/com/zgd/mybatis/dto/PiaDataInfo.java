@@ -23,6 +23,7 @@ public class PiaDataInfo implements Serializable {
 	private String playDateN;
 	private int totalOutN;
 	private int outMax;
+	private int outMaxN;
 	private int rate1;
 	private int ballOutput1;
 	private int rate2;
@@ -41,6 +42,14 @@ public class PiaDataInfo implements Serializable {
 	private int bonusCount3;
 	private int bonusCount4;
 	private int bonusCount5;
+
+	public int getOutMaxN() {
+		return outMaxN;
+	}
+
+	public void setOutMaxN(int outMaxN) {
+		this.outMaxN = outMaxN;
+	}
 
 	public int getRate6() {
 		return rate6;

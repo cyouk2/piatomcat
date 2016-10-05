@@ -42,7 +42,8 @@ public class GetPiaDataForChart extends HttpServlet {
 				if (s < outMax) {
 					outMax = s;
 				}
-				en.setOutMax(outMax);
+				en.setOutMaxN(outMax);
+				en.setOutMax(outMax * 100);
 				list2.add(en);
 			}
 			re.setRoot(list2);
