@@ -18,7 +18,7 @@ Ext.onReady(function() {
 		}
 	};
 	var renderForSaTaMa = function(value) {
-		if (value >= 0) {
+		if (value < 0) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
