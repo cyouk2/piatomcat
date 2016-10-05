@@ -10,6 +10,7 @@ public class PiaDataInfo implements Serializable {
 	private static final long serialVersionUID = 3637708191719106674L;
 
 	private int playDate;
+	private String groupName;
 	private int taiNo;
 	private int rate;
 	private int bonusCount;
@@ -42,6 +43,14 @@ public class PiaDataInfo implements Serializable {
 	private int bonusCount3;
 	private int bonusCount4;
 	private int bonusCount5;
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
 
 	public int getOutMaxN() {
 		return outMaxN;

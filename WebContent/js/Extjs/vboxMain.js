@@ -123,6 +123,9 @@ Ext.onReady(function() {
 			name : 'taiNo',
 			type : 'string'
 		}, {
+			name : 'groupName',
+			type : 'string'
+		}, {
 			name : 'ballInput',
 			type : 'integer'
 		}, {
@@ -713,6 +716,7 @@ Ext.onReady(function() {
 			}
 		}
 	});
+	// 日付のdatepicker
 	var playDatePicker = Ext.create('Ext.form.field.Date', {
 		fieldLabel : 'PLAY_DATE',
 		editable : false,
@@ -722,32 +726,29 @@ Ext.onReady(function() {
 		value : Ext.Date.add(new Date(), Ext.Date.DAY, -1),
 		format : 'Ymd'
 	});
-	// ソート区分のStore
-	var sortKindStore = Ext.create('Ext.data.Store', {
+	// 月区分のStore
+	var monthStore = Ext.create('Ext.data.Store', {
 		fields : [ 'abbr', 'name' ],
 		data : [ {
-			'abbr' : 'ballOutput',
-			'name' : '本日出玉'
+			'abbr' : '1',
+			'name' : 'ALL'
+		},{
+			'abbr' : '9',
+			'name' : '9'
 		}, {
-			'abbr' : 'totalOutBefore',
-			'name' : '前日差玉'
-		}, {
-			'abbr' : 'totalOut',
-			'name' : '本日差玉'
-		}, {
-			'abbr' : 'rate',
-			'name' : '前日確率'
-		} ]
+			'abbr' : '10',
+			'name' : '10'
+		}]
 	});
-	// ソート区分
-	var sortSelectField = Ext.create('Ext.form.ComboBox', {
-		fieldLabel : 'SORT',
+	// 月区分区分
+	var monthSelectField = Ext.create('Ext.form.ComboBox', {
+		fieldLabel : 'MONTH',
 		labelWidth : 50,
 		width : 150,
 		queryMode : 'local',
 		editable : false,
-		store : sortKindStore,
-		value : 'ballOutput',
+		store : monthStore,
+		value : '1',
 		valueField : 'abbr',
 		displayField : 'name'
 	});
@@ -757,16 +758,15 @@ Ext.onReady(function() {
 		handler : function() {
 			outputInfoStore.load({
 				params : {
-					playDate : Ext.Date
-							.format(playDatePicker.getValue(), 'Ymd'),
-					sortKind : sortSelectField.getValue()
+					playDate : Ext.Date.format(playDatePicker.getValue(), 'Ymd'),
+					month : monthSelectField.getValue()
 				}
 			});
 		}
 	});
 
 	var OutputInfoGrid = Ext.create('Ext.grid.Panel', {
-		tbar : [ playDatePicker, sortSelectField, SreachOutputInfoBtn ],
+		tbar : [ playDatePicker,SreachOutputInfoBtn ],
 		region : 'center',
 		// collapsible : true,
 		store : outputInfoStore,
@@ -781,6 +781,11 @@ Ext.onReady(function() {
 			width : 50,
 			sortable : true,
 			dataIndex : 'taiNo'
+		}, {
+			text : 'G',
+			width : 50,
+			sortable : true,
+			dataIndex : 'groupName'
 		}, {
 			text : 'BONUS',
 			width : 50,
@@ -909,6 +914,7 @@ Ext.onReady(function() {
 	// ########################## tabPanel ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
+		tbar :[monthSelectField],
 		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel ]
 	});
 

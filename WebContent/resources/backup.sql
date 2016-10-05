@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `pia` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `pia`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
 --
 -- Host: localhost    Database: pia
@@ -14,30 +16,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Temporary view structure for view `cc`
---
-
-DROP TABLE IF EXISTS `cc`;
-/*!50001 DROP VIEW IF EXISTS `cc`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-/*!50001 CREATE VIEW `cc` AS SELECT 
- 1 AS `playDate`,
- 1 AS `taiNo`,
- 1 AS `rate`,
- 1 AS `bonusCount`,
- 1 AS `ballOutput`,
- 1 AS `ballinputs`,
- 1 AS `totalOut`,
- 1 AS `totalOutBefore`,
- 1 AS `rateN`,
- 1 AS `bonusCountN`,
- 1 AS `ballOutputN`,
- 1 AS `playDateN`,
- 1 AS `totalOutN`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `piainfo`
@@ -155,6 +133,54 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `v_satama_by_d_t_10`
+--
+
+DROP TABLE IF EXISTS `v_satama_by_d_t_10`;
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_d_t_10`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_satama_by_d_t_10` AS SELECT 
+ 1 AS `playDate`,
+ 1 AS `taiNo`,
+ 1 AS `bonusCount`,
+ 1 AS `rate`,
+ 1 AS `ballOutput`,
+ 1 AS `ballInput`,
+ 1 AS `totalOut`,
+ 1 AS `totalOutBefore`,
+ 1 AS `rateN`,
+ 1 AS `bonusCountN`,
+ 1 AS `ballOutputN`,
+ 1 AS `playDateN`,
+ 1 AS `totalOutN`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `v_satama_by_d_t_9`
+--
+
+DROP TABLE IF EXISTS `v_satama_by_d_t_9`;
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_d_t_9`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_satama_by_d_t_9` AS SELECT 
+ 1 AS `playDate`,
+ 1 AS `taiNo`,
+ 1 AS `bonusCount`,
+ 1 AS `rate`,
+ 1 AS `ballOutput`,
+ 1 AS `ballInput`,
+ 1 AS `totalOut`,
+ 1 AS `totalOutBefore`,
+ 1 AS `rateN`,
+ 1 AS `bonusCountN`,
+ 1 AS `ballOutputN`,
+ 1 AS `playDateN`,
+ 1 AS `totalOutN`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `v_satama_by_playdate`
 --
 
@@ -163,6 +189,44 @@ DROP TABLE IF EXISTS `v_satama_by_playdate`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE VIEW `v_satama_by_playdate` AS SELECT 
+ 1 AS `playDate`,
+ 1 AS `addday`,
+ 1 AS `unaddday`,
+ 1 AS `totalout`,
+ 1 AS `rateday`,
+ 1 AS `addtime`,
+ 1 AS `unaddtime`,
+ 1 AS `ratetime`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `v_satama_by_playdate_10`
+--
+
+DROP TABLE IF EXISTS `v_satama_by_playdate_10`;
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_playdate_10`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_satama_by_playdate_10` AS SELECT 
+ 1 AS `playDate`,
+ 1 AS `addday`,
+ 1 AS `unaddday`,
+ 1 AS `totalout`,
+ 1 AS `rateday`,
+ 1 AS `addtime`,
+ 1 AS `unaddtime`,
+ 1 AS `ratetime`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `v_satama_by_playdate_9`
+--
+
+DROP TABLE IF EXISTS `v_satama_by_playdate_9`;
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_playdate_9`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_satama_by_playdate_9` AS SELECT 
  1 AS `playDate`,
  1 AS `addday`,
  1 AS `unaddday`,
@@ -193,6 +257,48 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `v_satama_by_taino_10`
+--
+
+DROP TABLE IF EXISTS `v_satama_by_taino_10`;
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_taino_10`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_satama_by_taino_10` AS SELECT 
+ 1 AS `taiNo`,
+ 1 AS `addball`,
+ 1 AS `unaddball`,
+ 1 AS `totalout`,
+ 1 AS `rateball`,
+ 1 AS `addtime`,
+ 1 AS `unaddtime`,
+ 1 AS `ratetime`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `v_satama_by_taino_9`
+--
+
+DROP TABLE IF EXISTS `v_satama_by_taino_9`;
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_taino_9`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_satama_by_taino_9` AS SELECT 
+ 1 AS `taiNo`,
+ 1 AS `addball`,
+ 1 AS `unaddball`,
+ 1 AS `totalout`,
+ 1 AS `rateball`,
+ 1 AS `addtime`,
+ 1 AS `unaddtime`,
+ 1 AS `ratetime`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping events for database 'pia'
+--
+
+--
 -- Dumping routines for database 'pia'
 --
 /*!50003 DROP FUNCTION IF EXISTS `adddays` */;
@@ -221,24 +327,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Final view structure for view `cc`
---
-
-/*!50001 DROP VIEW IF EXISTS `cc`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `cc` AS select `v`.`playDate` AS `playDate`,`v`.`taiNo` AS `taiNo`,`v`.`rate` AS `rate`,`v`.`bonusCount` AS `bonusCount`,`v`.`ballOutput` AS `ballOutput`,cast(if((`v`.`rate` <> 0),(`v`.`bonusCount` * `v`.`rate`),abs((((`v`.`ballOutput` * 4) / 1000) * 14))) as unsigned) AS `ballinputs`,(select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` >= `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`))) AS `totalOut`,ifnull((select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` > `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`))),0) AS `totalOutBefore`,format(if((`v`.`rate` = 0),0,(10000 / `v`.`rate`)),0) AS `rateN`,(`v`.`bonusCount` * 10) AS `bonusCountN`,cast((`v`.`ballOutput` / 100) as signed) AS `ballOutputN`,substr(`v`.`playDate`,5) AS `playDateN`,cast(((select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` >= `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`))) / 100) as signed) AS `totalOutN` from `piainfo` `v` group by `v`.`taiNo`,`v`.`playDate` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `v_satama_all_tai`
@@ -277,6 +365,42 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `v_satama_by_d_t_10`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_d_t_10`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_satama_by_d_t_10` AS select `v`.`playDate` AS `playDate`,`v`.`taiNo` AS `taiNo`,`v`.`bonusCount` AS `bonusCount`,`v`.`rate` AS `rate`,`v`.`ballOutput` AS `ballOutput`,cast(if((`v`.`rate` <> 0),(`v`.`bonusCount` * `v`.`rate`),abs((((`v`.`ballOutput` * 4) / 1000) * 14))) as unsigned) AS `ballInput`,(select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` >= `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`) and (`p`.`playDate` between 20161001 and 20161031))) AS `totalOut`,ifnull((select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` > `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`) and (`p`.`playDate` between 20161001 and 20161031))),0) AS `totalOutBefore`,format(if((`v`.`rate` = 0),0,(10000 / `v`.`rate`)),0) AS `rateN`,(`v`.`bonusCount` * 10) AS `bonusCountN`,cast((`v`.`ballOutput` / 100) as signed) AS `ballOutputN`,substr(`v`.`playDate`,5) AS `playDateN`,cast(((select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` >= `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`) and (`p`.`playDate` between 20161001 and 20161031))) / 100) as signed) AS `totalOutN` from `piainfo` `v` where (`v`.`playDate` between 20161001 and 20161031) group by `v`.`taiNo`,`v`.`playDate` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_satama_by_d_t_9`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_d_t_9`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_satama_by_d_t_9` AS select `v`.`playDate` AS `playDate`,`v`.`taiNo` AS `taiNo`,`v`.`bonusCount` AS `bonusCount`,`v`.`rate` AS `rate`,`v`.`ballOutput` AS `ballOutput`,cast(if((`v`.`rate` <> 0),(`v`.`bonusCount` * `v`.`rate`),abs((((`v`.`ballOutput` * 4) / 1000) * 14))) as unsigned) AS `ballInput`,(select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` >= `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`) and (`p`.`playDate` between 20160903 and 20160930))) AS `totalOut`,ifnull((select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` > `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`) and (`p`.`playDate` between 20160903 and 20160930))),0) AS `totalOutBefore`,format(if((`v`.`rate` = 0),0,(10000 / `v`.`rate`)),0) AS `rateN`,(`v`.`bonusCount` * 10) AS `bonusCountN`,cast((`v`.`ballOutput` / 100) as signed) AS `ballOutputN`,substr(`v`.`playDate`,5) AS `playDateN`,cast(((select sum(`p`.`ballOutput`) from `piainfo` `p` where ((`v`.`playDate` >= `p`.`playDate`) and (`p`.`taiNo` = `v`.`taiNo`) and (`p`.`playDate` between 20160903 and 20160930))) / 100) as signed) AS `totalOutN` from `piainfo` `v` where (`v`.`playDate` between 20160903 and 20160930) group by `v`.`taiNo`,`v`.`playDate` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `v_satama_by_playdate`
 --
 
@@ -290,6 +414,42 @@ DELIMITER ;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `v_satama_by_playdate` AS select `piainfo`.`playDate` AS `playDate`,sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) AS `addday`,sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)) AS `unaddday`,sum(`piainfo`.`ballOutput`) AS `totalout`,format((abs((sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) / sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)))) * 100),0) AS `rateday`,sum(if((`piainfo`.`ballOutput` >= 0),1,0)) AS `addtime`,sum(if((`piainfo`.`ballOutput` < 0),1,0)) AS `unaddtime`,format(((sum(if((`piainfo`.`ballOutput` >= 0),1,0)) / count(`piainfo`.`taiNo`)) * 100),0) AS `ratetime` from `piainfo` group by `piainfo`.`playDate` order by `totalout` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_satama_by_playdate_10`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_playdate_10`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_satama_by_playdate_10` AS select `piainfo`.`playDate` AS `playDate`,sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) AS `addday`,sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)) AS `unaddday`,sum(`piainfo`.`ballOutput`) AS `totalout`,format((abs((sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) / sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)))) * 100),0) AS `rateday`,sum(if((`piainfo`.`ballOutput` >= 0),1,0)) AS `addtime`,sum(if((`piainfo`.`ballOutput` < 0),1,0)) AS `unaddtime`,format(((sum(if((`piainfo`.`ballOutput` >= 0),1,0)) / count(`piainfo`.`taiNo`)) * 100),0) AS `ratetime` from `piainfo` where (`piainfo`.`playDate` between 20161001 and 20161031) group by `piainfo`.`playDate` order by `totalout` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_satama_by_playdate_9`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_playdate_9`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_satama_by_playdate_9` AS select `piainfo`.`playDate` AS `playDate`,sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) AS `addday`,sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)) AS `unaddday`,sum(`piainfo`.`ballOutput`) AS `totalout`,format((abs((sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) / sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)))) * 100),0) AS `rateday`,sum(if((`piainfo`.`ballOutput` >= 0),1,0)) AS `addtime`,sum(if((`piainfo`.`ballOutput` < 0),1,0)) AS `unaddtime`,format(((sum(if((`piainfo`.`ballOutput` >= 0),1,0)) / count(`piainfo`.`taiNo`)) * 100),0) AS `ratetime` from `piainfo` where (`piainfo`.`playDate` between 20160903 and 20160930) group by `piainfo`.`playDate` order by `totalout` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -311,6 +471,42 @@ DELIMITER ;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_satama_by_taino_10`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_taino_10`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_satama_by_taino_10` AS select `piainfo`.`taiNo` AS `taiNo`,sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) AS `addball`,sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)) AS `unaddball`,sum(`piainfo`.`ballOutput`) AS `totalout`,format((abs((sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) / sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)))) * 100),0) AS `rateball`,sum(if((`piainfo`.`ballOutput` >= 0),1,0)) AS `addtime`,sum(if((`piainfo`.`ballOutput` < 0),1,0)) AS `unaddtime`,format(((sum(if((`piainfo`.`ballOutput` >= 0),1,0)) / count(`piainfo`.`taiNo`)) * 100),0) AS `ratetime` from `piainfo` where (`piainfo`.`playDate` between 20161001 and 20161031) group by `piainfo`.`taiNo` order by `totalout` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_satama_by_taino_9`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_satama_by_taino_9`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_satama_by_taino_9` AS select `piainfo`.`taiNo` AS `taiNo`,sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) AS `addball`,sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)) AS `unaddball`,sum(`piainfo`.`ballOutput`) AS `totalout`,format((abs((sum(if((`piainfo`.`ballOutput` >= 0),`piainfo`.`ballOutput`,0)) / sum(if((`piainfo`.`ballOutput` < 0),`piainfo`.`ballOutput`,0)))) * 100),0) AS `rateball`,sum(if((`piainfo`.`ballOutput` >= 0),1,0)) AS `addtime`,sum(if((`piainfo`.`ballOutput` < 0),1,0)) AS `unaddtime`,format(((sum(if((`piainfo`.`ballOutput` >= 0),1,0)) / count(`piainfo`.`taiNo`)) * 100),0) AS `ratetime` from `piainfo` where (`piainfo`.`playDate` between 20160903 and 20160930) group by `piainfo`.`taiNo` order by `totalout` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -321,4 +517,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-05 10:57:49
+-- Dump completed on 2016-10-05 13:56:44

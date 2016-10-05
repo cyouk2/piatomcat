@@ -72,6 +72,7 @@
 <select id="getPiaDataByDate" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
 		v.playDate,
+		h.groupName,
 		v.taiNo,
 		v.rate,
 		v.bonusCount,
@@ -84,26 +85,36 @@
 		v.ballOutputN,
 		v.playDateN,
 		v.totalOutN,
-        b.rate as rate1,
-        b.bonusCount as bonusCount1,
-        b.ballOutput as ballOutput1,
-        c.rate as rate2,
-        c.bonusCount as bonusCount2,
-        c.ballOutput as ballOutput2,
-        d.rate as rate3,
-        d.bonusCount as bonusCount3,
-        d.ballOutput as ballOutput3,
-        e.rate as rate4,
-        e.bonusCount as bonusCount4,
-        e.ballOutput as ballOutput4,
-        f.rate as rate5,
-        f.bonusCount as bonusCount5,
-        f.ballOutput as ballOutput5,
-        g.rate as rate6,
-        g.bonusCount as bonusCount6,
-        g.ballOutput as ballOutput6
+		b.rate as rate1,
+		b.bonusCount as bonusCount1,
+		b.ballOutput as ballOutput1,
+		c.rate as rate2,
+		c.bonusCount as bonusCount2,
+		c.ballOutput as ballOutput2,
+		d.rate as rate3,
+		d.bonusCount as bonusCount3,
+		d.ballOutput as ballOutput3,
+		e.rate as rate4,
+		e.bonusCount as bonusCount4,
+		e.ballOutput as ballOutput4,
+		f.rate as rate5,
+		f.bonusCount as bonusCount5,
+		f.ballOutput as ballOutput5,
+		g.rate as rate6,
+		g.bonusCount as bonusCount6,
+		g.ballOutput as ballOutput6
 	FROM
-		v_satama_by_d_t v
+	<choose>
+		<when test="month == '9'">
+			v_satama_by_d_t_9 v
+		</when>
+		<when test="month == '10'">
+			v_satama_by_d_t_10 v
+		</when>
+		<otherwise>
+			v_satama_by_d_t v
+		</otherwise>
+	</choose>
 		LEFT OUTER JOIN piainfo b
 		on (b.taino = v.taino and b.playDate = adddays(v.playDate,-1))
         LEFT OUTER JOIN piainfo c
@@ -116,6 +127,8 @@
 		on (f.taino = v.taino and f.playDate = adddays(v.playDate,-5))
 		LEFT OUTER JOIN piainfo g
 		on (g.taino = v.taino and g.playDate = adddays(v.playDate,-6))
+		LEFT OUTER JOIN taino h
+		on (h.taino = v.taino)
 	WHERE
 		v.playDate = #{playDate}
 	<if test="sortKind == 'ballOutput'">
