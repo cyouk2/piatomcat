@@ -25,7 +25,20 @@
 		playDateN,
 		totalOutN
 	FROM
-		v_satama_by_d_t
+	<choose>
+		<when test="month == 'NINE'">
+			v_satama_by_d_t_9
+		</when>
+		<when test="month == 'TEN'">
+			v_satama_by_d_t_10
+		</when>
+		<when test="month == 'ALL' or month == null">
+			v_satama_by_d_t
+		</when>
+		<otherwise>
+			v_satama_by_d_t
+		</otherwise>
+	</choose>
 	WHERE
 		taiNo = #{taiNo}
 	<if test="playDate != null and playDate > 0">
@@ -34,40 +47,6 @@
 	ORDER BY playDate ASC;
 
 </select>  
-
-<select id="getPiaBallsOfDay" parameterType="PraInfo" resultType="PiaDataInfo">
-	SELECT
-		v.playDate,
-		v.taiNo,
-		v.rate,
-		v.bonusCount,
-		v.ballOutput,
-		v.ballInput,
-		v.totalOut,
-		v.rateN,
-		v.bonusCountN,
-		v.ballOutputN,
-		v.playDateN,
-		v.totalOutN,
-        b.rate as rate1,
-        b.ballOutput as ballOutput1,
-        c.rate as rate2,
-        c.ballOutput as ballOutput2,
-        d.rate as rate3,
-        d.ballOutput as ballOutput3
-	FROM
-		v_satama_by_d_t v
-		LEFT OUTER JOIN piainfo b
-		on (b.taino = v.taino and b.playDate = adddays(v.playDate,1))
-        LEFT OUTER JOIN piainfo c
-		on (c.taino = v.taino and c.playDate = adddays(v.playDate,2))
-         LEFT OUTER JOIN piainfo d
-		on (d.taino = v.taino and d.playDate = adddays(v.playDate,3))
-	WHERE
-		v.playDate = #{playDate}
-	ORDER BY totalOut DESC;
-
-</select> 
 
 <select id="getPiaDataByDate" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
@@ -105,11 +84,14 @@
 		g.ballOutput as ballOutput6
 	FROM
 	<choose>
-		<when test="month == '9'">
+		<when test="month == 'NINE'">
 			v_satama_by_d_t_9 v
 		</when>
-		<when test="month == '10'">
+		<when test="month == 'TEN'">
 			v_satama_by_d_t_10 v
+		</when>
+		<when test="month == 'ALL' or month == null">
+			v_satama_by_d_t v
 		</when>
 		<otherwise>
 			v_satama_by_d_t v

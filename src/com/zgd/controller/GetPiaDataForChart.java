@@ -25,12 +25,16 @@ public class GetPiaDataForChart extends HttpServlet {
 
 		String taiNo = req.getParameter("taiNo");
 		String playDate = req.getParameter("playDate");
+		String month = CommonUtil.ObejctToString(req.getParameter("month"));
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
 		PraInfo param = new PraInfo();
 		param.setTaiNo(CommonUtil.ObejctToInt(taiNo));
 		if (!CommonUtil.IsNullOrEmpty(playDate)) {
 			param.setPlayDate(CommonUtil.ObejctToInt(playDate));
+		}
+		if (!CommonUtil.IsNullOrEmpty(month)) {
+			param.setMonth(month);
 		}
 		List<PiaDataInfo> list2 = new ArrayList<PiaDataInfo>();
 		try {

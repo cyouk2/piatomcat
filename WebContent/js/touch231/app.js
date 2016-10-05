@@ -146,7 +146,7 @@ Ext.define('piaDataModel', {
 			name : 'totalOutN',
 			type : 'integer'
 		}, {
-			name : 'outMax',
+			name : 'outMaxN',
 			type : 'integer'
 		} ]
 	}
@@ -535,7 +535,7 @@ Ext.application({
 						}, {
 							type : 'line',
 							xField : 'playDateN',
-							yField : 'outMax',
+							yField : 'outMaxN',
 							title : '差玉MAX',
 							style : {
 								stroke : '#006600',
@@ -740,71 +740,6 @@ Ext.application({
 						items : [ playDateSelectField1,sortSelectField,searchButtonForm1 ]
 					}, listForBalloutOfOneDay ]
 				});
-				// ################################ 差玉台別 ListPanel Start
-				
-				var storeForSaTaMa = Ext.create("Ext.data.Store", {
-					model : "outTotalModel",
-					proxy : {
-						type : "ajax",
-						url : "GetPiaBallsOfDay",
-						reader : {
-							type : "json",
-							rootProperty : "root"
-						}
-					},
-					autoLoad : true
-				});
-				// 日付別
-				var playdateSelectField = Ext.create('Ext.field.Select', {
-					label : 'DATE',
-					valueField : 'value',
-					displayField : 'text',
-					store : {
-						data : this.getPlayDate()
-					},
-					listeners : {
-						change : function(selectf, newValue, oldValue, eOpts) {
-							storeForSaTaMa.load({
-								params : {
-									playDate : newValue
-								}
-							});
-						}
-					}
-				});
-				
-				
-				var listForSaTaMa = Ext.create('Ext.List', {
-					itemTpl : this.getItemTplForBall(),
-					store : storeForSaTaMa,
-					listeners : {
-						selectionchange : function(selection, records, eOpts) {
-							tabpanels.setActiveItem(0);
-							var intTaiNo = records[0].data.taiNo;
-							taiNoSelectFieldForIChiRan.setValue(intTaiNo);
-							taiNoSelectFieldForChart.setValue(intTaiNo);
-							storeChart.load({
-								params : {
-									taiNo : intTaiNo
-								}
-							});
-						}
-					}
-				});
-				var listPanelForSaTaMa = Ext.create("Ext.Panel", {
-					title : '差玉台別',
-					iconCls : 'info',
-					layout : 'fit',
-					items : [ {
-						xtype : 'toolbar',
-						docked : 'top',
-						scrollable : {
-							direction : 'horizontal',
-							directionLock : true
-						},
-						items : [ playdateSelectField ]
-					}, listForSaTaMa ]
-				});
 				// ################################ 一覧日別 ListPanel Start
 				// 台番
 				var taiNoSelectFieldForIChiRan = Ext.create('Ext.field.Select', {
@@ -854,7 +789,7 @@ Ext.application({
 				var tabpanels = Ext.create('Ext.TabPanel', {
 					xtype : 'tabpanel',
 					tabBarPosition : 'bottom',
-					items : [ panelForIChiRan, formPanel, chartpanel,listPanelForSaTaMa, 
+					items : [ panelForIChiRan, formPanel, chartpanel, 
 							listpanelForBalloutOfOneDay,taiInfoAllDaysChartpanel ]
 				});
 

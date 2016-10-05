@@ -237,7 +237,10 @@ Ext.onReady(function() {
 		text : 'Search',
 		handler : function() {
 			piaDataStore.load({
-				url : 'GetPiaDataForChart?taiNo=' + combTaiNo.getValue()
+				params:{
+					taiNo : combTaiNo.getValue(),
+					month : monthSelectField.getValue()
+				}
 			});
 		}
 	});
@@ -321,7 +324,10 @@ Ext.onReady(function() {
 							var strTaiNo = form.getValues().taiNo
 							combTaiNo.setValue(strTaiNo);
 							piaDataStore.load({
-								url : 'GetPiaDataForChart?taiNo=' + strTaiNo
+								params:{
+									taiNo : combTaiNo.getValue(),
+									month : monthSelectField.getValue()
+								}
 							});
 							Ext.Msg.alert('Success', action.result.msg);
 						},
@@ -730,14 +736,14 @@ Ext.onReady(function() {
 	var monthStore = Ext.create('Ext.data.Store', {
 		fields : [ 'abbr', 'name' ],
 		data : [ {
-			'abbr' : '1',
+			'abbr' : 'ALL',
 			'name' : 'ALL'
 		},{
-			'abbr' : '9',
-			'name' : '9'
+			'abbr' : 'NINE',
+			'name' : '９月'
 		}, {
-			'abbr' : '10',
-			'name' : '10'
+			'abbr' : 'TEN',
+			'name' : '１０月'
 		}]
 	});
 	// 月区分区分
@@ -748,7 +754,7 @@ Ext.onReady(function() {
 		queryMode : 'local',
 		editable : false,
 		store : monthStore,
-		value : '1',
+		value : 'ALL',
 		valueField : 'abbr',
 		displayField : 'name'
 	});

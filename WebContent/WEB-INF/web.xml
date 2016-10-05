@@ -45,15 +45,6 @@
 		<servlet-name>DeletePiaData</servlet-name>
 		<url-pattern>/DeletePiaData</url-pattern>
 	</servlet-mapping>
-	<!-- 当日出玉のリスト 台別 -->
-	<servlet>
-		<servlet-name>GetPiaBallsOfDay</servlet-name>
-		<servlet-class>com.zgd.controller.GetPiaBallsOfDay</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetPiaBallsOfDay</servlet-name>
-		<url-pattern>/GetPiaBallsOfDay</url-pattern>
-	</servlet-mapping>
 	<!-- 何日まで差玉集計 -->
 	<servlet>
 		<servlet-name>GetPiaDataByDate</servlet-name>

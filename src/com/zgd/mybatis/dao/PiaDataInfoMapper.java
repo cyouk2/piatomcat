@@ -10,8 +10,6 @@ public interface PiaDataInfoMapper {
 	
 	public List<PiaDataInfo> getPiaDataInfoList(PraInfo prainfo);
 
-	public List<PiaDataInfo> getPiaBallsOfDay(PraInfo prainfo);
-	
 	public List<PiaDataInfo> getPiaDataByDate(PraInfo prainfo);
 	
 	public List<TaiInfo> getTaiNoInfoOfAllDays();
