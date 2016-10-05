@@ -4,119 +4,28 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var renderforBallsout = function(value) {
-//		if (value >= 0 && value < 10000) {
-//			return '<span style="color:green;font-weight: bolder;">' + value
-//					+ '</span>';
-//		} else if (value >= 10000 && value <= 15000) {
-//			return '<span style="color:blue;font-weight: bolder;">' + value
-//					+ '</span>';
-//		} else if (value > 15000) {
-//			return '<span style="color:red;font-weight: bolder;">' + value
-//					+ '</span>';
-//		} else {
-//			return value;
-//		}
-		
 		if (value >= 0) {
-			return '<span style="color:red;font-weight: bolder;">' + value
-					+ '</span>';
+			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
 		}
 	};
-
 	var renderForRate = function(value) {
 		if (value > 0 && value <= 100) {
-			return '<span style="color:red;font-weight: bolder;">' + value
-					+ '</span>';
+			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
 		}
 	};
-
 	var renderForSaTaMa = function(value) {
 		if (value >= 0) {
-			return '<span style="color:red;font-weight: bolder;">' + value
-					+ '</span>';
+			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
 		}
 	};
 
-	// 台番のModel
-	Ext.define('taiNoModel', {
-		extend : 'Ext.data.Model',
-		fields : [ 'taiNo' ]
-	});
-	// 全台出玉情報のModel
-	Ext.define('taiInfoModel', {
-		extend : 'Ext.data.Model',
-		fields : [ {
-			name : 'playDate',
-			type : 'string'
-		}, {
-			name : 'playDateN',
-			type : 'string'
-		}, {
-			name : 'totalOut',
-			type : 'integer'
-		}, {
-			name : 'totalOutBefore',
-			type : 'integer'
-		} ]
-
-	});
-	// 台別情報のModel
-	Ext.define('ImageModel', {
-		extend : 'Ext.data.Model',
-		fields : [ {
-			name : 'playDate',
-			type : 'string'
-		}, {
-			name : 'taiNo',
-			type : 'integer'
-		}, {
-			name : 'bonusCount',
-			type : 'integer'
-		}, {
-			name : 'ballInput',
-			type : 'integer'
-		}, {
-			name : 'ballOutput',
-			type : 'integer'
-		}, {
-			name : 'rate',
-			type : 'integer'
-		}, {
-			name : 'playDateN',
-			type : 'string'
-		}, {
-			name : 'bonusCountN',
-			type : 'integer'
-		}, {
-			name : 'ballInputN',
-			type : 'integer'
-		}, {
-			name : 'ballOutputN',
-			type : 'integer'
-		}, {
-			name : 'rateN',
-			type : 'integer'
-		}, {
-			name : 'totalOut',
-			type : 'integer'
-		}, {
-			name : 'totalOutN',
-			type : 'integer'
-		}, {
-			name : 'outMax',
-			type : 'integer'
-		}, {
-			name : 'outMaxN',
-			type : 'integer'
-		} ]
-	});
-
+	// 共通Model
 	Ext.define('outTotalModel', {
 		extend : 'Ext.data.Model',
 		fields : [ {
@@ -134,9 +43,6 @@ Ext.onReady(function() {
 		}, {
 			name : 'totalOutBefore',
 			type : 'integer'
-		}, {
-			name : 'rank',
-			type : 'string'
 		}, {
 			name : 'playDate',
 			type : 'string'
@@ -203,13 +109,37 @@ Ext.onReady(function() {
 		}, {
 			name : 'bonusCount6',
 			type : 'integer'
-		} ]
+		}, {
+			name : 'playDateN',
+			type : 'string'
+		}, {
+			name : 'bonusCountN',
+			type : 'integer'
+		}, {
+			name : 'ballInputN',
+			type : 'integer'
+		}, {
+			name : 'ballOutputN',
+			type : 'integer'
+		}, {
+			name : 'rateN',
+			type : 'integer'
+		}, {
+			name : 'totalOutN',
+			type : 'integer'
+		}, {
+			name : 'outMax',
+			type : 'integer'
+		}, {
+			name : 'outMaxN',
+			type : 'integer'
+		}  ]
 
 	});
 
 	// 台別情報のStore
 	var piaDataStore = Ext.create('Ext.data.JsonStore', {
-		model : 'ImageModel',
+		model : 'outTotalModel',
 		proxy : {
 			type : 'ajax',
 			url : 'GetPiaDataForChart',
@@ -221,7 +151,7 @@ Ext.onReady(function() {
 	});
 	// 台番のStore
 	var dsTaiNoStore = Ext.create('Ext.data.Store', {
-		model : 'taiNoModel',
+		model : 'outTotalModel',
 		proxy : {
 			type : 'ajax',
 			url : 'GetTaiNoList',
@@ -237,7 +167,7 @@ Ext.onReady(function() {
 		text : 'Search',
 		handler : function() {
 			piaDataStore.load({
-				params:{
+				params : {
 					taiNo : combTaiNo.getValue(),
 					month : monthSelectField.getValue()
 				}
@@ -324,7 +254,7 @@ Ext.onReady(function() {
 							var strTaiNo = form.getValues().taiNo
 							combTaiNo.setValue(strTaiNo);
 							piaDataStore.load({
-								params:{
+								params : {
 									taiNo : combTaiNo.getValue(),
 									month : monthSelectField.getValue()
 								}
@@ -345,7 +275,6 @@ Ext.onReady(function() {
 		text : 'Delete',
 		listeners : {
 			click : function() {
-
 				var inputform = piaDataFormPanel.getForm();
 				inputform.url = 'DeletePiaData';
 				if (inputform.isValid()) {
@@ -433,8 +362,7 @@ Ext.onReady(function() {
 
 	// ################################ chart
 	var chartBonusCount = Ext.create('Ext.chart.Chart', {
-
-		animate : false,
+		animate : true,
 		store : piaDataStore,
 		legend : {
 			position : 'bottom'
@@ -605,7 +533,7 @@ Ext.onReady(function() {
 	// #######################差玉情報#############
 	// 差玉情報のStore
 	var balloutInfoOfAllDaysStore = Ext.create('Ext.data.Store', {
-		model : 'taiInfoModel',
+		model : 'outTotalModel',
 		proxy : {
 			type : 'ajax',
 			url : 'GetTaiInfoOfAllDays',
@@ -621,6 +549,9 @@ Ext.onReady(function() {
 	var balloutInfoOfAllDaysChart = Ext.create('Ext.chart.Chart', {
 		animate : false,
 		store : balloutInfoOfAllDaysStore,
+		legend : {
+			position : 'bottom'
+		},
 		axes : [ {
 			type : 'Numeric',
 			position : 'left',
@@ -738,13 +669,13 @@ Ext.onReady(function() {
 		data : [ {
 			'abbr' : 'ALL',
 			'name' : 'ALL'
-		},{
+		}, {
 			'abbr' : 'NINE',
 			'name' : '９月'
 		}, {
 			'abbr' : 'TEN',
 			'name' : '１０月'
-		}]
+		} ]
 	});
 	// 月区分区分
 	var monthSelectField = Ext.create('Ext.form.ComboBox', {
@@ -772,9 +703,8 @@ Ext.onReady(function() {
 	});
 
 	var OutputInfoGrid = Ext.create('Ext.grid.Panel', {
-		tbar : [ playDatePicker,SreachOutputInfoBtn ],
+		tbar : [ playDatePicker, SreachOutputInfoBtn ],
 		region : 'center',
-		// collapsible : true,
 		store : outputInfoStore,
 		title : 'OUTPUTINFO',
 		columns : [ {
@@ -920,7 +850,7 @@ Ext.onReady(function() {
 	// ########################## tabPanel ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
-		tbar :[monthSelectField],
+		tbar : [ monthSelectField ],
 		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel ]
 	});
 
@@ -930,9 +860,9 @@ Ext.onReady(function() {
 			type : 'fit',
 			padding : 2
 		},
-		defaults : {
-			split : true
-		},
+//		defaults : {
+//			split : true
+//		},
 		items : [ piaDataTabPanel ],
 		listeners : {
 			render : function(view, eOpts) {
