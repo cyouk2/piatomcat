@@ -4,21 +4,25 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var renderforBallsout = function(value) {
-		if (value >= 0) {
+		if (value > 0) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
 		}
 	};
 	var renderForRate = function(value) {
-		if (value > 0 && value <= 100) {
+		if (value > 0 && value < 90) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+		} else if (value > 180  && value < 230) {
+			return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
 		}
 	};
 	var renderForSaTaMa = function(value) {
 		if (value < 0) {
+			return '<span style="color:green;font-weight: bolder;">' + value + '</span>';
+		} else if (value > 0) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
@@ -706,6 +710,7 @@ Ext.onReady(function() {
 		tbar : [ playDatePicker, SreachOutputInfoBtn ],
 		region : 'center',
 		store : outputInfoStore,
+		columnLines: true, 
 		title : 'OUTPUTINFO',
 		columns : [ {
 			text : 'DATE',
@@ -740,50 +745,50 @@ Ext.onReady(function() {
 			dataIndex : 'totalOut',
 			renderer : renderForSaTaMa
 		}, {
-			text : 'RATE',
-			width : 50,
+			text : 'R',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate',
 			renderer : renderForRate
 		}, {
-			text : 'RATE1',
-			width : 50,
+			text : 'R1',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate1',
 			renderer : renderForRate
 		}, {
-			text : 'RATE2',
-			width : 50,
+			text : 'R2',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate2',
 			renderer : renderForRate
 		}, {
-			text : 'RATE3',
-			width : 50,
+			text : 'R3',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate3',
 			renderer : renderForRate
 		}, {
-			text : 'RATE4',
-			width : 50,
+			text : 'R4',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate4',
 			renderer : renderForRate
 		}, {
-			text : 'RATE5',
-			width : 50,
+			text : 'R5',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate5',
 			renderer : renderForRate
 		}, {
-			text : 'RATE6',
-			width : 50,
+			text : 'R6',
+			width : 40,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'rate6',
@@ -796,50 +801,50 @@ Ext.onReady(function() {
 			dataIndex : 'totalOutBefore',
 			renderer : renderForSaTaMa
 		}, {
-			text : 'BALL_OUT',
-			width : 80,
+			text : 'OUT',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput',
 			renderer : renderforBallsout
 		}, {
-			text : 'BALL_OUT1',
-			width : 80,
+			text : 'OUT1',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput1',
 			renderer : renderforBallsout
 		}, {
-			text : 'BALL_OUT2',
-			width : 80,
+			text : 'OUT2',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput2',
 			renderer : renderforBallsout
 		}, {
-			text : 'BALL_OUT3',
-			width : 80,
+			text : 'OUT3',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput3',
 			renderer : renderforBallsout
 		}, {
-			text : 'BALL_OUT4',
-			width : 80,
+			text : 'OUT4',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput4',
 			renderer : renderforBallsout
 		}, {
-			text : 'BALL_OUT5',
-			width : 80,
+			text : 'OUT5',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput5',
 			renderer : renderforBallsout
 		}, {
-			text : 'BALL_OUT6',
-			width : 80,
+			text : 'OUT6',
+			width : 60,
 			sortable : true,
 			align : 'right',
 			dataIndex : 'ballOutput6',

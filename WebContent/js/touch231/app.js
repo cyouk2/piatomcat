@@ -481,7 +481,7 @@ Ext.application({
 							type : 'line',
 							xField : 'playDateN',
 							yField : 'rateN',
-							title : '10000/確率',
+							title : '10000/rate',
 							style : {
 								stroke : '#993399',
 								lineWidth : 2
@@ -503,7 +503,7 @@ Ext.application({
 							type : 'bar',
 							xField : 'playDateN',
 							yField : [ 'ballOutputN' ],
-							title : [ '出玉' ],
+							title : [ 'ballout' ],
 							style : {
 								maxBarWidth : 3,
 								lineWidth : 1,
@@ -514,7 +514,7 @@ Ext.application({
 							type : 'line',
 							xField : 'playDateN',
 							yField : 'totalOutN',
-							title : '差玉',
+							title : 'totalout',
 							style : {
 								stroke : '#660033',
 								lineWidth : 2
@@ -536,7 +536,7 @@ Ext.application({
 							type : 'line',
 							xField : 'playDateN',
 							yField : 'outMaxN',
-							title : '差玉MAX',
+							title : 'outMax',
 							style : {
 								stroke : '#006600',
 								lineWidth : 2
