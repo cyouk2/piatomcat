@@ -123,6 +123,9 @@
 		ORDER BY totalOut DESC;
 	</if>
 	<if test="sortKind == 'rate'">
+		ORDER BY rate DESC;
+	</if>
+	<if test="sortKind == 'rate1'">
 		ORDER BY rate1 DESC;
 	</if>
 </select> 

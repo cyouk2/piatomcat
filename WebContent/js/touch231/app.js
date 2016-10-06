@@ -176,14 +176,9 @@ Ext.application({
 			},
 			getDataOfSortKind: function() {
 				var dataOfSortKind = [];
-				
 				var el = {};
 				el.value = 'ballOutput';
 				el.text = '本日出玉';
-				dataOfSortKind.push(el);
-				el = {};
-				el.value = 'totalOutBefore';
-				el.text = '前日差玉';
 				dataOfSortKind.push(el);
 				el = {};
 				el.value = 'totalOut';
@@ -191,25 +186,18 @@ Ext.application({
 				dataOfSortKind.push(el);
 				el = {};
 				el.value = 'rate';
+				el.text = '本日確率';
+				dataOfSortKind.push(el);
+				el = {};
+				el.value = 'totalOutBefore';
+				el.text = '前日差玉';
+				dataOfSortKind.push(el);
+				el = {};
+				el.value = 'rate1';
 				el.text = '前日確率';
 				dataOfSortKind.push(el);
+				
 				return dataOfSortKind;
-			},
-			getItemTplForBall : function() {
-				return [
-						'<div>',
-						'<span style="color:#000099;font-size:15px;width: 120px;display: inline-block;">{taiNo}</span><br/>',
-						'<span style="color:#006600;font-size:x-small;width: 120px;display: inline-block;">本日差玉 ：{totalOut}</span><br/>',
-						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">明後日</span>',
-						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate2}</span>',
-						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput2}</span><br/>',
-						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">明日</span>',
-						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate1}</span>',
-						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput1}</span><br/>',
-						'<span style="color:#000099;font-size:x-small;width: 50px;display: inline-block;">本日</span>',
-						'<span style="color:#ff0066;font-size:x-small;width: 70px;display: inline-block;">確率 ：{rate}</span>',
-						'<span style="color:#660066;font-size:x-small;width: 120px;display: inline-block;">出玉 ：{ballOutput}</span><br/>',
-						'</div>' ].join("");
 			},
 			getItemTpl : function() {
 				return [
@@ -311,13 +299,11 @@ Ext.application({
 						var strtaiNo = formPanel.getValues().taiNo;
 						var strplayDate = formPanel.getValues().playDate;
 						if (!strtaiNo) {
-							Ext.Msg.alert('保存 / 更新', '台番を入力してください。',
-									Ext.emptyFn);
+							Ext.Msg.alert('保存 / 更新', '台番を入力してください。',Ext.emptyFn);
 							return;
 						}
 						if (!strplayDate) {
-							Ext.Msg.alert('保存 / 更新', '日付を選択してください。',
-									Ext.emptyFn);
+							Ext.Msg.alert('保存 / 更新', '日付を選択してください。',Ext.emptyFn);
 							return;
 						}
 
@@ -336,8 +322,7 @@ Ext.application({
 					text : '削除',
 					ui : 'confirm',
 					handler : function() {
-						Ext.Msg.confirm("確認", "データを削除しますか？", function(buttonId,
-								value, opt) {
+						Ext.Msg.confirm("確認", "データを削除しますか？", function(buttonId, value, opt) {
 							if (buttonId == 'yes') {
 								formPanel.submit({
 									url : 'DeletePiaData',
@@ -763,8 +748,7 @@ Ext.application({
 					listeners : {
 						selectionchange : function(selection, records, eOpts) {
 							tabpanels.setActiveItem(1);
-							var piadataInfo = Ext.create('piaDataModel',
-									records[0].data);
+							var piadataInfo = Ext.create('piaDataModel', records[0].data);
 							formPanel.setRecord(piadataInfo);
 						}
 					}
@@ -789,8 +773,11 @@ Ext.application({
 				var tabpanels = Ext.create('Ext.TabPanel', {
 					xtype : 'tabpanel',
 					tabBarPosition : 'bottom',
-					items : [ panelForIChiRan, formPanel, chartpanel, 
-							listpanelForBalloutOfOneDay,taiInfoAllDaysChartpanel ]
+					items : [ panelForIChiRan, 
+					          formPanel, 
+					          chartpanel, 
+					          listpanelForBalloutOfOneDay,
+					          taiInfoAllDaysChartpanel ]
 				});
 
 				Ext.Viewport.add(tabpanels);
