@@ -516,7 +516,7 @@ Ext.onReady(function() {
 		bodyPadding : 5,
 		region : 'south',
 		collapsible : true,
-		height : 500,
+		height : 300,
 		layout : 'fit',
 		title : 'GRAPH',
 		items : [ chartBonusCount ]

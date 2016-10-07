@@ -81,4 +81,17 @@ public class CommonUtil {
 		return df.format(date1);
 
 	}
+	
+	public static int getMonth(String playDate) {
+
+		DateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+		try {
+			date = df.parse(playDate);
+		} catch (ParseException e) {
+		}
+		Calendar datetime = Calendar.getInstance();
+		datetime.setTime(date);
+		return datetime.get(Calendar.MONTH);
+	}
 }

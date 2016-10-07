@@ -132,8 +132,8 @@
 
 <insert id="insertPiaDataInfo" parameterType="PiaDataInfo">
 	INSERT INTO 
-		piainfo(playDate,taiNo,rate,bonusCount,ballOutput)
-	VALUES(#{playDate},#{taiNo},#{rate},#{bonusCount},#{ballOutput})
+		piainfo(playDate,taiNo,rate,bonusCount,ballOutput,kind,month)
+	VALUES(#{playDate},#{taiNo},#{rate},#{bonusCount},#{ballOutput},#{kind},#{month})
 </insert>
 <update id="updatePiaDataInfo" parameterType="PiaDataInfo" >
 	UPDATE

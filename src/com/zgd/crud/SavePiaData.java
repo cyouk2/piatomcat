@@ -22,32 +22,38 @@ public class SavePiaData extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-		String playDate = req.getParameter("playDate");
-		String taiNo = req.getParameter("taiNo");
-		String bonusCount = req.getParameter("bonusCount");
-		String ballOutput = req.getParameter("ballOutput");
-		String rate = req.getParameter("rate");
-		
+		int playDate = CommonUtil.ObejctToInt(req.getParameter("playDate"));
+		int taiNo = CommonUtil.ObejctToInt(req.getParameter("taiNo"));
+		int bonusCount = CommonUtil.ObejctToInt(req.getParameter("bonusCount"));
+		int ballOutput = CommonUtil.ObejctToInt(req.getParameter("ballOutput"));
+		int rate = CommonUtil.ObejctToInt(req.getParameter("rate"));
+
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComResult re = new ComResult();
 		PiaDataInfo param = new PiaDataInfo();
-		param.setPlayDate(CommonUtil.ObejctToInt(playDate));
-		param.setTaiNo(CommonUtil.ObejctToInt(taiNo));
-		param.setRate(CommonUtil.ObejctToInt(rate));
-		param.setBonusCount(CommonUtil.ObejctToInt(bonusCount));
-		param.setBallOutput(CommonUtil.ObejctToInt(ballOutput));
+		param.setPlayDate(playDate);
+		param.setTaiNo(taiNo);
+		param.setRate(rate);
+		param.setBonusCount(bonusCount);
+		param.setBallOutput(ballOutput);
+		param.setMonth(CommonUtil.ObejctToInt(playDate));
+		if (taiNo >= 557 && taiNo <= 584) {
+			param.setKind(1);
+		}else{
+			param.setKind(2);
+		}
 		PraInfo param1 = new PraInfo();
-		param1.setPlayDate(CommonUtil.ObejctToInt(playDate));
-		param1.setTaiNo(CommonUtil.ObejctToInt(taiNo));
-		
+		param1.setPlayDate(playDate);
+		param1.setTaiNo(taiNo);
+
 		try {
 			PiaDataInfoMapper piaDataInfoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
 			List<PiaDataInfo> result = piaDataInfoMapper.getPiaDataInfoList(param1);
-			if(result != null && result.size() > 0){
+			if (result != null && result.size() > 0) {
 				piaDataInfoMapper.updatePiaDataInfo(param);
 				re.setMsg("台番：" + taiNo + ";日付：" + playDate + "の情報を更新しました。");
-			
-			}else{
+
+			} else {
 				piaDataInfoMapper.insertPiaDataInfo(param);
 				re.setMsg("台番：" + taiNo + ";日付：" + playDate + "の情報を保存しました。");
 			}

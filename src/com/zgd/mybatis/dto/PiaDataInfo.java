@@ -12,6 +12,8 @@ public class PiaDataInfo implements Serializable {
 	private int playDate;
 	private String groupName;
 	private int taiNo;
+	private int month;
+	private int kind;
 	private int rate;
 	private int bonusCount;
 	private int ballOutput;
@@ -43,6 +45,22 @@ public class PiaDataInfo implements Serializable {
 	private int bonusCount3;
 	private int bonusCount4;
 	private int bonusCount5;
+
+	public int getKind() {
+		return kind;
+	}
+
+	public void setKind(int kind) {
+		this.kind = kind;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
 
 	public String getGroupName() {
 		return groupName;
