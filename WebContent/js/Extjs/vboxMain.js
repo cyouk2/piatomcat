@@ -11,13 +11,14 @@ Ext.onReady(function() {
 		}
 	};
 	var renderForRate = function(value) {
-		if (value > 0 && value < 90) {
-			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
-		} else if (value > 180  && value < 230) {
-			return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
-		} else {
-			return value;
-		}
+//		if (value > 0 && value < 90) {
+//			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+//		} else if (value > 180  && value < 230) {
+//			return '<span style="color:blue;font-weight: bolder;">' + value + '</span>';
+//		} else {
+//			return value;
+//		}
+		return value;
 	};
 	var renderForSaTaMa = function(value) {
 		if (value < 0) {
