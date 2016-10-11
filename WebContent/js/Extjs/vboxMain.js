@@ -589,6 +589,7 @@ Ext.onReady(function() {
 					axis : 'left',
 					xField : 'playDateN',
 					yField : 'totalOutBefore',
+					smooth : true,
 					tips : {
 						trackMouse : true,
 						width : 120,
