@@ -984,7 +984,8 @@ Ext.onReady(function() {
 	});
 	var limitSizeNumber = Ext.create('Ext.form.Number',{
 		 fieldLabel: 'limit',
-         value: 99,
+		 labelWidth : 50,
+         value: 10,
          maxValue: 99,
          minValue: 0
 	})
