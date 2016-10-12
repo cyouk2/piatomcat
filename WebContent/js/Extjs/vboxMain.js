@@ -982,19 +982,26 @@ Ext.onReady(function() {
 		valueField : 'abbr',
 		displayField : 'name'
 	});
+	var limitSizeNumber = Ext.create('Ext.form.Number',{
+		 fieldLabel: 'limit',
+         value: 99,
+         maxValue: 99,
+         minValue: 0
+	})
 	// 検索ボタン
 	var layoutInfoBtn = Ext.create('Ext.Button', {
 		text : 'Search',
 		handler : function() {
 			layoutStore.load({
 				params : {
-					month : layoutkindSelectField.getValue()
+					layoutkind : layoutkindSelectField.getValue(),
+					limitSize : limitSizeNumber.getValue()
 				}
 			});
 		}
 	});
 	var LayoutInfoGrid = Ext.create('Ext.grid.Panel', {
-		tbar:[layoutkindSelectField,layoutInfoBtn],
+		tbar:[layoutkindSelectField,limitSizeNumber,layoutInfoBtn],
 		store : layoutStore,
 		columnLines : true,
 		title : 'LAYOUT',

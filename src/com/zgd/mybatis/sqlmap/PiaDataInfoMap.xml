@@ -23,6 +23,10 @@
 				v_bonus_layout
 			</otherwise>
 		</choose>
+	<if test="taiNo != 0 ">
+		ORDER BY playDate DESC
+		limit #{taiNo}
+	</if>
 	</select>
 	<select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT

@@ -21,13 +21,15 @@ import com.zgd.mybatis.dto.PraInfo;
 public class GetPiaDataLayoutList extends HttpServlet {
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String month = CommonUtil.ObejctToString(req.getParameter("month"));
+		String layoutkind = CommonUtil.ObejctToString(req.getParameter("layoutkind"));
+		int limitSize = CommonUtil.ObejctToInt(req.getParameter("limitSize"));
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
 		try {
 			PiaDataInfoMapper taiNoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
 			PraInfo prainfo = new PraInfo();
-			prainfo.setMonth(month);
+			prainfo.setMonth(layoutkind);
+			prainfo.setTaiNo(limitSize);
 			List<PiaDataLayout> list = taiNoMapper.getPiaDataLayoutList(prainfo);
 			re.setRoot(list);
 		} finally {
