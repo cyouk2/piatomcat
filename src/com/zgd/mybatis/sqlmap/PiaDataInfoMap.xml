@@ -9,8 +9,22 @@
 		FROM
 			v_satama_all_tai
 	</select>   
-
-<select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
+	<select id="getPiaDataLayoutList" parameterType="PraInfo" resultType="PiaDataLayout">
+		SELECT *
+		FROM 
+		<choose>
+			<when test="month == 'ballOutput'">
+				v_balloutput_layout
+			</when>
+			<when test="month == 'rate'">
+				v_rate_layout
+			</when>
+			<otherwise>
+				v_bonus_layout
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
 	SELECT
 		playDate,
 		taiNo,

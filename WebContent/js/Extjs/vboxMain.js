@@ -4,7 +4,7 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var renderforBallsout = function(value) {
-		if (value > 0) {
+		if (value > 100) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
@@ -141,7 +141,97 @@ Ext.onReady(function() {
 		}  ]
 
 	});
-
+	Ext.define('LayoutModel', {
+		extend : 'Ext.data.Model',
+		fields : [ {
+			name : 'playdate',
+			type : 'string'
+		}, {
+			name : 'v_557',
+			type : 'integer'
+		}, {
+			name : 'v_558',
+			type : 'integer'
+		}, {
+			name : 'v_559',
+			type : 'integer'
+		}, {
+			name : 'v_560',
+			type : 'integer'
+		}, {
+			name : 'v_561',
+			type : 'integer'
+		}, {
+			name : 'v_562',
+			type : 'integer'
+		}, {
+			name : 'v_563',
+			type : 'integer'
+		}, {
+			name : 'v_564',
+			type : 'integer'
+		}, {
+			name : 'v_565',
+			type : 'integer'
+		}, {
+			name : 'v_566',
+			type : 'integer'
+		}, {
+			name : 'v_567',
+			type : 'integer'
+		}, {
+			name : 'v_568',
+			type : 'integer'
+		}, {
+			name : 'v_569',
+			type : 'integer'
+		}, {
+			name : 'v_570',
+			type : 'integer'
+		}, {
+			name : 'v_571',
+			type : 'integer'
+		}, {
+			name : 'v_572',
+			type : 'integer'
+		}, {
+			name : 'v_573',
+			type : 'integer'
+		}, {
+			name : 'v_574',
+			type : 'integer'
+		}, {
+			name : 'v_575',
+			type : 'integer'
+		}, {
+			name : 'v_576',
+			type : 'integer'
+		}, {
+			name : 'v_577',
+			type : 'integer'
+		}, {
+			name : 'v_578',
+			type : 'integer'
+		}, {
+			name : 'v_579',
+			type : 'integer'
+		}, {
+			name : 'v_580',
+			type : 'integer'
+		}, {
+			name : 'v_581',
+			type : 'integer'
+		}, {
+			name : 'v_582',
+			type : 'integer'
+		}, {
+			name : 'v_583',
+			type : 'integer'
+		}, {
+			name : 'v_584',
+			type : 'integer'
+		} ]
+	});
 	// 台別情報のStore
 	var piaDataStore = Ext.create('Ext.data.JsonStore', {
 		model : 'outTotalModel',
@@ -853,12 +943,270 @@ Ext.onReady(function() {
 			renderer : renderforBallsout
 		} ]
 	});
-
+	// ###############################layout 
+	var layoutStore = Ext.create('Ext.data.Store', {
+		model : 'LayoutModel',
+		proxy : {
+			type : 'ajax',
+			url : 'GetPiaDataLayoutList',
+			reader : {
+				type : 'json',
+				root : 'root'
+			}
+		}/*,
+		autoLoad : true*/
+	});
+	// 区分のStore
+	var layoutkindStore = Ext.create('Ext.data.Store', {
+		fields : [ 'abbr', 'name' ],
+		data : [  {
+			'abbr' : 'ballOutput',
+			'name' : 'ballOutput'
+		}, {
+			'abbr' : 'bonus',
+			'name' : 'bonus'
+		}, {
+			'abbr' : 'rate',
+			'name' : 'rate'
+		} ]
+	});
+	// 区分
+	var layoutkindSelectField = Ext.create('Ext.form.ComboBox', {
+		fieldLabel : 'KIND',
+		labelWidth : 50,
+		width : 150,
+		queryMode : 'local',
+		editable : false,
+		store : layoutkindStore,
+		value : 'rate',
+		valueField : 'abbr',
+		displayField : 'name'
+	});
+	// 検索ボタン
+	var layoutInfoBtn = Ext.create('Ext.Button', {
+		text : 'Search',
+		handler : function() {
+			layoutStore.load({
+				params : {
+					month : layoutkindSelectField.getValue()
+				}
+			});
+		}
+	});
+	var LayoutInfoGrid = Ext.create('Ext.grid.Panel', {
+		tbar:[layoutkindSelectField,layoutInfoBtn],
+		store : layoutStore,
+		columnLines : true,
+		title : 'LAYOUT',
+		columns : [ {
+			text : 'playdate',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'playdate'
+		}, {
+			text : 'A_557',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_557',
+			renderer : renderforBallsout
+		}, {
+			text : 'A_558',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_558',
+			renderer : renderforBallsout
+		}, {
+			text : 'A_559',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_559',
+			renderer : renderforBallsout
+		}, {
+			text : 'A_560',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_560',
+			renderer : renderforBallsout
+		}, {
+			text : 'A_561',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_561',
+			renderer : renderforBallsout
+		}, {
+			text : 'A_562',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_562',
+			renderer : renderforBallsout
+		}, {
+			text : 'A_563',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_563',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_564',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_564',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_565',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_565',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_566',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_566',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_567',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_567',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_568',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_568',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_569',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_569',
+			renderer : renderforBallsout
+		}, {
+			text : 'B_570',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_570',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_571',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_571',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_572',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_572',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_573',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_573',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_574',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_574',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_575',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_575',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_576',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_576',
+			renderer : renderforBallsout
+		}, {
+			text : 'C_577',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_577',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_578',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_578',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_579',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_579',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_580',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_580',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_581',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_581',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_582',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_582',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_583',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_583',
+			renderer : renderforBallsout
+		}, {
+			text : 'D_584',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'v_584',
+			renderer : renderforBallsout
+		} ]
+	});
 	// ########################## tabPanel ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
 		tbar : [ monthSelectField ],
-		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel ]
+		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel,LayoutInfoGrid ]
 	});
 
 	// ########################## viewport ##################

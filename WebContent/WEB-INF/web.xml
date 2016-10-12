@@ -63,6 +63,14 @@
 		<servlet-name>GetTaiInfoOfAllDays</servlet-name>
 		<url-pattern>/GetTaiInfoOfAllDays</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>GetPiaDataLayoutList</servlet-name>
+		<servlet-class>com.zgd.controller.GetPiaDataLayoutList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetPiaDataLayoutList</servlet-name>
+		<url-pattern>/GetPiaDataLayoutList</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>2.html</welcome-file>
