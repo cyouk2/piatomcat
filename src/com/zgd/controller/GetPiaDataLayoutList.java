@@ -23,13 +23,15 @@ public class GetPiaDataLayoutList extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String layoutkind = CommonUtil.ObejctToString(req.getParameter("layoutkind"));
 		int limitSize = CommonUtil.ObejctToInt(req.getParameter("limitSize"));
+		int offsetSize = CommonUtil.ObejctToInt(req.getParameter("offsetSize"));
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
 		try {
 			PiaDataInfoMapper taiNoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
 			PraInfo prainfo = new PraInfo();
-			prainfo.setMonth(layoutkind);
-			prainfo.setTaiNo(limitSize);
+			prainfo.setDataKind(layoutkind);
+			prainfo.setLimit(limitSize);
+			prainfo.setOffset(offsetSize);
 			List<PiaDataLayout> list = taiNoMapper.getPiaDataLayoutList(prainfo);
 			re.setRoot(list);
 		} finally {

@@ -5,171 +5,169 @@
 
 	<select id="getTaiNoInfoOfAllDays" resultType="TaiInfo">
 		SELECT
-			playDate, SUBSTR(playDate, 5) AS playDateN,totalOutBefore, totalOut
+			playDate, SUBSTR(playDate, 5) AS playDateN,totalOutBefore, totalOut,a,b,c,d
 		FROM
-			v_satama_all_tai
+			v_group_ballout
 	</select>   
 	<select id="getPiaDataLayoutList" parameterType="PraInfo" resultType="PiaDataLayout">
 		SELECT *
 		FROM 
 		<choose>
-			<when test="month == 'ballOutput'">
+			<when test="dataKind == 'ballOutput'">
 				v_balloutput_layout
 			</when>
-			<when test="month == 'rate'">
+			<when test="dataKind == 'rate'">
 				v_rate_layout
 			</when>
 			<otherwise>
 				v_bonus_layout
 			</otherwise>
 		</choose>
-	<if test="taiNo != 0 ">
-		ORDER BY playDate DESC
-		limit #{taiNo}
-	</if>
+		ORDER BY playDate ASC
+		limit #{limit}
+		offset #{offset}
 	</select>
 	<select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
-	SELECT
-		playDate,
-		taiNo,
-		rate,
-		bonusCount,
-		ballOutput,
-		ballInput,
-		totalOut,
-		rateN,
-		bonusCountN,
-		ballOutputN,
-		playDateN,
-		totalOutN
-	FROM
-	<choose>
-		<when test="month == 'NINE'">
-			v_satama_by_d_t_09
-		</when>
-		<when test="month == 'TEN'">
-			v_satama_by_d_t_10
-		</when>
-		<when test="month == 'ALL' or month == null">
-			v_satama_by_d_t
-		</when>
-		<otherwise>
-			v_satama_by_d_t
-		</otherwise>
-	</choose>
-	WHERE
-		taiNo = #{taiNo}
-	<if test="playDate != null and playDate > 0">
-		AND playDate = #{playDate}
-	</if>
-	ORDER BY playDate ASC;
+		SELECT
+			playDate,
+			taiNo,
+			rate,
+			bonusCount,
+			ballOutput,
+			ballInput,
+			totalOut,
+			rateN,
+			bonusCountN,
+			ballOutputN,
+			playDateN,
+			totalOutN
+		FROM
+		<choose>
+			<when test="month == 'NINE'">
+				v_satama_by_d_t_09
+			</when>
+			<when test="month == 'TEN'">
+				v_satama_by_d_t_10
+			</when>
+			<otherwise>
+				v_satama_by_d_t
+			</otherwise>
+		</choose>
+		WHERE
+			taiNo = #{taiNo}
+		<if test="playDate != null and playDate > 0">
+			AND playDate = #{playDate}
+		</if>
+			ORDER BY playDate ASC;
+	
+	</select>  
 
-</select>  
+	<select id="getPiaDataByDate" parameterType="PraInfo" resultType="PiaDataInfo">
+		SELECT
+			v.playDate,
+			h.groupName,
+			v.taiNo,
+			v.rate,
+			v.bonusCount,
+			v.ballOutput,
+			v.ballInput,
+			v.totalOut,
+			v.totalOutBefore,
+			v.rateN,
+			v.bonusCountN,
+			v.ballOutputN,
+			v.playDateN,
+			v.totalOutN,
+			b.rate as rate1,
+			b.bonusCount as bonusCount1,
+			b.ballOutput as ballOutput1,
+			c.rate as rate2,
+			c.bonusCount as bonusCount2,
+			c.ballOutput as ballOutput2,
+			d.rate as rate3,
+			d.bonusCount as bonusCount3,
+			d.ballOutput as ballOutput3,
+			e.rate as rate4,
+			e.bonusCount as bonusCount4,
+			e.ballOutput as ballOutput4,
+			f.rate as rate5,
+			f.bonusCount as bonusCount5,
+			f.ballOutput as ballOutput5,
+			g.rate as rate6,
+			g.bonusCount as bonusCount6,
+			g.ballOutput as ballOutput6
+		FROM
+		<choose>
+			<when test="month == 'NINE'">
+				v_satama_by_d_t_09 v
+			</when>
+			<when test="month == 'TEN'">
+				v_satama_by_d_t_10 v
+			</when>
+			<otherwise>
+				v_satama_by_d_t v
+			</otherwise>
+		</choose>
+			LEFT OUTER JOIN piainfo b
+			on (b.taino = v.taino and b.playDate = adddays(v.playDate,-1))
+	        LEFT OUTER JOIN piainfo c
+			on (c.taino = v.taino and c.playDate = adddays(v.playDate,-2))
+	        LEFT OUTER JOIN piainfo d
+			on (d.taino = v.taino and d.playDate = adddays(v.playDate,-3))
+			LEFT OUTER JOIN piainfo e
+			on (e.taino = v.taino and e.playDate = adddays(v.playDate,-4))
+			LEFT OUTER JOIN piainfo f
+			on (f.taino = v.taino and f.playDate = adddays(v.playDate,-5))
+			LEFT OUTER JOIN piainfo g
+			on (g.taino = v.taino and g.playDate = adddays(v.playDate,-6))
+			LEFT OUTER JOIN taino h
+			on (h.taino = v.taino)
+		WHERE
+			v.playDate = #{playDate}
+		<if test="sortKind == 'ballOutput'">
+			ORDER BY ballOutput DESC;
+		</if>
+		<if test="sortKind == 'totalOutBefore'">
+			ORDER BY totalOutBefore DESC;
+		</if>
+		<if test="sortKind == 'totalOut'">
+			ORDER BY totalOut DESC;
+		</if>
+		<if test="sortKind == 'rate'">
+			ORDER BY rate DESC;
+		</if>
+		<if test="sortKind == 'rate1'">
+			ORDER BY rate1 DESC;
+		</if>
+	</select> 
 
-<select id="getPiaDataByDate" parameterType="PraInfo" resultType="PiaDataInfo">
-	SELECT
-		v.playDate,
-		h.groupName,
-		v.taiNo,
-		v.rate,
-		v.bonusCount,
-		v.ballOutput,
-		v.ballInput,
-		v.totalOut,
-		v.totalOutBefore,
-		v.rateN,
-		v.bonusCountN,
-		v.ballOutputN,
-		v.playDateN,
-		v.totalOutN,
-		b.rate as rate1,
-		b.bonusCount as bonusCount1,
-		b.ballOutput as ballOutput1,
-		c.rate as rate2,
-		c.bonusCount as bonusCount2,
-		c.ballOutput as ballOutput2,
-		d.rate as rate3,
-		d.bonusCount as bonusCount3,
-		d.ballOutput as ballOutput3,
-		e.rate as rate4,
-		e.bonusCount as bonusCount4,
-		e.ballOutput as ballOutput4,
-		f.rate as rate5,
-		f.bonusCount as bonusCount5,
-		f.ballOutput as ballOutput5,
-		g.rate as rate6,
-		g.bonusCount as bonusCount6,
-		g.ballOutput as ballOutput6
-	FROM
-	<choose>
-		<when test="month == 'NINE'">
-			v_satama_by_d_t_09 v
-		</when>
-		<when test="month == 'TEN'">
-			v_satama_by_d_t_10 v
-		</when>
-		<when test="month == 'ALL' or month == null">
-			v_satama_by_d_t v
-		</when>
-		<otherwise>
-			v_satama_by_d_t v
-		</otherwise>
-	</choose>
-		LEFT OUTER JOIN piainfo b
-		on (b.taino = v.taino and b.playDate = adddays(v.playDate,-1))
-        LEFT OUTER JOIN piainfo c
-		on (c.taino = v.taino and c.playDate = adddays(v.playDate,-2))
-        LEFT OUTER JOIN piainfo d
-		on (d.taino = v.taino and d.playDate = adddays(v.playDate,-3))
-		LEFT OUTER JOIN piainfo e
-		on (e.taino = v.taino and e.playDate = adddays(v.playDate,-4))
-		LEFT OUTER JOIN piainfo f
-		on (f.taino = v.taino and f.playDate = adddays(v.playDate,-5))
-		LEFT OUTER JOIN piainfo g
-		on (g.taino = v.taino and g.playDate = adddays(v.playDate,-6))
-		LEFT OUTER JOIN taino h
-		on (h.taino = v.taino)
-	WHERE
-		v.playDate = #{playDate}
-	<if test="sortKind == 'ballOutput'">
-		ORDER BY ballOutput DESC;
-	</if>
-	<if test="sortKind == 'totalOutBefore'">
-		ORDER BY totalOutBefore DESC;
-	</if>
-	<if test="sortKind == 'totalOut'">
-		ORDER BY totalOut DESC;
-	</if>
-	<if test="sortKind == 'rate'">
-		ORDER BY rate DESC;
-	</if>
-	<if test="sortKind == 'rate1'">
-		ORDER BY rate1 DESC;
-	</if>
-</select> 
+	<insert id="insertPiaDataInfo" parameterType="PiaDataInfo">
+		INSERT INTO piainfo(
+			playDate,taiNo,rate,bonusCount,ballOutput,kind,month
+		) VALUES (
+			#{playDate},#{taiNo},#{rate},#{bonusCount},#{ballOutput},#{kind},#{month}
+		)
+	</insert>
 
-<insert id="insertPiaDataInfo" parameterType="PiaDataInfo">
-	INSERT INTO 
-		piainfo(playDate,taiNo,rate,bonusCount,ballOutput,kind,month)
-	VALUES(#{playDate},#{taiNo},#{rate},#{bonusCount},#{ballOutput},#{kind},#{month})
-</insert>
-<update id="updatePiaDataInfo" parameterType="PiaDataInfo" >
-	UPDATE
-		piainfo
-	SET
-		rate = #{rate},
-		bonusCount = #{bonusCount},
-		ballOutput = #{ballOutput}
-	WHERE
-		playDate = #{playDate}
-	AND
-		taiNo = #{taiNo}
-</update>
-<delete id="deletePiaDataInfo" parameterType="PiaDataInfo" >
-  DELETE FROM piainfo 
-  WHERE
-  	playDate = #{playDate}
-  AND
-  	taiNo = #{taiNo}
-</delete>
+	<update id="updatePiaDataInfo" parameterType="PiaDataInfo" >
+		UPDATE
+			piainfo
+		SET
+			rate = #{rate},
+			bonusCount = #{bonusCount},
+			ballOutput = #{ballOutput}
+		WHERE
+			playDate = #{playDate}
+		AND
+			taiNo = #{taiNo}
+	</update>
+
+	<delete id="deletePiaDataInfo" parameterType="PiaDataInfo" >
+	  DELETE FROM
+	  	piainfo 
+	  WHERE
+	  	playDate = #{playDate}
+	  AND
+	  	taiNo = #{taiNo}
+	</delete>
 </mapper>

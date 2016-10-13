@@ -4,7 +4,7 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var renderforBallsout = function(value) {
-		if (value > 100) {
+		if (value >= 1000) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
@@ -53,6 +53,18 @@ Ext.onReady(function() {
 			type : 'string'
 		}, {
 			name : 'rate',
+			type : 'integer'
+		}, {
+			name : 'a',
+			type : 'integer'
+		}, {
+			name : 'b',
+			type : 'integer'
+		}, {
+			name : 'c',
+			type : 'integer'
+		}, {
+			name : 'd',
 			type : 'integer'
 		}, {
 			name : 'rate1',
@@ -974,7 +986,7 @@ Ext.onReady(function() {
 	var layoutkindSelectField = Ext.create('Ext.form.ComboBox', {
 		fieldLabel : 'KIND',
 		labelWidth : 50,
-		width : 150,
+		width : 110,
 		queryMode : 'local',
 		editable : false,
 		store : layoutkindStore,
@@ -984,8 +996,18 @@ Ext.onReady(function() {
 	});
 	var limitSizeNumber = Ext.create('Ext.form.Number',{
 		 fieldLabel: 'limit',
-		 labelWidth : 50,
+		 labelWidth : 40,
+		 width : 100,
          value: 10,
+         maxValue: 99,
+         minValue: 0
+	})
+	
+	var offsetSizeNumber = Ext.create('Ext.form.Number',{
+		 fieldLabel: 'offset',
+		 labelWidth : 40,
+		 width : 100,
+         value: 30,
          maxValue: 99,
          minValue: 0
 	})
@@ -996,13 +1018,14 @@ Ext.onReady(function() {
 			layoutStore.load({
 				params : {
 					layoutkind : layoutkindSelectField.getValue(),
-					limitSize : limitSizeNumber.getValue()
+					limitSize : limitSizeNumber.getValue(),
+					offsetSize : offsetSizeNumber.getValue()
 				}
 			});
 		}
 	});
 	var LayoutInfoGrid = Ext.create('Ext.grid.Panel', {
-		tbar:[layoutkindSelectField,limitSizeNumber,layoutInfoBtn],
+		tbar:[layoutkindSelectField,limitSizeNumber,offsetSizeNumber,layoutInfoBtn],
 		store : layoutStore,
 		columnLines : true,
 		title : 'LAYOUT',
@@ -1210,11 +1233,52 @@ Ext.onReady(function() {
 			renderer : renderforBallsout
 		} ]
 	});
+	var groupInfoGrid = Ext.create('Ext.grid.Panel', {
+		//tbar:[layoutkindSelectField,limitSizeNumber,offsetSizeNumber,layoutInfoBtn],
+		store : balloutInfoOfAllDaysStore,
+		columnLines : true,
+		title : 'GROUP',
+		columns : [ {
+			text : 'playdate',
+			width : 70,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'playDate'
+		}, {
+			text : 'A',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'a',
+			renderer : renderforBallsout
+		}, {
+			text : 'B',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'b',
+			renderer : renderforBallsout
+		}, {
+			text : 'C',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'c',
+			renderer : renderforBallsout
+		}, {
+			text : 'D',
+			width : 60,
+			sortable : true,
+			align : 'right',
+			dataIndex : 'd',
+			renderer : renderforBallsout
+		}]
+	});
 	// ########################## tabPanel ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
 		tbar : [ monthSelectField ],
-		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel,LayoutInfoGrid ]
+		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel,LayoutInfoGrid ,groupInfoGrid]
 	});
 
 	// ########################## viewport ##################
@@ -1223,9 +1287,6 @@ Ext.onReady(function() {
 			type : 'fit',
 			padding : 2
 		},
-//		defaults : {
-//			split : true
-//		},
 		items : [ piaDataTabPanel ],
 		listeners : {
 			render : function(view, eOpts) {
