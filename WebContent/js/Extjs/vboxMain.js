@@ -1234,7 +1234,6 @@ Ext.onReady(function() {
 		} ]
 	});
 	var groupInfoGrid = Ext.create('Ext.grid.Panel', {
-		//tbar:[layoutkindSelectField,limitSizeNumber,offsetSizeNumber,layoutInfoBtn],
 		store : balloutInfoOfAllDaysStore,
 		columnLines : true,
 		title : 'GROUP',
