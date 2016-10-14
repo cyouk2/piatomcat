@@ -24,5 +24,7 @@ VIEW `v_satama_by_taino` AS
             0) AS `ratetime`
     FROM
         `piainfo`
+    WHERE
+        (`piainfo`.`taiNo` BETWEEN 557 AND 584)
     GROUP BY `piainfo`.`taiNo`
     ORDER BY `totalout` DESC

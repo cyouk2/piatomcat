@@ -2,7 +2,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `v_satama_by_d_t_09` AS
+VIEW `v_satama_by_d_t_now` AS
     SELECT 
         `v`.`playDate` AS `playDate`,
         `v`.`taiNo` AS `taiNo`,
@@ -20,7 +20,7 @@ VIEW `v_satama_by_d_t_09` AS
             WHERE
                 ((`v`.`playDate` >= `p`.`playDate`)
                     AND (`p`.`taiNo` = `v`.`taiNo`)
-                    AND (`p`.`playDate` BETWEEN 20160903 AND 20160930))) AS `totalOut`,
+                    AND (`p`.`month` = MONTH(NOW())))) AS `totalOut`,
         IFNULL((SELECT 
                         SUM(`p`.`ballOutput`)
                     FROM
@@ -28,7 +28,7 @@ VIEW `v_satama_by_d_t_09` AS
                     WHERE
                         ((`v`.`playDate` > `p`.`playDate`)
                             AND (`p`.`taiNo` = `v`.`taiNo`)
-                            AND (`p`.`playDate` BETWEEN 20160903 AND 20160930))),
+                            AND (`p`.`month` = MONTH(NOW())))),
                 0) AS `totalOutBefore`,
         FORMAT(IF((`v`.`rate` = 0),
                 0,
@@ -44,10 +44,10 @@ VIEW `v_satama_by_d_t_09` AS
                 WHERE
                     ((`v`.`playDate` >= `p`.`playDate`)
                         AND (`p`.`taiNo` = `v`.`taiNo`)
-                        AND (`p`.`playDate` BETWEEN 20160903 AND 20160930))) / 100)
+                        AND (`p`.`month` = MONTH(NOW())))) / 100)
             AS SIGNED) AS `totalOutN`
     FROM
         `piainfo` `v`
     WHERE
-        (`v`.`playDate` BETWEEN 20160903 AND 20160930)
+        (`v`.`month` = MONTH(NOW()))
     GROUP BY `v`.`taiNo` , `v`.`playDate`

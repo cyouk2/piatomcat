@@ -2,7 +2,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `v_satama_by_taino_09` AS
+VIEW `v_satama_by_taino_now` AS
     SELECT 
         `piainfo`.`taiNo` AS `taiNo`,
         SUM(IF((`piainfo`.`ballOutput` >= 0),
@@ -25,6 +25,7 @@ VIEW `v_satama_by_taino_09` AS
     FROM
         `piainfo`
     WHERE
-        (`piainfo`.`playDate` BETWEEN 20160903 AND 20160930)
+        ((`piainfo`.`month` = MONTH(NOW()))
+            AND (`piainfo`.`taiNo` BETWEEN 557 AND 584))
     GROUP BY `piainfo`.`taiNo`
     ORDER BY `totalout` DESC

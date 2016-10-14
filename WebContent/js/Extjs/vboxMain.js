@@ -778,11 +778,8 @@ Ext.onReady(function() {
 			'abbr' : 'ALL',
 			'name' : 'ALL'
 		}, {
-			'abbr' : 'NINE',
-			'name' : '９月'
-		}, {
-			'abbr' : 'TEN',
-			'name' : '１０月'
+			'abbr' : 'now',
+			'name' : 'NOW'
 		} ]
 	});
 	// 月区分区分
@@ -986,7 +983,7 @@ Ext.onReady(function() {
 	var layoutkindSelectField = Ext.create('Ext.form.ComboBox', {
 		fieldLabel : 'KIND',
 		labelWidth : 50,
-		width : 110,
+		width : 180,
 		queryMode : 'local',
 		editable : false,
 		store : layoutkindStore,

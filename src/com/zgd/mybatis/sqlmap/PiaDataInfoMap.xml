@@ -43,11 +43,8 @@
 			totalOutN
 		FROM
 		<choose>
-			<when test="month == 'NINE'">
-				v_satama_by_d_t_09
-			</when>
-			<when test="month == 'TEN'">
-				v_satama_by_d_t_10
+			<when test="month == 'now'">
+				v_satama_by_d_t_now
 			</when>
 			<otherwise>
 				v_satama_by_d_t
@@ -98,11 +95,8 @@
 			g.ballOutput as ballOutput6
 		FROM
 		<choose>
-			<when test="month == 'NINE'">
-				v_satama_by_d_t_09 v
-			</when>
-			<when test="month == 'TEN'">
-				v_satama_by_d_t_10 v
+			<when test="month == 'now'">
+				v_satama_by_d_t_now v
 			</when>
 			<otherwise>
 				v_satama_by_d_t v
@@ -140,6 +134,8 @@
 			ORDER BY rate1 DESC;
 		</if>
 	</select> 
+
+
 
 	<insert id="insertPiaDataInfo" parameterType="PiaDataInfo">
 		INSERT INTO piainfo(
