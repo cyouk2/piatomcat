@@ -3,11 +3,19 @@
   
 <mapper namespace="com.zgd.mybatis.dao.PiaDataInfoMapper">
 
-	<select id="getTaiNoInfoOfAllDays" resultType="TaiInfo">
+	<select id="getTaiNoInfoOfAllDays" parameterType="PraInfo" resultType="TaiInfo">
 		SELECT
 			playDate, SUBSTR(playDate, 5) AS playDateN,totalOutBefore, totalOut,a,b,c,d
 		FROM
-			v_group_ballout
+			
+		<choose>
+			<when test="month == 'now'">
+				v_group_ballout_now
+			</when>
+			<otherwise>
+				v_group_ballout
+			</otherwise>
+		</choose>
 	</select>   
 	<select id="getPiaDataLayoutList" parameterType="PraInfo" resultType="PiaDataLayout">
 		SELECT *
@@ -23,24 +31,15 @@
 				v_bonus_layout
 			</otherwise>
 		</choose>
+		<if test="month == 'now'">
+		WHERE month = MONTH(NOW())
+		</if>
 		ORDER BY playDate ASC
 		limit #{limit}
 		offset #{offset}
 	</select>
 	<select id="getPiaDataInfoList" parameterType="PraInfo" resultType="PiaDataInfo">
-		SELECT
-			playDate,
-			taiNo,
-			rate,
-			bonusCount,
-			ballOutput,
-			ballInput,
-			totalOut,
-			rateN,
-			bonusCountN,
-			ballOutputN,
-			playDateN,
-			totalOutN
+		SELECT *
 		FROM
 		<choose>
 			<when test="month == 'now'">

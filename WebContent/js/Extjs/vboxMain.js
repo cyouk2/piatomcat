@@ -648,10 +648,21 @@ Ext.onReady(function() {
 				type : 'json',
 				root : 'root'
 			}
-		},
-		autoLoad : true
+		}
 	});
 
+	// 検索ボタン
+	var btn_balloutInfoOfAllDaysChart = Ext.create('Ext.Button', {
+		text : 'Search',
+		handler : function() {
+			balloutInfoOfAllDaysStore.load({
+				params : {
+					month : monthSelectField.getValue()
+				}
+			});
+		}
+	});
+	
 	// 台別情報
 	var balloutInfoOfAllDaysChart = Ext.create('Ext.chart.Chart', {
 		animate : false,
@@ -744,6 +755,7 @@ Ext.onReady(function() {
 	var balloutInfoOfAllDaysPanel = Ext.create('Ext.Panel', {
 		layout : 'fit',
 		title : 'SATAMA_INFO',
+		tbar:[btn_balloutInfoOfAllDaysChart],
 		items : [ balloutInfoOfAllDaysChart ]
 	});
 
@@ -995,7 +1007,7 @@ Ext.onReady(function() {
 		 fieldLabel: 'limit',
 		 labelWidth : 40,
 		 width : 100,
-         value: 10,
+         value: 20,
          maxValue: 99,
          minValue: 0
 	})
@@ -1004,7 +1016,7 @@ Ext.onReady(function() {
 		 fieldLabel: 'offset',
 		 labelWidth : 40,
 		 width : 100,
-         value: 30,
+         value: 0,
          maxValue: 99,
          minValue: 0
 	})
@@ -1016,7 +1028,8 @@ Ext.onReady(function() {
 				params : {
 					layoutkind : layoutkindSelectField.getValue(),
 					limitSize : limitSizeNumber.getValue(),
-					offsetSize : offsetSizeNumber.getValue()
+					offsetSize : offsetSizeNumber.getValue(),
+					month : monthSelectField.getValue()
 				}
 			});
 		}

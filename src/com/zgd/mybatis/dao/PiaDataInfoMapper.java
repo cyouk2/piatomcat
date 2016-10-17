@@ -13,7 +13,7 @@ public interface PiaDataInfoMapper {
 
 	public List<PiaDataInfo> getPiaDataByDate(PraInfo prainfo);
 	
-	public List<TaiInfo> getTaiNoInfoOfAllDays();
+	public List<TaiInfo> getTaiNoInfoOfAllDays(PraInfo prainfo);
 	
 	public List<PiaDataLayout> getPiaDataLayoutList(PraInfo prainfo);
 	
