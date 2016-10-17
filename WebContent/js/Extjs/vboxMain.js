@@ -1243,8 +1243,20 @@ Ext.onReady(function() {
 			renderer : renderforBallsout
 		} ]
 	});
+	// 検索ボタン
+	var btn_groupInfoGrid = Ext.create('Ext.Button', {
+		text : 'Search',
+		handler : function() {
+			balloutInfoOfAllDaysStore.load({
+				params : {
+					month : monthSelectField.getValue()
+				}
+			});
+		}
+	});
 	var groupInfoGrid = Ext.create('Ext.grid.Panel', {
 		store : balloutInfoOfAllDaysStore,
+		tbar:[btn_groupInfoGrid],
 		columnLines : true,
 		title : 'GROUP',
 		columns : [ {
