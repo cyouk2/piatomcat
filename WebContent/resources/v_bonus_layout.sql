@@ -5,6 +5,7 @@ CREATE
 VIEW `v_bonus_layout` AS
     SELECT 
         `piainfo`.`playDate` AS `playdate`,
+        `piainfo`.`month` AS `month`,
         SUM(IF((`piainfo`.`taiNo` = 557),
             `piainfo`.`bonusCount`,
             0)) AS `v_557`,

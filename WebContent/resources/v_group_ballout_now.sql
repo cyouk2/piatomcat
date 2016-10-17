@@ -2,7 +2,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `v_group_ballout` AS
+VIEW `v_group_ballout_now` AS
     SELECT 
         `a`.`playDate` AS `playDate`,
         SUM(IF((`a`.`groupName` = 'A'), `a`.`ss`, 0)) AS `a`,
@@ -16,7 +16,8 @@ VIEW `v_group_ballout` AS
                 `pia`.`piainfo` `p1`
             WHERE
                 ((`p1`.`playDate` <= `a`.`playDate`)
-                    AND (`p1`.`kind` = 1))) AS `totalOutBefore`
+                    AND (`p1`.`kind` = 1)
+                    AND (`p1`.`month` = MONTH(NOW())))) AS `totalOutBefore`
     FROM
         (SELECT 
             `p`.`playDate` AS `playDate`,
@@ -27,7 +28,8 @@ VIEW `v_group_ballout` AS
         JOIN `pia`.`taino` `t`)
         WHERE
             ((`p`.`taiNo` = `t`.`taiNo`)
-                AND (`p`.`kind` = 1))
+                AND (`p`.`kind` = 1)
+                AND (`p`.`month` = MONTH(NOW())))
         GROUP BY `p`.`playDate` , `t`.`groupName`
         ORDER BY `p`.`playDate` , `t`.`groupName`) `a`
     GROUP BY `a`.`playDate`
