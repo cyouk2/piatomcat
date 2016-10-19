@@ -4,7 +4,7 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var renderforBallsout = function(value) {
-		if (value >= 1000) {
+		if (value >= 2500) {
 			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
 		} else {
 			return value;
