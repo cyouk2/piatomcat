@@ -1347,9 +1347,7 @@ Ext.onReady(function() {
 		}]
 	});
 	// 台別情報
-	
-
-		var satamaInfoOfallChart = function(index) {
+	var satamaInfoOfallChart = function(index) {
 		var aa = [];
 		if (index == 'A') {
 			aa = [ lineChartPropity('playdateN', 'v_557', '#b66699'),
