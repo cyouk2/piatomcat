@@ -153,6 +153,7 @@ Ext.onReady(function() {
 		}  ]
 
 	});
+
 	Ext.define('LayoutModel', {
 		extend : 'Ext.data.Model',
 		fields : [ {
@@ -244,6 +245,21 @@ Ext.onReady(function() {
 			type : 'integer'
 		} ]
 	});
+	
+	
+	var satamaInfoOfallStore = Ext.create('Ext.data.JsonStore', {
+		model : 'LayoutModel',
+		proxy : {
+			type : 'ajax',
+			url : 'GetSatamaInfoList',
+			reader : {
+				type : 'json',
+				root : 'root'
+			}
+		},
+		autoLoad :true
+	});
+	
 	// 台別情報のStore
 	var piaDataStore = Ext.create('Ext.data.JsonStore', {
 		model : 'outTotalModel',
@@ -1295,11 +1311,147 @@ Ext.onReady(function() {
 			renderer : renderforBallsout
 		}]
 	});
+	// 台別情報
+	var satamaInfoOfallChart = Ext.create('Ext.chart.Chart', {
+		animate : false,
+		store : satamaInfoOfallStore,
+		legend : {
+			position : 'bottom'
+		},
+		axes : [ {
+			type : 'Numeric',
+			position : 'left',
+			fields : [ 'v_557', 'v_558', 'v_559', 'v_560', 'v_561','v_562','v_563' ],
+			title : false,
+			grid : {
+				odd : {
+					opacity : 1,
+					fill : '#ddd',
+					stroke : '#bbb',
+					'stroke-width' : 0.5
+				}
+			},
+			label : {
+				renderer : Ext.util.Format.numberRenderer('0,0'),
+				font : '8px Arial'
+			}
+		}, {
+			type : 'Category',
+			position : 'bottom',
+			fields : [ 'playdate' ],
+			title : false,
+			label : {
+				font : '8px Arial'
+			}
+		} ],
+		series : [
+				{
+					type : 'line',
+					axis : 'left',
+					xField : 'playdate',
+					yField : 'v_557',
+					smooth : true,
+					tips : {
+						trackMouse : true,
+						width : 120,
+						height : 20,
+						renderer : function(storeItem, item) {
+							this.setTitle(' 総差玉 :'
+									+ storeItem.get('v_557'));
+						}
+					},
+					style : {
+						fill : '#006600',
+						stroke : '#006600',
+						'stroke-width' : 1
+					},
+					highlight : {
+						size : 1,
+						radius : 1
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#006600',
+						stroke : '#006600'
+					}
+				},{
+					type : 'line',
+					axis : 'left',
+					xField : 'playdate',
+					yField : 'v_558',
+					smooth : true,
+					tips : {
+						trackMouse : true,
+						width : 120,
+						height : 20,
+						renderer : function(storeItem, item) {
+							this.setTitle(' 総差玉 :'
+									+ storeItem.get('v_558'));
+						}
+					},
+					style : {
+						fill : '#006600',
+						stroke : '#006600',
+						'stroke-width' : 1
+					},
+					highlight : {
+						size : 1,
+						radius : 1
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#006600',
+						stroke : '#006600'
+					}
+				},{
+					type : 'line',
+					axis : 'left',
+					xField : 'playdate',
+					yField : 'v_559',
+					smooth : true,
+					tips : {
+						trackMouse : true,
+						width : 120,
+						height : 20,
+						renderer : function(storeItem, item) {
+							this.setTitle(' 総差玉 :'
+									+ storeItem.get('v_559'));
+						}
+					},
+					style : {
+						fill : '#006600',
+						stroke : '#006600',
+						'stroke-width' : 1
+					},
+					highlight : {
+						size : 1,
+						radius : 1
+					},
+					markerConfig : {
+						type : 'circle',
+						size : 2,
+						radius : 2,
+						fill : '#006600',
+						stroke : '#006600'
+					}
+				}]
+	});
+
+	// 差玉情報のchartPanel
+	var satamaInfoOfallChartPanel = Ext.create('Ext.Panel', {
+		layout : 'fit',
+		title : 'SATAMA_INFO11',
+		items : [ satamaInfoOfallChart ]
+	});
 	// ########################## tabPanel ##################
 	var piaDataTabPanel = Ext.create('Ext.tab.Panel', {
 		activeTab : 0,
 		tbar : [ monthSelectField ],
-		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel,LayoutInfoGrid ,groupInfoGrid]
+		items : [ borderPanel, OutputInfoGrid, balloutInfoOfAllDaysPanel,LayoutInfoGrid ,groupInfoGrid,satamaInfoOfallChartPanel]
 	});
 
 	// ########################## viewport ##################

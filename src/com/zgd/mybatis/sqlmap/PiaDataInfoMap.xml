@@ -17,6 +17,12 @@
 			</otherwise>
 		</choose>
 	</select>   
+	
+	<select id="getSatamaInfoList" resultType="PiaDataLayout">
+		SELECT s.*
+		FROM satamainfo s
+	</select> 
+	
 	<select id="getPiaDataLayoutList" parameterType="PraInfo" resultType="PiaDataLayout">
 		SELECT *
 		FROM 

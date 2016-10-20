@@ -17,6 +17,9 @@ public interface PiaDataInfoMapper {
 	
 	public List<PiaDataLayout> getPiaDataLayoutList(PraInfo prainfo);
 	
+	public List<PiaDataLayout> getSatamaInfoList();
+	
+	
 	public void insertPiaDataInfo(PiaDataInfo piadatainfo);
 	
 	public void updatePiaDataInfo(PiaDataInfo piadatainfo);

@@ -18,6 +18,14 @@
 		<servlet-name>GetTaiNoList</servlet-name>
 		<url-pattern>/GetTaiNoList</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>GetSatamaInfoList</servlet-name>
+		<servlet-class>com.zgd.controller.GetSatamaInfoList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetSatamaInfoList</servlet-name>
+		<url-pattern>/GetSatamaInfoList</url-pattern>
+	</servlet-mapping>
 	<!-- 図を表示用データ情報取得 -->
 	<servlet>
 		<servlet-name>GetPiaDataForChart</servlet-name>
