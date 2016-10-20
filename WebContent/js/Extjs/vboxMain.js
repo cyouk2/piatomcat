@@ -1348,40 +1348,41 @@ Ext.onReady(function() {
 	});
 	// 台別情報
 	
-	var satamaInfoOfallChart = function(index){
+
+		var satamaInfoOfallChart = function(index) {
 		var aa = [];
-		if(index =='A'){
-			aa =[ lineChartPropity('playdateN','v_557','#b66699'),
-		          lineChartPropity('playdateN','v_558','#cc0066'),
-		          lineChartPropity('playdateN','v_559','#006600'),
-		          lineChartPropity('playdateN','v_560','#ff0000'),
-		          lineChartPropity('playdateN','v_561','#4d9900'),
-		          lineChartPropity('playdateN','v_562','#660066'),
-		          lineChartPropity('playdateN','v_563','#9966ff')];
-		} else if(index =='B'){
-			aa =[ lineChartPropity('playdateN','v_564','#4d9900'),
-		          lineChartPropity('playdateN','v_565','#660066'),
-		          lineChartPropity('playdateN','v_566','#9966ff'),
-		          lineChartPropity('playdateN','v_567','#4d9900'),
-		          lineChartPropity('playdateN','v_568','#660066'),
-		          lineChartPropity('playdateN','v_569','#1966ff'),
-		          lineChartPropity('playdateN','v_570','#2966ff')];
-		}else if(index =='C'){
-			aa =[ lineChartPropity('playdateN','v_571','#4d9900'),
-		          lineChartPropity('playdateN','v_572','#660066'),
-		          lineChartPropity('playdateN','v_573','#9966ff'),
-		          lineChartPropity('playdateN','v_574','#4d9900'),
-		          lineChartPropity('playdateN','v_575','#660066'),
-		          lineChartPropity('playdateN','v_576','#1966ff'),
-		          lineChartPropity('playdateN','v_577','#2966ff')];
-		}else if(index =='D'){
-			aa =[ lineChartPropity('playdateN','v_578','#4d9900'),
-		          lineChartPropity('playdateN','v_579','#660066'),
-		          lineChartPropity('playdateN','v_580','#9966ff'),
-		          lineChartPropity('playdateN','v_581','#4d9900'),
-		          lineChartPropity('playdateN','v_582','#660066'),
-		          lineChartPropity('playdateN','v_583','#1966ff'),
-		          lineChartPropity('playdateN','v_584','#2966ff')];
+		if (index == 'A') {
+			aa = [ lineChartPropity('playdateN', 'v_557', '#b66699'),
+					lineChartPropity('playdateN', 'v_558', '#cc0066'),
+					lineChartPropity('playdateN', 'v_559', '#006600'),
+					lineChartPropity('playdateN', 'v_560', '#ff0000'),
+					lineChartPropity('playdateN', 'v_561', '#4d9900'),
+					lineChartPropity('playdateN', 'v_562', '#660066'),
+					lineChartPropity('playdateN', 'v_563', '#9966ff') ];
+		} else if (index == 'B') {
+			aa = [ lineChartPropity('playdateN', 'v_564', '#4d9900'),
+					lineChartPropity('playdateN', 'v_565', '#660066'),
+					lineChartPropity('playdateN', 'v_566', '#9966ff'),
+					lineChartPropity('playdateN', 'v_567', '#4d9900'),
+					lineChartPropity('playdateN', 'v_568', '#660066'),
+					lineChartPropity('playdateN', 'v_569', '#1966ff'),
+					lineChartPropity('playdateN', 'v_570', '#2966ff') ];
+		} else if (index == 'C') {
+			aa = [ lineChartPropity('playdateN', 'v_571', '#4d9900'),
+					lineChartPropity('playdateN', 'v_572', '#660066'),
+					lineChartPropity('playdateN', 'v_573', '#9966ff'),
+					lineChartPropity('playdateN', 'v_574', '#4d9900'),
+					lineChartPropity('playdateN', 'v_575', '#660066'),
+					lineChartPropity('playdateN', 'v_576', '#1966ff'),
+					lineChartPropity('playdateN', 'v_577', '#2966ff') ];
+		} else if (index == 'D') {
+			aa = [ lineChartPropity('playdateN', 'v_578', '#4d9900'),
+					lineChartPropity('playdateN', 'v_579', '#660066'),
+					lineChartPropity('playdateN', 'v_580', '#9966ff'),
+					lineChartPropity('playdateN', 'v_581', '#4d9900'),
+					lineChartPropity('playdateN', 'v_582', '#660066'),
+					lineChartPropity('playdateN', 'v_583', '#1966ff'),
+					lineChartPropity('playdateN', 'v_584', '#2966ff') ];
 		}
 		var chart = Ext.create('Ext.chart.Chart', {
 			animate : false,
@@ -1389,40 +1390,44 @@ Ext.onReady(function() {
 			legend : {
 				position : 'bottom'
 			},
-			axes : [ {
-				type : 'Numeric',
-				position : 'left',
-				fields : [ 'v_557', 'v_558', 'v_559', 'v_560', 'v_561','v_562','v_563', 
-				           'v_564', 'v_565', 'v_567', 'v_568','v_569','v_570','v_571','v_572','v_573','v_574','v_575','v_576'
-				           ,'v_578','v_579','v_580','v_581','v_582','v_583','v_584'],
-				title : false,
-				grid : {
-					odd : {
-						opacity : 1,
-						fill : '#ddd',
-						stroke : '#bbb',
-						'stroke-width' : 0.5
-					}
-				},
-				label : {
-					renderer : Ext.util.Format.numberRenderer('0,0'),
-					font : '8px Arial'
-				}
-			}, {
-				type : 'Category',
-				position : 'bottom',
-				fields : [ 'playdateN' ],
-				title : false,
-				label : {
-					font : '8px Arial'
-				}
-			} ],
-			series :aa
+			axes : [
+					{
+						type : 'Numeric',
+						position : 'left',
+						fields : [ 'v_557', 'v_558', 'v_559', 'v_560', 'v_561',
+								'v_562', 'v_563', 'v_564', 'v_565', 'v_567',
+								'v_568', 'v_569', 'v_570', 'v_571', 'v_572',
+								'v_573', 'v_574', 'v_575', 'v_576', 'v_578',
+								'v_579', 'v_580', 'v_581', 'v_582', 'v_583',
+								'v_584' ],
+						title : false,
+						grid : {
+							odd : {
+								opacity : 1,
+								fill : '#ddd',
+								stroke : '#bbb',
+								'stroke-width' : 0.5
+							}
+						},
+						label : {
+							renderer : Ext.util.Format.numberRenderer('0,0'),
+							font : '8px Arial'
+						}
+					}, {
+						type : 'Category',
+						position : 'bottom',
+						fields : [ 'playdateN' ],
+						title : false,
+						label : {
+							font : '8px Arial'
+						}
+					} ],
+			series : aa
 		});
 		return chart;
 	};
 	// 月区分のStore
-	var monthStore11 = Ext.create('Ext.data.Store', {
+	var groupStore = Ext.create('Ext.data.Store', {
 		fields : [ 'abbr', 'name' ],
 		data : [ {
 			'abbr' : 'A',
@@ -1439,28 +1444,28 @@ Ext.onReady(function() {
 		} ]
 	});
 	// 月区分区分
-	var monthSelectField111 = Ext.create('Ext.form.ComboBox', {
+	var groupSelectField = Ext.create('Ext.form.ComboBox', {
 		fieldLabel : 'GROUP',
 		labelWidth : 50,
 		width : 150,
 		queryMode : 'local',
 		editable : false,
-		store : monthStore11,
+		store : groupStore,
 		value : 'A',
 		valueField : 'abbr',
 		displayField : 'name'
 	});
 	// 検索ボタン
-	var layoutInfoBtn111 = Ext.create('Ext.Button', {
-		text : 'Search',
+	var groupChangeBtn = Ext.create('Ext.Button', {
+		text : 'Change',
 		handler : function() {
 			satamaInfoOfallChartPanel.removeAll();
-			satamaInfoOfallChartPanel.add(satamaInfoOfallChart(monthSelectField111.getValue()));
+			satamaInfoOfallChartPanel.add(satamaInfoOfallChart(groupSelectField.getValue()));
 		}
 	});
 	// 差玉情報のchartPanel
 	var satamaInfoOfallChartPanel = Ext.create('Ext.Panel', {
-		tbar:[monthSelectField111,layoutInfoBtn111],
+		tbar:[groupSelectField,groupChangeBtn],
 		layout : 'fit',
 		title : 'SATAMA_INFO11',
 		items : [ satamaInfoOfallChart('A') ]
