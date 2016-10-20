@@ -19,7 +19,7 @@
 	</select>   
 	
 	<select id="getSatamaInfoList" resultType="PiaDataLayout">
-		SELECT s.*
+		SELECT s.*, SUBSTR(s.playdate, 5) AS playdateN
 		FROM satamainfo s
 	</select> 
 	

@@ -10,6 +10,38 @@ Ext.onReady(function() {
 			return value;
 		}
 	};
+	var lineChartPropity = function(p_xField, p_yField, color) {
+		var pro = {
+			type : 'line',
+			axis : 'left',
+			xField : 'playdate',
+			yField : 'v_557',
+			smooth : true,
+			style : {
+				fill : '#006600',
+				stroke : '#006600',
+				'stroke-width' : 1
+			},
+			highlight : {
+				size : 1,
+				radius : 1
+			},
+			markerConfig : {
+				type : 'circle',
+				size : 2,
+				radius : 2,
+				fill : '#006600',
+				stroke : '#006600'
+			}
+		};
+		pro.xField = p_xField;
+		pro.yField = p_yField;
+		pro.style.fill = color;
+		pro.style.stroke = color;
+		pro.markerConfig.fill = color;
+		pro.markerConfig.stroke = color;
+		return pro;
+	}
 	var renderForRate = function(value) {
 //		if (value > 0 && value < 90) {
 //			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
@@ -158,6 +190,9 @@ Ext.onReady(function() {
 		extend : 'Ext.data.Model',
 		fields : [ {
 			name : 'playdate',
+			type : 'string'
+		},{
+			name : 'playdateN',
 			type : 'string'
 		}, {
 			name : 'v_557',
@@ -1338,107 +1373,21 @@ Ext.onReady(function() {
 		}, {
 			type : 'Category',
 			position : 'bottom',
-			fields : [ 'playdate' ],
+			fields : [ 'playdateN' ],
 			title : false,
 			label : {
 				font : '8px Arial'
 			}
 		} ],
 		series : [
-				{
-					type : 'line',
-					axis : 'left',
-					xField : 'playdate',
-					yField : 'v_557',
-					smooth : true,
-					tips : {
-						trackMouse : true,
-						width : 120,
-						height : 20,
-						renderer : function(storeItem, item) {
-							this.setTitle(' 総差玉 :'
-									+ storeItem.get('v_557'));
-						}
-					},
-					style : {
-						fill : '#006600',
-						stroke : '#006600',
-						'stroke-width' : 1
-					},
-					highlight : {
-						size : 1,
-						radius : 1
-					},
-					markerConfig : {
-						type : 'circle',
-						size : 2,
-						radius : 2,
-						fill : '#006600',
-						stroke : '#006600'
-					}
-				},{
-					type : 'line',
-					axis : 'left',
-					xField : 'playdate',
-					yField : 'v_558',
-					smooth : true,
-					tips : {
-						trackMouse : true,
-						width : 120,
-						height : 20,
-						renderer : function(storeItem, item) {
-							this.setTitle(' 総差玉 :'
-									+ storeItem.get('v_558'));
-						}
-					},
-					style : {
-						fill : '#006600',
-						stroke : '#006600',
-						'stroke-width' : 1
-					},
-					highlight : {
-						size : 1,
-						radius : 1
-					},
-					markerConfig : {
-						type : 'circle',
-						size : 2,
-						radius : 2,
-						fill : '#006600',
-						stroke : '#006600'
-					}
-				},{
-					type : 'line',
-					axis : 'left',
-					xField : 'playdate',
-					yField : 'v_559',
-					smooth : true,
-					tips : {
-						trackMouse : true,
-						width : 120,
-						height : 20,
-						renderer : function(storeItem, item) {
-							this.setTitle(' 総差玉 :'
-									+ storeItem.get('v_559'));
-						}
-					},
-					style : {
-						fill : '#006600',
-						stroke : '#006600',
-						'stroke-width' : 1
-					},
-					highlight : {
-						size : 1,
-						radius : 1
-					},
-					markerConfig : {
-						type : 'circle',
-						size : 2,
-						radius : 2,
-						fill : '#006600',
-						stroke : '#006600'
-					}
-				}]
+		          lineChartPropity('playdateN','v_557','#b66699'),
+		          lineChartPropity('playdateN','v_558','#cc0066'),
+		          lineChartPropity('playdateN','v_559','#006600'),
+		          lineChartPropity('playdateN','v_560','#ff0000'),
+		          lineChartPropity('playdateN','v_561','#4d9900'),
+		          lineChartPropity('playdateN','v_562','#660066'),
+		          lineChartPropity('playdateN','v_563','#9966ff')
+		       ]
 	});
 
 	// 差玉情報のchartPanel
