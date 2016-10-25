@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 
-	<!-- UserMap.xml 등록 -->
+	<!-- UserMap.xmls-->
 	<mappers>
 		<mapper resource="com/zgd/mybatis/sqlmap/PiaDataInfoMap.xml" />
 		<mapper resource="com/zgd/mybatis/sqlmap/TaiNoMap.xml" />
