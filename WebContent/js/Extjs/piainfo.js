@@ -124,61 +124,45 @@ Ext.onReady(function() {
 			position : 'bottom'
 		},
 		style : 'background:#fff',
-		axes : [
-				{
-					type : 'Numeric',
-					position : 'left',
-					fields : ['lineno', 'ballin',
-							'bonus', 'big16r', 'middle8r', 'small4r'],
-					title : false,
-					label : {
-						renderer : Ext.util.Format.numberRenderer('0,0'),
-						font : '9px Arial'
-					},
-					grid : {
-						odd : {
-							opacity : 1,
-							fill : '#ddd',
-							stroke : '#bbb',
-							'stroke-width' : 0.5
-						}
-					}
-				}, {
-					type : 'Category',
-					position : 'bottom',
-					fields : [ 'lineno' ],
-					title : false,
-					label : {
-						font : '9px Arial'
-					}
-				} ],
-		series : [ {
-			type : 'column',
-			axis : 'left',
-			highlight : true,
-			tips : {
-				trackMouse : true,
-				width : 140,
-				height : 28,
-				renderer : function(storeItem, item) {
-					this.setTitle('16R:' + storeItem.get('big16r') + '>>' + storeItem.get('ballin'));
-				}
-			},
-			xField : 'lineno',
-			yField : 'ballin',
+        axes: [{
+            type: 'Numeric',
+            position: 'left',
+            fields: ['ballin','bonus'],
             label: {
-                display: 'insideEnd',
-                'text-anchor': 'middle',
+                renderer: Ext.util.Format.numberRenderer('0,0')
+            },
+            title: 'Number of Hits',
+            grid: true,
+            minimum: 0
+        }, {
+            type: 'Category',
+            position: 'bottom',
+            fields: ['lineno'],
+            title: 'Month of the Year'
+        }],
+        series: [{
+            type: 'column',
+            axis: 'left',
+            highlight: true,
+            tips: {
+              trackMouse: true,
+              width: 140,
+              height: 28,
+              renderer: function(storeItem, item) {
+                this.setTitle(storeItem.get('big16r') + ': ' + storeItem.get('middle8r') + ' $');
+              }
+            },
+            label: {
+              display: 'insideEnd',
+              'text-anchor': 'middle',
                 field: 'bonus',
                 renderer: Ext.util.Format.numberRenderer('0'),
                 orientation: 'vertical',
                 color: '#333'
-              },
-			style : {
-				fill : '#00001a',
-				stroke : '#00001a'
-			}
-		} ]
+            },
+            xField: 'lineno',
+            yField: 'ballin'
+        }]
 	});
 
 	var filterPanel = Ext.create('Ext.Panel', {
