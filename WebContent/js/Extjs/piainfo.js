@@ -34,6 +34,9 @@ Ext.onReady(function() {
 		}, {
 			name : 'starttotal',
 			type : 'string'
+		}, {
+			name : 'ballindiv',
+			type : 'string'
 		} ]
 	});
 	// 店舗のStore
@@ -127,17 +130,18 @@ Ext.onReady(function() {
         axes: [{
             type: 'Numeric',
             position: 'left',
-            fields: ['ballin','bonus'],
+            fields: ['ballindiv'],
             label: {
                 renderer: Ext.util.Format.numberRenderer('0,0')
             },
             title: 'Number of Hits',
             grid: true,
-            minimum: 0
+            minimum: 0,
+            maximum: 1000
         }, {
             type: 'Category',
             position: 'bottom',
-            fields: ['lineno'],
+            fields: ['bonus'],
             title: 'Month of the Year'
         }],
         series: [{
@@ -146,22 +150,22 @@ Ext.onReady(function() {
             highlight: true,
             tips: {
               trackMouse: true,
-              width: 140,
-              height: 28,
+              width: 50,
+              height: 50,
               renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('big16r') + ': ' + storeItem.get('middle8r') + ' $');
+                this.setTitle('大：' + storeItem.get('big16r') + '<br />中：' + storeItem.get('middle8r') + '<br />小：' + storeItem.get('small4r'));
               }
             },
             label: {
               display: 'insideEnd',
               'text-anchor': 'middle',
-                field: 'bonus',
+                field: 'ballin',
                 renderer: Ext.util.Format.numberRenderer('0'),
                 orientation: 'vertical',
                 color: '#333'
             },
-            xField: 'lineno',
-            yField: 'ballin'
+            xField: 'bonus',
+            yField: 'ballindiv'
         }]
 	});
 

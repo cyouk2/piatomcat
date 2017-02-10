@@ -14,7 +14,7 @@
 	 SELECT taino FROM shopinfo where shop = #{shop} ORDER BY taino
 </select>  
 <select id="getTaiInfoList" resultType="TaiInfo" parameterType="PraInfo">  
-	SELECT * FROM piainfototal
+	SELECT shop, playdate, taino, lineno, ballin, bonus, big16r, middle8r, small4r, starttotal, (ballin DIV 100 + 1) * 100 as ballindiv FROM piainfototal
 	WHERE shop = #{shop}
 	AND taino = #{taino}
 	ORDER BY playdate, lineno;

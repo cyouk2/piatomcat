@@ -19,6 +19,15 @@ public class TaiInfo implements Serializable {
 	private int middle8r;
 	private int small4r;
 	private int starttotal;
+	private int ballindiv;
+
+	public int getBallindiv() {
+		return ballindiv;
+	}
+
+	public void setBallindiv(int ballindiv) {
+		this.ballindiv = ballindiv;
+	}
 
 	public String getShop() {
 		return shop;
