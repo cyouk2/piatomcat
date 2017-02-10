@@ -9,11 +9,14 @@ public class TaiNo implements Serializable {
 	 */
 	private static final long serialVersionUID = 3637708191719106674L;
 
-	private int taiNo;
-	public int getTaiNo() {
-		return taiNo;
+	private String taino;
+
+	public String getTaino() {
+		return taino;
 	}
-	public void setTaiNo(int taiNo) {
-		this.taiNo = taiNo;
+
+	public void setTaino(String taino) {
+		this.taino = taino;
 	}
+
 }

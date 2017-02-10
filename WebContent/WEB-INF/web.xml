@@ -9,6 +9,14 @@
 		<servlet-class>com.zgd.mybatis.config.MyBatisConfig</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>GetShopList</servlet-name>
+		<servlet-class>com.zgd.controller.GetShopList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetShopList</servlet-name>
+		<url-pattern>/GetShopList</url-pattern>
+	</servlet-mapping>
 	<!-- 台番リスト取得 -->
 	<servlet>
 		<servlet-name>GetTaiNoList</servlet-name>
@@ -18,69 +26,16 @@
 		<servlet-name>GetTaiNoList</servlet-name>
 		<url-pattern>/GetTaiNoList</url-pattern>
 	</servlet-mapping>
-		<servlet>
-		<servlet-name>GetSatamaInfoList</servlet-name>
-		<servlet-class>com.zgd.controller.GetSatamaInfoList</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetSatamaInfoList</servlet-name>
-		<url-pattern>/GetSatamaInfoList</url-pattern>
-	</servlet-mapping>
-	<!-- 図を表示用データ情報取得 -->
 	<servlet>
-		<servlet-name>GetPiaDataForChart</servlet-name>
-		<servlet-class>com.zgd.controller.GetPiaDataForChart</servlet-class>
+		<servlet-name>GetTaiInfoList</servlet-name>
+		<servlet-class>com.zgd.controller.GetTaiInfoList</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GetPiaDataForChart</servlet-name>
-		<url-pattern>/GetPiaDataForChart</url-pattern>
-	</servlet-mapping>
-	<!-- データ保存 -->
-	<servlet>
-		<servlet-name>SavePiaData</servlet-name>
-		<servlet-class>com.zgd.crud.SavePiaData</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SavePiaData</servlet-name>
-		<url-pattern>/SavePiaData</url-pattern>
-	</servlet-mapping>
-	<!-- データ削除 -->
-	<servlet>
-		<servlet-name>DeletePiaData</servlet-name>
-		<servlet-class>com.zgd.crud.DeletePiaData</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DeletePiaData</servlet-name>
-		<url-pattern>/DeletePiaData</url-pattern>
-	</servlet-mapping>
-	<!-- 何日まで差玉集計 -->
-	<servlet>
-		<servlet-name>GetPiaDataByDate</servlet-name>
-		<servlet-class>com.zgd.controller.GetPiaDataByDate</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetPiaDataByDate</servlet-name>
-		<url-pattern>/GetPiaDataByDate</url-pattern>
-	</servlet-mapping>
-	<!-- 全差玉集計 -->
-	<servlet>
-		<servlet-name>GetTaiInfoOfAllDays</servlet-name>
-		<servlet-class>com.zgd.controller.GetTaiInfoOfAllDays</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetTaiInfoOfAllDays</servlet-name>
-		<url-pattern>/GetTaiInfoOfAllDays</url-pattern>
-	</servlet-mapping>
-		<servlet>
-		<servlet-name>GetPiaDataLayoutList</servlet-name>
-		<servlet-class>com.zgd.controller.GetPiaDataLayoutList</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetPiaDataLayoutList</servlet-name>
-		<url-pattern>/GetPiaDataLayoutList</url-pattern>
+		<servlet-name>GetTaiInfoList</servlet-name>
+		<url-pattern>/GetTaiInfoList</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>2.html</welcome-file>
+		<welcome-file>3.html</welcome-file>
 	</welcome-file-list>
 </web-app>

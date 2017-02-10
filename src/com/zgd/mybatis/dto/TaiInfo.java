@@ -9,77 +9,95 @@ public class TaiInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 3637708191719106674L;
 
-	private int playDate;
-	private String playDateN;
-	private int totalOut;
-	private int totalOutBefore;
-	private int a;
-	private int b;
-	private int c;
-	private int d;
-	
-	public int getA() {
-		return a;
+	private String shop;
+	private String playdate;
+	private String taino;
+	private String lineno;
+	private String ballin;
+	private String bonus;
+	private String big16r;
+	private String middle8r;
+	private String small4r;
+	private String starttotal;
+
+	public String getShop() {
+		return shop;
 	}
 
-	public void setA(int a) {
-		this.a = a;
+	public void setShop(String shop) {
+		this.shop = shop;
 	}
 
-	public int getB() {
-		return b;
+	public String getPlaydate() {
+		return playdate;
 	}
 
-	public void setB(int b) {
-		this.b = b;
+	public void setPlaydate(String playdate) {
+		this.playdate = playdate;
 	}
 
-	public int getC() {
-		return c;
+	public String getTaino() {
+		return taino;
 	}
 
-	public void setC(int c) {
-		this.c = c;
+	public void setTaino(String taino) {
+		this.taino = taino;
 	}
 
-	public int getD() {
-		return d;
+	public String getLineno() {
+		return lineno;
 	}
 
-	public void setD(int d) {
-		this.d = d;
+	public void setLineno(String lineno) {
+		this.lineno = lineno;
 	}
 
-	public String getPlayDateN() {
-		return playDateN;
+	public String getBallin() {
+		return ballin;
 	}
 
-	public void setPlayDateN(String playDateN) {
-		this.playDateN = playDateN;
+	public void setBallin(String ballin) {
+		this.ballin = ballin;
 	}
 
-	public int getPlayDate() {
-		return playDate;
+	public String getBonus() {
+		return bonus;
 	}
 
-	public void setPlayDate(int playDate) {
-		this.playDate = playDate;
+	public void setBonus(String bonus) {
+		this.bonus = bonus;
 	}
 
-	public int getTotalOut() {
-		return totalOut;
+	public String getBig16r() {
+		return big16r;
 	}
 
-	public void setTotalOut(int totalOut) {
-		this.totalOut = totalOut;
+	public void setBig16r(String big16r) {
+		this.big16r = big16r;
 	}
 
-	public int getTotalOutBefore() {
-		return totalOutBefore;
+	public String getMiddle8r() {
+		return middle8r;
 	}
 
-	public void setTotalOutBefore(int totalOutBefore) {
-		this.totalOutBefore = totalOutBefore;
+	public void setMiddle8r(String middle8r) {
+		this.middle8r = middle8r;
+	}
+
+	public String getSmall4r() {
+		return small4r;
+	}
+
+	public void setSmall4r(String small4r) {
+		this.small4r = small4r;
+	}
+
+	public String getStarttotal() {
+		return starttotal;
+	}
+
+	public void setStarttotal(String starttotal) {
+		this.starttotal = starttotal;
 	}
 
 }

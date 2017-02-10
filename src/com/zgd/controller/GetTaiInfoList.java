@@ -1,7 +1,6 @@
 package com.zgd.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -14,32 +13,27 @@ import com.google.gson.Gson;
 import com.zgd.common.ComRootResult;
 import com.zgd.common.CommonUtil;
 import com.zgd.mybatis.config.MyBatisConfig;
-import com.zgd.mybatis.dao.PiaDataInfoMapper;
-import com.zgd.mybatis.dto.PiaDataInfo;
+import com.zgd.mybatis.dao.TaiNoMapper;
 import com.zgd.mybatis.dto.PraInfo;
+import com.zgd.mybatis.dto.TaiInfo;
 
 @SuppressWarnings("serial")
-public class GetPiaDataByDate extends HttpServlet {
+public class GetTaiInfoList extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String playDate = CommonUtil.ObejctToString(req.getParameter("playDate"));
-		String sortKind = CommonUtil.ObejctToString(req.getParameter("sortKind"));
-		String month = CommonUtil.ObejctToString(req.getParameter("month"));
+		String shop = CommonUtil.ObejctToString(req.getParameter("shop"));
+		String taino = CommonUtil.ObejctToString(req.getParameter("taino"));
+		String playdate = CommonUtil.ObejctToString(req.getParameter("playdate"));
 		SqlSession sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 		ComRootResult re = new ComRootResult();
-		PraInfo param = new PraInfo();
-		param.setPlayDate(CommonUtil.ObejctToInt(playDate));
-		param.setSortKind(sortKind);
-		param.setMonth(month);
 		try {
-			PiaDataInfoMapper piaDataInfoMapper = sqlSession.getMapper(PiaDataInfoMapper.class);
-			List<PiaDataInfo> list = piaDataInfoMapper.getPiaDataByDate(param);
-			if (list != null && list.size() > 0) {
-				re.setRoot(list);
-			} else {
-				re.setRoot(new ArrayList<PiaDataInfo>());
-			}
-
+			TaiNoMapper taiNoMapper = sqlSession.getMapper(TaiNoMapper.class);
+			PraInfo prainfo = new PraInfo();
+			prainfo.setShop(shop);
+			prainfo.setPlaydate(playdate);
+			prainfo.setTaino(taino);
+			List<TaiInfo> list = taiNoMapper.getTaiInfoList(prainfo);
+			re.setRoot(list);
 		} finally {
 			sqlSession.close();
 		}
@@ -47,6 +41,7 @@ public class GetPiaDataByDate extends HttpServlet {
 		Gson gson = new Gson();
 		re.setSuccess(true);
 		re.setMsg("");
+
 		resp.setContentType("text/plain");
 		resp.getWriter().println(gson.toJson(re));
 	}
@@ -54,4 +49,5 @@ public class GetPiaDataByDate extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		doGet(req, resp);
 	}
+
 }

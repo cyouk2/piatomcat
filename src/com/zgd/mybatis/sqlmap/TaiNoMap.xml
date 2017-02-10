@@ -3,11 +3,20 @@
   
 <mapper namespace="com.zgd.mybatis.dao.TaiNoMapper">  
   
-<select id="getTaiNoList" resultType="TaiNo">  
+<select id="getShopList" resultType="Shop">  
 	 SELECT 
-	    taiNo
-	FROM taino
-	order by taiNo;
+	    shop
+	FROM shopinfo
+	group by shop;
 
-</select>    
+</select>
+<select id="getTaiNoList" resultType="TaiNo" parameterType="PraInfo">  
+	 SELECT taino FROM shopinfo where shop = #{shop} ORDER BY taino
+</select>  
+<select id="getTaiInfoList" resultType="TaiInfo" parameterType="PraInfo">  
+	SELECT * FROM piainfototal
+	WHERE shop = #{shop}
+	AND taino = #{taino}
+	ORDER BY playdate, lineno;
+</select>   
 </mapper>
