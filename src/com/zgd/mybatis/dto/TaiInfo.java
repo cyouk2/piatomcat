@@ -12,13 +12,13 @@ public class TaiInfo implements Serializable {
 	private String shop;
 	private String playdate;
 	private String taino;
-	private String lineno;
-	private String ballin;
-	private String bonus;
-	private String big16r;
-	private String middle8r;
-	private String small4r;
-	private String starttotal;
+	private int lineno;
+	private int ballin;
+	private int bonus;
+	private int big16r;
+	private int middle8r;
+	private int small4r;
+	private int starttotal;
 
 	public String getShop() {
 		return shop;
@@ -44,59 +44,59 @@ public class TaiInfo implements Serializable {
 		this.taino = taino;
 	}
 
-	public String getLineno() {
+	public int getLineno() {
 		return lineno;
 	}
 
-	public void setLineno(String lineno) {
+	public void setLineno(int lineno) {
 		this.lineno = lineno;
 	}
 
-	public String getBallin() {
+	public int getBallin() {
 		return ballin;
 	}
 
-	public void setBallin(String ballin) {
+	public void setBallin(int ballin) {
 		this.ballin = ballin;
 	}
 
-	public String getBonus() {
+	public int getBonus() {
 		return bonus;
 	}
 
-	public void setBonus(String bonus) {
+	public void setBonus(int bonus) {
 		this.bonus = bonus;
 	}
 
-	public String getBig16r() {
+	public int getBig16r() {
 		return big16r;
 	}
 
-	public void setBig16r(String big16r) {
+	public void setBig16r(int big16r) {
 		this.big16r = big16r;
 	}
 
-	public String getMiddle8r() {
+	public int getMiddle8r() {
 		return middle8r;
 	}
 
-	public void setMiddle8r(String middle8r) {
+	public void setMiddle8r(int middle8r) {
 		this.middle8r = middle8r;
 	}
 
-	public String getSmall4r() {
+	public int getSmall4r() {
 		return small4r;
 	}
 
-	public void setSmall4r(String small4r) {
+	public void setSmall4r(int small4r) {
 		this.small4r = small4r;
 	}
 
-	public String getStarttotal() {
+	public int getStarttotal() {
 		return starttotal;
 	}
 
-	public void setStarttotal(String starttotal) {
+	public void setStarttotal(int starttotal) {
 		this.starttotal = starttotal;
 	}
 

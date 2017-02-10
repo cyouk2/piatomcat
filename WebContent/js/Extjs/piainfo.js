@@ -128,9 +128,8 @@ Ext.onReady(function() {
 				{
 					type : 'Numeric',
 					position : 'left',
-					fields : [ 'shop', 'playdate', 'taino', 'lineno', 'ballin',
-							'bonus', 'big16r', 'middle8r', 'small4r',
-							'starttotal' ],
+					fields : ['lineno', 'ballin',
+							'bonus', 'big16r', 'middle8r', 'small4r'],
 					title : false,
 					label : {
 						renderer : Ext.util.Format.numberRenderer('0,0'),
@@ -141,7 +140,7 @@ Ext.onReady(function() {
 							opacity : 1,
 							fill : '#ddd',
 							stroke : '#bbb',
-							'stroke-width' : 100
+							'stroke-width' : 0.5
 						}
 					}
 				}, {
@@ -162,9 +161,7 @@ Ext.onReady(function() {
 				width : 140,
 				height : 28,
 				renderer : function(storeItem, item) {
-					this.setTitle(storeItem.get('bonus') + '連  : ' + ' 16R:'
-							+ storeItem.get('big16r') + '>>'
-							+ storeItem.get('ballin'));
+					this.setTitle('16R:' + storeItem.get('big16r') + '>>' + storeItem.get('ballin'));
 				}
 			},
 			xField : 'lineno',
@@ -172,10 +169,10 @@ Ext.onReady(function() {
             label: {
                 display: 'insideEnd',
                 'text-anchor': 'middle',
-                  field: 'data1',
-                  renderer: Ext.util.Format.numberRenderer('0'),
-                  orientation: 'vertical',
-                  color: '#333'
+                field: 'bonus',
+                renderer: Ext.util.Format.numberRenderer('0'),
+                orientation: 'vertical',
+                color: '#333'
               },
 			style : {
 				fill : '#00001a',
