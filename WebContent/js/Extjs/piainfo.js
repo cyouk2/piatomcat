@@ -137,7 +137,7 @@ Ext.onReady(function() {
             title: 'Number of Hits',
             grid: true,
             minimum: 0,
-            maximum: 1000
+            maximum: 700
         }, {
             type: 'Category',
             position: 'bottom',
