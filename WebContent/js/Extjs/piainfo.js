@@ -130,14 +130,14 @@ Ext.onReady(function() {
         axes: [{
             type: 'Numeric',
             position: 'left',
-            fields: ['ballindiv'],
+            fields: ['ballindiv','ballin'],
             label: {
                 renderer: Ext.util.Format.numberRenderer('0,0')
             },
             title: 'Number of Hits',
             grid: true,
             minimum: 0,
-            maximum: 700
+            maximum: 1500
         }, {
             type: 'Category',
             position: 'bottom',
@@ -150,22 +150,36 @@ Ext.onReady(function() {
             highlight: true,
             tips: {
               trackMouse: true,
-              width: 50,
-              height: 50,
+              width: 100,
+              height: 80,
               renderer: function(storeItem, item) {
-                this.setTitle('大：' + storeItem.get('big16r') + '<br />中：' + storeItem.get('middle8r') + '<br />小：' + storeItem.get('small4r'));
+                this.setTitle(storeItem.get('playdate') + '<br />start:' +storeItem.get('ballin') + '<br />' +'大：' + storeItem.get('big16r') + '<br />中：' + storeItem.get('middle8r') + '<br />小：' + storeItem.get('small4r'));
               }
             },
             label: {
               display: 'insideEnd',
               'text-anchor': 'middle',
-                field: 'ballin',
+                field: 'ballindiv',
                 renderer: Ext.util.Format.numberRenderer('0'),
                 orientation: 'vertical',
                 color: '#333'
             },
             xField: 'bonus',
             yField: 'ballindiv'
+        },{
+            type: 'column',
+            axis: 'left',
+            highlight: true,
+            tips: {
+              trackMouse: true,
+              width: 100,
+              height: 80,
+              renderer: function(storeItem, item) {
+                this.setTitle(storeItem.get('playdate') + '<br />start:' +storeItem.get('ballin') + '<br />' +'大：' + storeItem.get('big16r') + '<br />中：' + storeItem.get('middle8r') + '<br />小：' + storeItem.get('small4r'));
+              }
+            },
+            xField: 'bonus',
+            yField: 'ballin'
         }]
 	});
 
