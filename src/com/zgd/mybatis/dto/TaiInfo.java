@@ -20,6 +20,15 @@ public class TaiInfo implements Serializable {
 	private int small4r;
 	private int starttotal;
 	private int ballindiv;
+	private String sortno;
+
+	public String getSortno() {
+		return sortno;
+	}
+
+	public void setSortno(String sortno) {
+		this.sortno = sortno;
+	}
 
 	public int getBallindiv() {
 		return ballindiv;

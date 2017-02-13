@@ -2,10 +2,20 @@ Ext.require([ '*' ]);
 Ext.onReady(function() {
 
 	Ext.QuickTips.init();
+	var renderforBallsout = function(value) {
+		if (value >= 2500) {
+			return '<span style="color:red;font-weight: bolder;">' + value + '</span>';
+		} else {
+			return value;
+		}
+	};
 	Ext.define('outTotalModel', {
 		extend : 'Ext.data.Model',
 		fields : [ {
 			name : 'shop',
+			type : 'string'
+		}, {
+			name : 'sortno',
 			type : 'string'
 		}, {
 			name : 'playdate',
@@ -15,28 +25,28 @@ Ext.onReady(function() {
 			type : 'string'
 		}, {
 			name : 'lineno',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'ballin',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'bonus',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'big16r',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'middle8r',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'small4r',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'starttotal',
-			type : 'string'
+			type : 'integer'
 		}, {
 			name : 'ballindiv',
-			type : 'string'
+			type : 'integer'
 		} ]
 	});
 	// 店舗のStore
@@ -134,15 +144,14 @@ Ext.onReady(function() {
             label: {
                 renderer: Ext.util.Format.numberRenderer('0,0')
             },
-            title: 'Number of Hits',
+            title: 'start',
             grid: true,
-            minimum: 0,
-            maximum: 1500
+            minimum: 0
         }, {
             type: 'Category',
             position: 'bottom',
             fields: ['bonus'],
-            title: 'Month of the Year'
+            title: '連'
         }],
         series: [{
             type: 'column',
@@ -167,20 +176,28 @@ Ext.onReady(function() {
             xField: 'bonus',
             yField: 'ballindiv'
         },{
-            type: 'column',
-            axis: 'left',
-            highlight: true,
-            tips: {
-              trackMouse: true,
-              width: 100,
-              height: 80,
-              renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('playdate') + '<br />start:' +storeItem.get('ballin') + '<br />' +'大：' + storeItem.get('big16r') + '<br />中：' + storeItem.get('middle8r') + '<br />小：' + storeItem.get('small4r'));
-              }
-            },
-            xField: 'bonus',
-            yField: 'ballin'
-        }]
+			type : 'line',
+			axis : 'left',
+			xField : 'bonus',
+			yField : 'ballin',
+			smooth : true,
+			style : {
+				fill : '#006600',
+				stroke : '#006600',
+				'stroke-width' : 1
+			},
+			highlight : {
+				size : 1,
+				radius : 1
+			},
+			markerConfig : {
+				type : 'circle',
+				size : 2,
+				radius : 2,
+				fill : '#006600',
+				stroke : '#006600'
+			}
+		}]
 	});
 
 	var filterPanel = Ext.create('Ext.Panel', {
