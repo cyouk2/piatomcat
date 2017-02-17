@@ -34,7 +34,14 @@
 		<servlet-name>GetTaiInfoList</servlet-name>
 		<url-pattern>/GetTaiInfoList</url-pattern>
 	</servlet-mapping>
-
+<servlet>
+		<servlet-name>GetTaiInfoList2</servlet-name>
+		<servlet-class>com.zgd.controller.GetTaiInfoList2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetTaiInfoList2</servlet-name>
+		<url-pattern>/GetTaiInfoList2</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>3.html</welcome-file>
 	</welcome-file-list>

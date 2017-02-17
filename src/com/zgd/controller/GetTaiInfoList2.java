@@ -1,7 +1,6 @@
 package com.zgd.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,7 @@ import com.zgd.mybatis.dto.PraInfo;
 import com.zgd.mybatis.dto.TaiInfo;
 
 @SuppressWarnings("serial")
-public class GetTaiInfoList extends HttpServlet {
+public class GetTaiInfoList2 extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String shop = CommonUtil.ObejctToString(req.getParameter("shop"));
@@ -46,7 +45,7 @@ public class GetTaiInfoList extends HttpServlet {
 		resp.setContentType("text/plain");
 		resp.getWriter().println(gson.toJson(re));
 	}
-	
+
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		doGet(req, resp);
 	}
