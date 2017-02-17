@@ -1,20 +1,21 @@
-function conse(jsonObject) {
+function ballin(jsonObject) {
 
-	var myChart = echarts.init(document.getElementById('conse'));
+	var myChart = echarts.init(document.getElementById('ballin'));
 
 	var data = [];
-	var small4rdata = [];
-	var big16rdata = [];
+	var ballindata = [];
+	var ballindivdata = [];
+	
 	for (var i = 0; i < jsonObject.length; i++) {
-		small4rdata.push(jsonObject[i].small4r + jsonObject[i].middle8r);
-		big16rdata.push(jsonObject[i].big16r);
+		ballindata.push(jsonObject[i].ballin);
+		ballindivdata.push(jsonObject[i].ballindiv);
 		data.push(jsonObject[i].bonus)
 	}
 
 	option = {
 		backgroundColor : "#344b58",
 		"title" : {
-			"text" : "ボーナス集計",
+			"text" : "スータト集計",
 			x : "4%",
 
 			textStyle : {
@@ -46,7 +47,7 @@ function conse(jsonObject) {
 			textStyle : {
 				color : '#90979c',
 			},
-			"data" : ['middle', 'other' ,  'big']
+			"data" : ['ballin', 'ballindiv']
 		},
 
 		"calculable" : true,
@@ -121,12 +122,12 @@ function conse(jsonObject) {
 					"end" : 35
 				} ],
 		"series" : [{
-			"name" : "other",
-			"type" : "bar",
-			"stack" : "bonus",
+			"name" : "ballin",
+			"type" : "line",
+			//"stack" : "bonus",
 			"itemStyle" : {
 				"normal" : {
-					"color" : "rgba(51, 51, 255,1)",
+					"color" : "rgba(252,230,48,1)",
 					"barBorderRadius" : 0,
 					"label" : {
 						"show" : true,
@@ -137,21 +138,19 @@ function conse(jsonObject) {
 					}
 				}
 			},
-			"data" : small4rdata
-		},{
-			"name" : "big",
+			"data" : ballindata
+		}, {
+			"name" : "ballindiv",
 			"type" : "bar",
-			"stack" : "bonus",
-			"barMaxWidth" : 35,
-			"barGap" : "10%",
+			//"stack" : "bonus",
+			symbolSize : 10,
+			symbol : 'circle',
 			"itemStyle" : {
 				"normal" : {
-					"color" : "rgba(255, 255, 0,1)",
+					"color" : "rgba(51, 51, 255,1)",
+					"barBorderRadius" : 0,
 					"label" : {
 						"show" : true,
-						"textStyle" : {
-							"color" : "#fff"
-						},
 						"position" : "top",
 						formatter : function(p) {
 							return p.value > 0 ? (p.value) : '';
@@ -159,8 +158,8 @@ function conse(jsonObject) {
 					}
 				}
 			},
-			"data" : big16rdata
-		} ]
+			"data" : ballindivdata
+		}, ]
 	};
 	myChart.setOption(option);
 }

@@ -63,7 +63,8 @@ Ext.onReady(function() {
 			    success: function(response){
 			        var text = response.responseText;
 			        var a = Ext.JSON.decode(text);
-			        q(a.root);
+			        conse(a.root);
+			        ballin(a.root);
 			        // process server response here
 			    }
 			});
